@@ -1,0 +1,34 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>{{title}}</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="keywords" content="baked, food, crafts, clothing, custom, southern, creations">
+    <meta name="description" content="{{description}}">
+
+    <!--<meta property="fb:app_id" content="APP_ID">-->
+    <meta property="og:title" content="{{appName}} - {{title}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="APP_URL">
+    <meta property="og:image" content="APP_LOGO">
+    <meta property="og:site_name" content="Southern Creations - Aesthetic Comfort">
+    <meta property="fb:admins" content="APP_ADMIN">
+
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+
+    {% for file in aggregatedassets.header.css %}
+    <link rel="stylesheet" href="{{file}}">
+    {% endfor %}
+
+    {% for file in aggregatedassets.footer.css %}
+    <link rel="stylesheet" href="{{file}}">
+    {% endfor %}
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
