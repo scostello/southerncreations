@@ -1,12 +1,36 @@
 .navbar {
-    border-radius: 0;
-}
+    &.navbar-utility {
+        background: lighten(@brand-accent, 5%);
+        height: @navbar-height / 2;
+        min-height: @navbar-height / 2;
+        margin: 0;
 
-.navbar-nav {
-    float: right;
-}
+        .nav.navbar-utilitynav {
+            .navbar-nav;
 
-.nav > li > a {
-    padding-left: 25px;
-    padding-right: 25px;
+            & > li > a {
+                font-size: 12px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                color: darken(@brand-accent, 30%);
+
+                &:hover {
+                    background: inherit;
+                    color: darken(@brand-accent, 50%);
+                }
+            }
+
+            @media (min-width: @screen-tablet) {
+                float: right;
+            }
+        }
+    }
+
+    &.navbar-default {
+        .nav.navbar-nav {
+            @media (min-width: @screen-tablet) {
+                float: right;
+            }
+        }
+    }
 }
