@@ -1,13 +1,13 @@
 'use strict';
 
-var path = require('path'),
-    paths = {
+var paths = {
         js: [
             '*.js',
             'src/**/*.js'
         ],
         less: [
-            'src/assets/less/**/*.less'
+            'src/assets/less/**/*.less',
+            'src/app/features/**/*.less'
         ]
     };
 
@@ -45,6 +45,9 @@ module.exports = function (grunt) {
                 files: {
                     'src/assets/css/app.css': [
                         '<%= srcDir %>assets/less/app.less'
+                    ],
+                    'src/assets/css/home.css': [
+                        '<%= srcDir %>app/features/home/less/home.less'
                     ]
                 }
             },

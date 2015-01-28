@@ -21,11 +21,12 @@ var app = express(),
     envConfig = config[env];
 
 app.set('view cache', false);
-swig.setDefaults({ cache: false });
+swig.setDefaults({ loader: swig.loaders.fs(envConfig.server.srcFolder + '/views/layouts')});
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
-app.set('views', envConfig.server.srcFolder + '/views/layouts');
-
+app.set('views', [
+    envConfig.server.srcFolder + '/app/features/home/views'
+]);
 app.use(morgan('dev'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded()); // to support URL-encoded bodies
