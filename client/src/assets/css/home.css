@@ -1,4 +1,38 @@
-/* line 1, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
-.home {
-  background: #fff;
+/* line 2, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.page {
+  background: #ffffff;
+  height: 100vh;
+}
+/* line 7, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.section-welcome {
+  height: 100vh;
+  width: 100%;
+  background: url('/static/assets/images/backgrounds/wood.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/* line 17, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.splash-information-bar {
+  height: 40px;
+  background: #323232;
+}
+/* line 22, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.section-introduction {
+  text-align: center;
+}
+/* line 26, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.article-introduction {
+  padding: 35px;
+}
+/* line 29, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.article-introduction .kelly-img {
+  margin-right: 20px;
+}
+/* line 34, /Users/scostello/Development/projects/southerncreations/client/src/app/features/home/less/home.less */
+.text-introduction {
+  text-align: left;
+  font-size: 20px;
+  padding: 15px;
 }

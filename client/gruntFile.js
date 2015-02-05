@@ -39,15 +39,16 @@ module.exports = function (grunt) {
         less: {
             dev: {
                 options: {
-                    paths: ['vendor/'],
+                    paths: [
+                        'vendor/',
+                        'src/assets/less/'
+                    ],
                     dumpLineNumbers: 'comments'
                 },
                 files: {
                     'src/assets/css/app.css': [
-                        '<%= srcDir %>assets/less/app.less'
-                    ],
-                    'src/assets/css/home.css': [
-                        '<%= srcDir %>app/features/home/less/home.less'
+                        '<%= srcDir %>assets/less/app.less',
+                        '<%= srcDir %>app/components/home/less/home.less'
                     ]
                 }
             },
@@ -58,7 +59,8 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/assets/css/app.css': [
-                        '<%= distDir %>assets/less/app.less'
+                        '<%= srcDir %>assets/less/app.less',
+                        '<%= srcDir %>app/components/home/less/home.less'
                     ]
                 }
             }

@@ -5141,14 +5141,20 @@ a.list-group-item-danger.active:focus {
     display: none !important;
   }
 }
-/* line 2, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+/* line 1, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar {
+  margin-top: 30px;
+  margin-bottom: 0;
+  border-bottom: 2px solid #ffffff;
+}
+/* line 6, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility {
   background: #fbfbfb;
   height: 30px;
   min-height: 30px;
   margin: 0;
 }
-/* line 8, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+/* line 12, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility .nav.navbar-utilitynav {
   margin: 10px -15px;
 }
@@ -5200,29 +5206,35 @@ a.list-group-item-danger.active:focus {
     padding-bottom: 20px;
   }
 }
-/* line 11, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+/* line 15, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility .nav.navbar-utilitynav > li > a {
   font-size: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
   color: #a2a2a2;
 }
-/* line 17, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+/* line 21, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility .nav.navbar-utilitynav > li > a:hover {
   background: inherit;
   color: #6f6f6f;
 }
 @media (min-width: 768px) {
-  /* line 23, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+  /* line 27, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
   .navbar.navbar-utility .nav.navbar-utilitynav {
     float: right;
   }
 }
 @media (min-width: 768px) {
-  /* line 31, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+  /* line 35, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
   .navbar.navbar-default .nav.navbar-nav {
     float: right;
   }
+}
+/* line 1, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-utilities.less */
+.constrain {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
 }
 /* line 3, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/layout.less */
 * {
@@ -5234,4 +5246,43 @@ body {
   font-family: 'Open Sans', sans-serif;
   height: 100%;
   min-height: 100%;
+}
+
+/* line 2, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.page {
+  background: #ffffff;
+  height: 100vh;
+}
+/* line 7, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.section-welcome {
+  height: 100vh;
+  width: 100%;
+  background: url('/static/assets/images/backgrounds/wood.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/* line 17, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.splash-information-bar {
+  height: 40px;
+  background: #323232;
+}
+/* line 22, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.section-introduction {
+  text-align: center;
+}
+/* line 26, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.article-introduction {
+  padding: 35px;
+}
+/* line 29, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.article-introduction .kelly-img {
+  margin-right: 20px;
+}
+/* line 34, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+.text-introduction {
+  text-align: left;
+  font-size: 20px;
+  padding: 15px;
 }
