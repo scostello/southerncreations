@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 exports.addRoutes = function (app) {
 
     var headDefaults = {

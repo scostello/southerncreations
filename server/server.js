@@ -10,14 +10,14 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 // local modules
-var config = require('./config'),
-    protectJSON = require('./lib/protectJSON');
+var config = require('./config');
 
 // server.js variables
 var app = express(),
     server = http.createServer(app),
     env = process.env.NODE_ENV || 'development',
     port = process.env.PORT || 3030,
+    router = express.Router(),
     envConfig = config[env];
 
 app.set('view cache', false);
@@ -35,11 +35,12 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded()); // to support URL-encoded bodies
 
 // Adding routes
+require('./middlewares/static').addMiddleWare(app, envConfig);
+require('./middlewares/protectJson').protect(app);
+require('./controllers/all').addRoutes(app);
+require('./controllers/products').addRoutes(router);
 
-require('./lib/routes/static').addRoutes(app, envConfig, env);
-require('./lib/routes/appFile').addRoutes(app, envConfig, env);
-
-app.use(protectJSON);
+app.use('/api', router);
 
 if (env === 'development') {
     app.use(errorhandler());
