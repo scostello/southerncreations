@@ -1,38 +1,12 @@
 <!DOCTYPE html>
 <html>
 {% include '../includes/head.html' %}
-<body>
-    <header>
-        <nav class="navbar navbar-utility">
-            <div class="col-md-12">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-utilitynav">
-                        <li><a href="#">Sign In</a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i> View Cart</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <nav class="navbar navbar-default">
-            <div class="col-md-12">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Brand</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Baked Goods</a></li>
-                        <li><a href="#">Hand Made Crafts</a></li>
-                        <li><a href="#">Custom Requests</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+<body ng-app="southerncreations">
+    <div ui-view="header"></div>
     <div id="main">
-
+        <div ui-view="container"></div>
     </div>
+    <div ui-view="footer"></div>
     {% include '../includes/foot.html' %}
 </body>
 </html>

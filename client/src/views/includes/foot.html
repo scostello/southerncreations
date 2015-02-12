@@ -1,1 +1,3 @@
-<script src="/static/angular/angular.min.js"></script>
+{% for file in feature.js %}
+<script src="{{file}}"></script>
+{% endfor %}

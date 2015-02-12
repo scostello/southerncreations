@@ -20,11 +20,7 @@
     <link rel="stylesheet" href="/static/assets/css/app.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    {% for file in aggregatedassets.header.css %}
-    <link rel="stylesheet" href="{{file}}">
-    {% endfor %}
-
-    {% for file in aggregatedassets.footer.css %}
+    {% for file in feature.css %}
     <link rel="stylesheet" href="{{file}}">
     {% endfor %}
 
