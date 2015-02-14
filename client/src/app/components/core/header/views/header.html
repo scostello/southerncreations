@@ -12,13 +12,16 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="constrain">
             <div class="navbar-header">
-                <a class="navbar-brand" ui-sref=".home">Brand</a>
+                <a class="navbar-brand" ui-sref=".home">
+                    <img class="logo" src="/static/assets/images/logo/southerncreations-small.svg" alt="cupcake"/>
+                </a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="#">Baked Goods</a></li>
-                    <li><a ui-sref=".about">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li ui-sref-active="active"><a ui-sref=".home">Home</a></li>
+                    <li ui-sref-active="active"><a href="#">Products</a></li>
+                    <li ui-sref-active="active"><a ui-sref=".about">About</a></li>
+                    <li ui-sref-active="active"><a href="#">Contact</a></li>
                 </ul>
             </div>
         </div>

@@ -1,5 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 @import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic);
+@import "owl-carousel/owl-carousel/owl.carousel.css";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /* line 9, vendor/bootstrap/less/normalize.less */
 html {
@@ -4358,39 +4360,39 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 /* line 395, vendor/bootstrap/less/navbar.less */
 .navbar-default {
-  background-color: #cb386c;
-  border-color: #b32f5d;
+  background-color: #ffffff;
+  border-color: #eeeeee;
 }
 /* line 399, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-brand {
-  color: #ffffff;
+  color: #333333;
 }
 /* line 401, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #e6e6e6;
+  color: #1a1a1a;
   background-color: transparent;
 }
 /* line 408, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-text {
-  color: #eeeeee;
+  color: #515151;
 }
 /* line 413, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-nav > li > a {
-  color: #ffffff;
+  color: #333333;
 }
 /* line 416, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #fbfbfb;
-  background-color: #b32f5d;
+  color: #333333;
+  background-color: #ffffff;
 }
 /* line 423, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #fbfbfb;
-  background-color: #b32f5d;
+  color: #333333;
+  background-color: #ffffff;
 }
 /* line 431, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-nav > .disabled > a,
@@ -4415,32 +4417,32 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 /* line 451, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #b32f5d;
+  border-color: #eeeeee;
 }
 /* line 460, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #b32f5d;
-  color: #fbfbfb;
+  background-color: #ffffff;
+  color: #333333;
 }
 @media (max-width: 767px) {
   /* line 471, vendor/bootstrap/less/navbar.less */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #ffffff;
+    color: #333333;
   }
   /* line 473, vendor/bootstrap/less/navbar.less */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #fbfbfb;
-    background-color: #b32f5d;
+    color: #333333;
+    background-color: #ffffff;
   }
   /* line 480, vendor/bootstrap/less/navbar.less */
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #fbfbfb;
-    background-color: #b32f5d;
+    color: #333333;
+    background-color: #ffffff;
   }
   /* line 488, vendor/bootstrap/less/navbar.less */
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
@@ -4452,20 +4454,20 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 /* line 504, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-link {
-  color: #ffffff;
+  color: #333333;
 }
 /* line 506, vendor/bootstrap/less/navbar.less */
 .navbar-default .navbar-link:hover {
-  color: #fbfbfb;
+  color: #333333;
 }
 /* line 511, vendor/bootstrap/less/navbar.less */
 .navbar-default .btn-link {
-  color: #ffffff;
+  color: #333333;
 }
 /* line 513, vendor/bootstrap/less/navbar.less */
 .navbar-default .btn-link:hover,
 .navbar-default .btn-link:focus {
-  color: #fbfbfb;
+  color: #333333;
 }
 /* line 519, vendor/bootstrap/less/navbar.less */
 .navbar-default .btn-link[disabled]:hover,
@@ -5145,11 +5147,11 @@ a.list-group-item-danger.active:focus {
 .navbar {
   margin-top: 30px;
   margin-bottom: 0;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 1px solid #C9C9C9;
 }
 /* line 6, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility {
-  background: #fbfbfb;
+  background: #f2f2f2;
   height: 30px;
   min-height: 30px;
   margin: 0;
@@ -5207,28 +5209,87 @@ a.list-group-item-danger.active:focus {
   }
 }
 /* line 15, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-utility .nav.navbar-utilitynav > li:last-child > a {
+  padding-right: 35px;
+}
+/* line 19, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility .nav.navbar-utilitynav > li > a {
   font-size: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: #a2a2a2;
+  color: #040404;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
 }
-/* line 21, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+/* line 28, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
 .navbar.navbar-utility .nav.navbar-utilitynav > li > a:hover {
   background: inherit;
-  color: #6f6f6f;
+  color: #6a6a6a;
 }
 @media (min-width: 768px) {
-  /* line 27, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+  /* line 34, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
   .navbar.navbar-utility .nav.navbar-utilitynav {
     float: right;
   }
 }
+/* line 40, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default {
+  font-weight: 100;
+  font-size: 23px;
+}
+/* line 46, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .nav.navbar-nav > li.active > a:after {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
+}
+/* line 53, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .nav.navbar-nav > li > a {
+  position: relative;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+/* line 58, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .nav.navbar-nav > li > a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  content: '';
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  transform: translateY(10px);
+}
+/* line 75, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .nav.navbar-nav > li > a:hover:after,
+.navbar.navbar-default .nav.navbar-nav > li > a:active:after {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
+}
 @media (min-width: 768px) {
-  /* line 35, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+  /* line 85, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
   .navbar.navbar-default .nav.navbar-nav {
     float: right;
   }
+}
+/* line 91, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .navbar-header .navbar-brand {
+  padding: 5px 15px 0 15px;
+}
+/* line 95, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-navbar.less */
+.navbar.navbar-default .navbar-header img.logo {
+  width: 47px;
+  height: 55px;
 }
 /* line 1, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/bootstrap-overrides/custom-utilities.less */
 .constrain {
@@ -5236,14 +5297,14 @@ a.list-group-item-danger.active:focus {
   width: 100%;
   margin: 0 auto;
 }
-/* line 3, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/layout.less */
+/* line 4, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/layout.less */
 * {
   box-sizing: border-box;
 }
-/* line 7, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/layout.less */
+/* line 8, /Users/scostello/Development/projects/southerncreations/client/src/assets/less/layout.less */
 html,
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   height: 100%;
   min-height: 100%;
 }
@@ -5251,38 +5312,14 @@ body {
 /* line 2, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
 .page {
   background: #ffffff;
-  height: 100vh;
 }
-/* line 7, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+/* line 6, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
 .section-welcome {
-  height: 100vh;
+  height: 400px;
   width: 100%;
-  background: url('/static/assets/images/backgrounds/wood.jpg') no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
-/* line 17, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
+/* line 11, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
 .splash-information-bar {
   height: 40px;
   background: #323232;
-}
-/* line 22, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
-.section-introduction {
-  text-align: center;
-}
-/* line 26, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
-.article-introduction {
-  padding: 35px;
-}
-/* line 29, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
-.article-introduction .kelly-img {
-  margin-right: 20px;
-}
-/* line 34, /Users/scostello/Development/projects/southerncreations/client/src/app/components/home/less/home.less */
-.text-introduction {
-  text-align: left;
-  font-size: 20px;
-  padding: 15px;
 }

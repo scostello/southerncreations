@@ -7,7 +7,7 @@ var paths = {
         ],
         less: [
             'src/assets/less/**/*.less',
-            'src/app/features/**/*.less'
+            'src/app/components/**/*.less'
         ]
     };
 

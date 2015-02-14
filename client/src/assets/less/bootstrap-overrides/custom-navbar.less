@@ -1,10 +1,10 @@
 .navbar {
     margin-top: @navbar-height / 2;
     margin-bottom: 0;
-    border-bottom: 2px solid @white;
+    border-bottom: 1px solid #C9C9C9;
 
     &.navbar-utility {
-        background: lighten(@brand-accent, 5%);
+        background: darken(@navbar-default-bg, 5%);
         height: @navbar-height / 2;
         min-height: @navbar-height / 2;
         margin: 0;
@@ -12,15 +12,22 @@
         .nav.navbar-utilitynav {
             .navbar-nav;
 
+            & > li:last-child > a {
+                padding-right: 35px;
+            }
+
             & > li > a {
                 font-size: 12px;
                 padding-top: 5px;
                 padding-bottom: 5px;
                 color: darken(@brand-accent, 30%);
+                -webkit-transition: color 0.3s;
+                -moz-transition: color 0.3s;
+                transition: color 0.3s;
 
                 &:hover {
                     background: inherit;
-                    color: darken(@brand-accent, 50%);
+                    color: lighten(@brand-accent, 10%);
                 }
             }
 
@@ -31,9 +38,63 @@
     }
 
     &.navbar-default {
+        font-weight: 100;
+        font-size: 23px;
+
         .nav.navbar-nav {
+            & > li {
+                &.active > a:after {
+                    opacity: 1;
+                    -webkit-transform: translateY(0px);
+                    -moz-transform: translateY(0px);
+                    transform: translateY(0px);
+                }
+
+                & > a {
+                    position: relative;
+                    padding-left: 35px;
+                    padding-right: 35px;
+
+                    &:after {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 4px;
+                        background: rgba(0,0,0,0.1);
+                        content: '';
+                        opacity: 0;
+                        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                        -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+                        transition: opacity 0.3s, transform 0.3s;
+                        -webkit-transform: translateY(10px);
+                        -moz-transform: translateY(10px);
+                        transform: translateY(10px);
+                    }
+
+                    &:hover:after,
+                    &:active:after{
+                        opacity: 1;
+                        -webkit-transform: translateY(0px);
+                        -moz-transform: translateY(0px);
+                        transform: translateY(0px);
+                    }
+                }
+            }
+
             @media (min-width: @screen-tablet) {
                 float: right;
+            }
+        }
+
+        .navbar-header {
+            .navbar-brand {
+                padding: 5px 15px 0 15px;
+            }
+
+            img.logo {
+                width: 47px;
+                height: 55px;
             }
         }
     }

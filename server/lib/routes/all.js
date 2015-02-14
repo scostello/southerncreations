@@ -17,6 +17,7 @@ exports.addRoutes = function (app) {
                     '/static/restangular/dist/restangular.min.js',
                     '/static/jquery/dist/jquery.min.js',
                     '/static/lodash/dist/lodash.min.js',
+                    '/static/owl-carousel/owl-carousel/owl.carousel.min.js',
                     '/static/app/app.module.js',
                     '/static/app/app.routes.js',
                     '/static/app/components/home/js/controllers/home-controller.js',
