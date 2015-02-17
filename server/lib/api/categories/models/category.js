@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
  * Category Schema
  */
 var Category = new Schema({
-    category: {
+    name: {
         type: String,
         required: true,
         trim: true

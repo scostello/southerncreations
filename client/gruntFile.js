@@ -1,15 +1,18 @@
 'use strict';
 
 var paths = {
-        js: [
-            '*.js',
-            'src/**/*.js'
-        ],
-        less: [
-            'src/assets/less/**/*.less',
-            'src/app/components/**/*.less'
-        ]
-    };
+    js: [
+        '*.js',
+        'src/**/*.js'
+    ],
+    less: [
+        'src/assets/**/*.less',
+        'src/app/**/*.less'
+    ],
+    css: [
+        'src/assets/**/*.css'
+    ]
+};
 
 module.exports = function (grunt) {
 
@@ -27,7 +30,7 @@ module.exports = function (grunt) {
             },
             less: {
                 files: paths.less,
-                tasks: ['less']
+                tasks: ['clean:dev', 'less:dev', 'cssmin']
             }
         },
         jshint: {
@@ -35,6 +38,10 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: true
             }
+        },
+        clean: {
+            dev: ['src/assets/css'],
+            release: ['dist/assets/css']
         },
         less: {
             dev: {
@@ -63,6 +70,17 @@ module.exports = function (grunt) {
                         '<%= srcDir %>app/components/home/less/home.less'
                     ]
                 }
+            }
+        },
+        cssmin: {
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= srcDir %>assets/css/',
+                    src: ['*.css', '!*.min.css'],
+                    dest: '<%= srcDir %>assets/css/',
+                    ext: '.min.css'
+                }]
             }
         },
         concurrent: {

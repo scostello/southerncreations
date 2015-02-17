@@ -1,0 +1,89 @@
+[
+  {
+    "slug": "angel-cake",
+    "category": "cake",
+    "pricing": 110.00,
+    "isCustom": false,
+    "name": "Angel Cake",
+    "created": "2011-02-04",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["cake", "angel", "sponge", "cream", "light", "white"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "red-velvet-cake",
+    "category": "cake",
+    "pricing": 95.00,
+    "isCustom": false,
+    "name": "Red Velvet Cake",
+    "created": "2011-04-06",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["cake", "red", "velvet", "cocoa"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "wedding-cake",
+    "category": "cake",
+    "pricing": 120.00,
+    "isCustom": false,
+    "name": "Wedding Cake",
+    "created": "2012-08-19",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["cake", "wedding", "white", "fancy"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "vanilla-cupcake",
+    "category": "cupcake",
+    "pricing": 2.00,
+    "name": "Vanilla Cupcake",
+    "created": "2013-11-01",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["cupcake", "vanilla", "light"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "pink-cupcake",
+    "category": "cupcake",
+    "pricing": 2.00,
+    "name": "Pink Cupcake",
+    "created": "2014-07-21",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["cupcake", "pink", "vanilla", "light"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "cinnamon-roll",
+    "pricing": 2.00,
+    "category": "sweet-rolls",
+    "name": "Cinnamon Rolls",
+    "created": "2015-02-02",
+    "ingredients": [],
+    "awards": [],
+    "tags": ["roll", "cinnamon", "sugar", "cream", "cheese"],
+    "images": {
+      "main": "",
+      "gallery": []
+    }
+  }
+]

@@ -76,6 +76,7 @@
       "define"      : false,
       "jasmine"     : false,
       "require"     : false,
+      "requirejs"   : false,
       "exports"     : false,
       "module"      : false,
       "describe"    : false,

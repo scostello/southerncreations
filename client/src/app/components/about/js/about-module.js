@@ -1,10 +1,10 @@
 define([
     'angular',
-    './controllers/home-controller'
+    './controllers/about-controller'
 ], function (angular, controller) {
     'use strict';
 
-    var moduleName = 'southerncreations.home',
+    var moduleName = 'southerncreations.about',
         module;
 
     module = angular.module(moduleName, [])

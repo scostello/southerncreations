@@ -1,0 +1,12 @@
+[
+  {
+    "username": "scostello",
+    "email": "st.costello61@gmail.com",
+    "isAdmin": true,
+    "created": "2014-11-20",
+    "orders": [],
+    "paymentMethods": [],
+    "password": "",
+    "salt": ""
+  }
+]

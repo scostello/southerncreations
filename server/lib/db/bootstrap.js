@@ -1,27 +1,57 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    products = require('../../fixtures/products'),
+var _ = require('lodash'),
+    Q = require('q'),
+    mongoose = require('mongoose'),
+    products = require('./fixtures/products'),
     Product = mongoose.model('Product'),
-    categories = require('../../fixtures/categories'),
+    categories = require('./fixtures/categories'),
     Category = mongoose.model('Category'),
-    users = require('../../fixtures/users'),
+    users = require('./fixtures/users'),
     User = mongoose.model('User');
 
-Product.find({}).remove(function () {
-    Product.create(products, function (err) {
-        console.log('Finished populating products.');
-    });
-});
 
-Category.find({}).remove(function () {
-    Category.create(categories, function () {
-        console.log('Finished populating categories.');
-    });
-});
+/**
+ * Populating categories and products
+ */
+Category.find({}).remove().exec()
+    .then(function () {
+        console.log('Removed all categories.');
 
-User.find({}).remove(function () {
-    User.create(users, function () {
-        console.log('Finished populating users.');
+        return Category.create(categories);
+    })
+    .then(function () {
+        console.log('Re-populated categories.');
+
+        return Product.find({}).remove().exec()
+            .then(function () {
+                return Category.find({}).exec();
+            });
+    })
+    .then(function (categories) {
+        console.log('Removed all products.');
+
+        var dfds = [];
+        products.forEach(function (product) {
+            var category = _.find(categories, function (category) { return product.category === category.name; });
+            product.category = category;
+
+            dfds.push(Product.create(product));
+        });
+
+        Q.all(dfds)
+            .done(function () {
+                console.log('Finished populating products.');
+            });
     });
-});
+
+
+/**
+ * Populating users
+ */
+User.find({}).remove().exec()
+    .then(function () {
+        User.create(users, function () {
+            console.log('Finished populating users.');
+        });
+    });
