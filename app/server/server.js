@@ -49,7 +49,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // to support URL-encoded bodies
 require('./lib/middleware/static').addMiddleware(app, envConfig);
-require('./lib/middleware/protectJson').protect(app);
+//require('./lib/middleware/protectJson').protect(app);
 
 // Adding routes
 require('./lib/routes/all').addRoutes(app);         // Application

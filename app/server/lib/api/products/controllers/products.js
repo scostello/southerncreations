@@ -26,7 +26,7 @@ exports.product = function(req, res, next, id) {
 };
 
 /**
- * Create an product
+ * Create a product
  */
 exports.create = function(req, res) {
     var product = new Product(req.body);
