@@ -1,22 +1,33 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require "yaml"
+vconfig = YAML.load(File.open(File.join(File.dirname(__FILE__), "vagrant.yml"), File::RDONLY).read)
+
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+    config.vm.define vconfig['VAGRANT_BOX_NAME'] do |m|
 
-  config.vm.network "private_network", ip: "192.168.50.50"
+        # set up basic box image
+        m.vm.box = "ubuntu/trusty64"
 
-  config.vm.synced_folder ".", "/opt/southerncreations"
+        m.vm.synced_folder ".", "/opt/southerncreations"
 
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = 512
-    vb.cpus = 1
-  end
+        # set host name
+        m.vm.hostname = vconfig['VAGRANT_HOST_NAME']
 
-  config.vm.provision "docker"
+        # set private network, machine will use this ip
+        m.vm.network "private_network", ip: vconfig['VAGRANT_HOST_IP']
+        #m.vm.network "forwarded_port", guest: 80, host: 8080
 
-  config.vm.provision "shell",
-    :path => "config/build.sh",
-    run: "always"
+        m.vm.provision "ansible" do |ansible|
+            ansible.playbook = "config/dev.yml"
+            ansible.groups = {
+                "vagrant" => ["default"]
+            }
+            ansible.verbose = "vvvv"
+        end
+
+    end
+
 end

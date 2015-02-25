@@ -7,7 +7,9 @@ define(function () {
             vm.items = [
                 'one',
                 'two',
-                'three'
+                'three',
+                'four',
+                'five'
             ];
         };
 

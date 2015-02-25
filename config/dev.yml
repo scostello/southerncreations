@@ -1,0 +1,32 @@
+---
+- hosts: all
+  connection: ssh
+  gather_facts: yes
+- name: Install pycurl
+  hosts: all
+  gather_facts: no
+  sudo: yes
+  tasks:
+    - name: Install pycurl
+      apt: pkg=python-pycurl update_cache=yes cache_valid_time=600
+- name: Install Docker
+  hosts: all
+  sudo: yes
+  roles:
+    - angstwad.docker_ubuntu
+- name: Build and Run Docker Images
+  hosts: all
+  sudo: yes
+  tasks:
+    - name: Build scostello/nginx Image
+      command: docker build -t scostello/nginx .
+      args:
+        chdir: /opt/southerncreations/config/dockerimages/nginx
+    - name: Create scostello/nginx Container
+      command: docker run -d -p 80:80 -p 443:443 -v /vagrant/var/www:/var/www -v /vagrant/var/log/nginx:/var/log/nginx scostello/nginx
+    - name: Build scostello/node Image
+      command: docker build -t scostello/node .
+      args:
+        chdir: /opt/southerncreations/config/dockerimages/node
+    - name: Create scostello/node Container
+      command: docker run -d -p 3030:3030 -v /vagrant/var/log/node:/var/log/node -v /opt/southerncreations/app:/var/www/app scostello/node

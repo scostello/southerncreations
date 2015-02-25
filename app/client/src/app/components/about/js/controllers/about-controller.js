@@ -3,7 +3,7 @@ define(function () {
 
     var controllerName = 'AboutController',
         AboutController = function () {
-
+            console.log('Hola from about controller!');
         };
 
     return {

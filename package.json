@@ -1,0 +1,15 @@
+{
+  "name": "southerncreations-server",
+  "version": "0.1.0",
+  "description": "Backend server for southern creations",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Sean Costello <st.costello61@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "flightplan": "~0.6.0"
+  }
+}

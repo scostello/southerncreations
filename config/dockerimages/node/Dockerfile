@@ -1,0 +1,47 @@
+FROM debian:jessie
+MAINTAINER Sean Costello <st.costello61@gmail.com>
+
+ENV APPDIR /var/www/app
+
+# verify gpg and sha256: http://nodejs.org/dist/v0.10.31/SHASUMS256.txt.asc
+# gpg: aka "Timothy J Fontaine (Work) <tj.fontaine@joyent.com>"
+# gpg: aka "Julien Gilli <jgilli@fastmail.fm>"
+RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 7937DFD2AB06298B2293C3187D33FF9D0246406D 114F43EE0176B71C7BC219DD50A3051F888C628D
+
+ENV NODE_VERSION 0.10.36
+ENV NPM_VERSION 2.5.0
+
+RUN buildDeps='curl' \
+	&& set -x \
+	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
+	&& curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+	&& gpg --verify SHASUMS256.txt.asc \
+	&& grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
+	&& tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
+	&& rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
+	&& apt-get purge -y --auto-remove $buildDeps \
+	&& npm install -g npm@"$NPM_VERSION" \
+	&& npm cache clear
+
+RUN mkdir -p /var/log
+RUN mkdir -p /var/www
+RUN mkdir -p $APPDIR
+
+VOLUME ["/var/www/app"]
+VOLUME ["/var/log"]
+
+RUN npm install bower grunt-cli -g
+
+EXPOSE 3030
+
+#CMD ["npm",  "start"]
+
+ENTRYPOINT cd $APPDIR/client && \
+    npm install && \
+    bower install --allow-root && \
+    grunt less && \
+    cd $APPDIR/server && \
+    npm install && \
+    grunt
