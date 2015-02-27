@@ -10,7 +10,6 @@ var _ = require('lodash'),
     users = require('./fixtures/users'),
     User = mongoose.model('User');
 
-
 /**
  * Populating categories and products
  */

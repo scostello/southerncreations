@@ -17,4 +17,4 @@ var Category = new Schema({
     }
 });
 
-mongoose.model('Category', Category);
+module.exports = mongoose.model('Category', Category);

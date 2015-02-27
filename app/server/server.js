@@ -1,7 +1,8 @@
 'use strict';
 
 var http = require('http'),
-    path = require('path');
+    path = require('path'),
+    fs = require('fs');
 
 // npm modules
 var express = require('express'),
@@ -9,65 +10,68 @@ var express = require('express'),
     passport = require('passport'),
     morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
-    errorhandler = require('errorhandler'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     flash = require('connect-flash'),
-    glob = require('glob');
+    errorhandler = require('errorhandler');
 
-// local modules
-var config = require('./config');
-
-require('./lib/db/index');
-
-// Bootstrap models
-var files = glob.sync('**/models/*.js');
-files.forEach(function (filePath) {
-    require(path.join(__dirname, filePath));
-});
-
-// Populate empty DB with dummy data
-require('./lib/db/bootstrap');
-
-// server.js variables
 var app = express(),
     server = http.createServer(app),
-    env = process.env.NODE_ENV || 'development',
     port = process.env.PORT || 3030,
     router = express.Router(),
-    envConfig = config[env];
+    config = require('./config');
 
+/**
+ * Setting app configuration
+ */
+app.set('config', config[app.get('env')]);
+
+/**
+ * Setting view configuration
+ */
 app.set('view cache', false);
 swig.setDefaults({
-    cache: false,
-    loader: swig.loaders.fs(envConfig.server.srcFolder + '/views/layouts')
+    cache: app.get('env') !== 'development',
+    loader: swig.loaders.fs(path.join(app.get('config').srcFolder, '/views/layouts'))
 });
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
-app.set('views', [
-    envConfig.server.srcFolder + '/views/layouts/'
-]);
+app.set('views', path.join(app.get('config').srcFolder, '/views/layouts/'));
 
-// Middleware
-app.use(morgan('dev'));
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({extended: true})); // to support URL-encoded bodies
-require('./lib/middleware/static').addMiddleware(app, envConfig);
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+/**
+ * Adding middleware to the app
+ */
+require('./lib/auth/config/passport')(passport);
+app.use(morgan('dev', {
+    stream: fs.createWriteStream(app.get('config').accessLogPath)
+}));
+app.use(cookieParser());                          // Add ability to parse session cookies
+app.use(bodyParser.json());                       // Support JSON-encoded bodies
+app.use(bodyParser.urlencoded({extended: true})); // Support URL-encoded bodies
+require('./lib/middleware/static')(app);          // Add static file supports=
 
-// Adding routes
-require('./lib/routes/all').addRoutes(app);         // Application
+/**
+ * Session support which is required for passport
+ */
+app.use(session({
+    secret: app.get('config').cookieSecret,
+    proxy: true
+}));
+app.use(passport.initialize()); // Initialize passport
+app.use(passport.session());    // Persistent login sessions
+app.use(flash());               // Use connect-flash for flash messages stored in session
+
+/**
+ * Adding custom routes
+ */
+require('./lib/web/routes/web')(app); // Application
+require('./lib/auth/routes/auth')(app, passport);
 require('./lib/api/products/routes/products').addRoutes(router); // API
-
 
 app.use('/api', router);
 
-if (env === 'development') {
+if (app.get('env') === 'development') {
     app.use(errorhandler());
 }
 

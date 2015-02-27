@@ -3,12 +3,12 @@
 var express = require('express'),
     compression = require('compression');
 
-exports.addMiddleware = function (app, config) {
-
-    app.use(config.server.staticUrl, compression());
-    app.use(config.server.staticUrl, express.static(config.server.srcFolder));
-    app.use(config.server.staticUrl, express.static(config.server.vendorFolder));
-    app.use(config.server.staticUrl, function (req, res) {
+module.exports = function (app) {
+    var config = app.get('config');
+    app.use(config.staticUrl, compression());
+    app.use(config.staticUrl, express.static(config.srcFolder));
+    app.use(config.staticUrl, express.static(config.vendorFolder));
+    app.use(config.staticUrl, function (req, res) {
         res.sendfile('404.html');
     });
 };

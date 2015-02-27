@@ -1,6 +1,6 @@
 'use strict';
 
-exports.addRoutes = function (app) {
+module.exports = function (app) {
 
     var headDefaults = {
             appName: 'southerncreations',

@@ -11,6 +11,13 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 7937DFD2AB06298B2293C318
 ENV NODE_VERSION 0.10.36
 ENV NPM_VERSION 2.5.0
 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    gcc \
+    git \
+    git-core
+
 RUN buildDeps='curl' \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends \
@@ -25,6 +32,8 @@ RUN buildDeps='curl' \
 	&& npm install -g npm@"$NPM_VERSION" \
 	&& npm cache clear
 
+#RUN apt-get install -y git-core
+
 RUN mkdir -p /var/log
 RUN mkdir -p /var/www
 RUN mkdir -p $APPDIR
@@ -32,16 +41,18 @@ RUN mkdir -p $APPDIR
 VOLUME ["/var/www/app"]
 VOLUME ["/var/log"]
 
-RUN npm install bower grunt-cli -g
+RUN npm install bower grunt-cli nodemon -g
 
 EXPOSE 3030
 
 #CMD ["npm",  "start"]
 
 ENTRYPOINT cd $APPDIR/client && \
+    rm -rf ./node_modules ./vendor && \
     npm install && \
     bower install --allow-root && \
     grunt less && \
     cd $APPDIR/server && \
+    rm -rf ./node_modules && \
     npm install && \
-    grunt
+    nodemon server.js

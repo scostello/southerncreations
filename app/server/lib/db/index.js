@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 exports.mongoose = mongoose;
 
 // Configure for possible deployment
-var uristring = process.env.MONGOLAB_URI || 'mongodb://localhost/southerncreations';
+var uristring = process.env.MONGOLAB_URI || 'mongodb://webuser:webpassword@ds047911.mongolab.com:47911/southerncreations' || 'mongodb://localhost/southerncreations';
 
 var mongoOptions = { db: { safe: true } };
 

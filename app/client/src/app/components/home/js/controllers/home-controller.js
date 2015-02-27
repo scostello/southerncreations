@@ -9,7 +9,8 @@ define(function () {
                 'two',
                 'three',
                 'four',
-                'five'
+                'five',
+                'six'
             ];
         };
 
