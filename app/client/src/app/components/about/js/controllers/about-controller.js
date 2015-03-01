@@ -1,13 +1,12 @@
 define(function () {
     'use strict';
 
-    var controllerName = 'AboutController',
-        AboutController = function () {
-            console.log('Hola from about controller!');
-        };
-
     return {
-        name: controllerName,
-        fn: [AboutController]
+        name: 'AboutController',
+        fn: ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+            $timeout(function () {
+                $rootScope.$broadcast('boom');
+            }, 2000);
+        }]
     };
 });

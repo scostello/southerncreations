@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    Product = require('../models/product'),
+var Product = require('../models/product'),
     _ = require('lodash');
 
 /**

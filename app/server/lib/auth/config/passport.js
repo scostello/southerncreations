@@ -19,7 +19,6 @@ module.exports = function (passport) {
         passwordField: 'password',
         passReqToCallback: true
     }, function (req, email, password, done) {
-        console.log();
         email = email.toLowerCase();
 
         process.nextTick(function () {

@@ -21,8 +21,9 @@ require.config({
         angularSanitize: 'angular-resource/angular-resource.min',
         angularUiRouter: 'angular-ui-router/release/angular-ui-router.min',
         restangular: 'restangular/dist/restangular.min',
+        angularStorage: 'angular-local-storage/dist/angular-local-storage.min',
+        angularJwt: 'angular-jwt/dist/angular-jwt.min',
         ocLazyLoad: 'ocLazyLoad/dist/ocLazyLoad.min',
-        uiRouterExtras: 'ui-router-extras/release/ct-ui-router-extras',
 
         owl: 'owl-carousel/owl-carousel/owl.carousel.min'
     },
@@ -46,11 +47,17 @@ require.config({
         angularUiRouter: {
             deps: ['angular']
         },
-        ocLazyLoad: {
+        restangular: {
+            deps: ['angular', 'lodash']
+        },
+        angularStorage: {
             deps: ['angular']
         },
-        uiRouterExtras: {
-            deps: ['angularUiRouter']
+        angularJwt: {
+            deps: ['angular']
+        },
+        ocLazyLoad: {
+            deps: ['angular']
         }
     }
 });

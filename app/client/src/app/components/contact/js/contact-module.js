@@ -1,5 +1,5 @@
 define([
-    '../../../../../.bower-cache/24cd0aa8295891c84edc135537fcaa27/0.5.2/examples/requireJSExample/js/angular.min',
+    'angular',
     './controllers/contact-controller'
 ], function (angular, contactController) {
     'use strict';

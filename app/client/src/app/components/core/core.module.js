@@ -1,7 +1,10 @@
 define([
     'angular',
     'angularUiRouter',
-    'ocLazyLoad'
+    'ocLazyLoad',
+    'restangular',
+    'angularStorage',
+    'angularJwt'
 ], function (angular) {
     'use strict';
 
@@ -10,13 +13,25 @@ define([
 
     module = angular.module(moduleName, [
             'ui.router',
-            'oc.lazyLoad'
+            'oc.lazyLoad',
+            'restangular',
+            'LocalStorageModule',
+            'angular-jwt'
         ])
         .config([
+            '$locationProvider',
             '$urlRouterProvider',
             '$stateProvider',
             '$ocLazyLoadProvider',
-            function ($urlRouterProvider, $stateProvider, $ocLazyLoadProvider) {
+            '$httpProvider',
+            'jwtInterceptorProvider',
+            function ($locationProvider, $urlRouterProvider, $stateProvider, $ocLazyLoadProvider, $httpProvider, jwtInterceptorProvider) {
+
+                jwtInterceptorProvider.tokenGetter = ['localStorageService', function (localStorageService) {
+                    return localStorageService.get('jwt');
+                }];
+
+                $httpProvider.interceptors.push('jwtInterceptor');
 
                 $ocLazyLoadProvider.config({
                     debug: true,
@@ -30,8 +45,25 @@ define([
                         url: '',
                         abstract: true,
                         views: {
-                            'header': {templateUrl: '/static/app/components/partials/header/views/header.html'},
-                            'footer': {templateUrl: '/static/app/components/partials/footer/views/footer.html'}
+                            'header': {
+                                templateUrl: '/static/app/components/partials/views/header.html',
+                                controller: 'HeaderController'
+                            },
+                            'footer': {templateUrl: '/static/app/components/partials/views/footer.html'}
+                        },
+                        resolve: {
+                            loadHeaderController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    {
+                                        name: 'southerncreations.header',
+                                        files: ['app/components/partials/js/header-module']
+                                    },
+                                    {
+                                        name: 'southerncreations.footer',
+                                        files: ['app/components/partials/js/footer-module']
+                                    }
+                                ])
+                            }]
                         }
                     })
                     .state('app.home', {
@@ -101,8 +133,79 @@ define([
                                 });
                             }]
                         }
+                    })
+                    .state('auth', {
+                        url: '',
+                        abstract: true
+                    })
+                    .state('auth.login', {
+                        url: '/login',
+                        views: {
+                            'content@': {
+                                templateUrl: '/static/app/components/login/views/login.html',
+                                controller: 'LoginController'
+                            }
+                        },
+                        resolve: {
+                            loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load({
+                                    name: 'southerncreations.login',
+                                    files: ['app/components/login/js/login-module']
+                                });
+                            }]
+                        }
+                    })
+                    .state('auth.signup', {
+                        url: '/signup',
+                        views: {
+                            'content@': {
+                                templateUrl: '/static/app/components/signup/views/signup.html',
+                                controller: 'SignupController'
+                            }
+                        },
+                        resolve: {
+                            loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load({
+                                    name: 'southerncreations.signup',
+                                    files: ['app/components/signup/js/signup-module']
+                                });
+                            }]
+                        }
+                    })
+                    .state('auth.profile', {
+                        url: '/profile',
+                        views: {
+                            'content@': {
+                                templateUrl: '/static/app/components/profile/views/profile.html',
+                                controller: 'ProfileController'
+                            }
+                        },
+                        resolve: {
+                            loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                return $ocLazyLoad.load({
+                                    name: 'southerncreations.profile',
+                                    files: ['app/components/profile/js/profile-module']
+                                });
+                            }]
+                        },
+                        data: {
+                            requiresLogin: true
+                        }
                     });
-            }]);
+
+                $locationProvider.html5Mode(true);
+            }]
+        )
+        .run(['$rootScope', '$state', 'localStorageService', 'jwtHelper', function($rootScope, $state, localStorageService, jwtHelper) {
+            $rootScope.$on('$stateChangeStart', function (evt, to) {
+                if (to.data && to.data.requiresLogin) {
+                    if (!localStorageService.get('jwt') || jwtHelper.isTokenExpired(localStorageService.get('jwt'))) {
+                        evt.preventDefault();
+                        $state.go('auth.login');
+                    }
+                }
+            });
+        }]);
 
     return {
         name: moduleName,
