@@ -3,7 +3,7 @@
 var paths = {
     js: [
         '*.js',
-        'src/**/*.js'
+        'src/app/**/*.js'
     ],
     less: [
         'src/assets/**/*.less',
@@ -23,6 +23,11 @@ module.exports = function (grunt) {
         distDir: '<%= projectDir %>dist/',
         srcDir: '<%= projectDir %>src/',
         vendorDir: '<%= projectDir %>vendor/',
+        karma: {
+            options: {
+                configFile: 'karma.conf.js'
+            }
+        },
         watch: {
             js: {
                 files: paths.js,
@@ -47,25 +52,13 @@ module.exports = function (grunt) {
             dev: {
                 options: {
                     paths: [
-                        'vendor/',
+                        'src/vendor/',
                         'src/assets/less/'
                     ],
                     dumpLineNumbers: 'comments'
                 },
                 files: {
                     'src/assets/css/app.css': [
-                        '<%= srcDir %>assets/less/app.less',
-                        '<%= srcDir %>app/components/home/less/home.less'
-                    ]
-                }
-            },
-            release: {
-                options: {
-                    paths: ['vendor/'],
-                    cleancss: true
-                },
-                files: {
-                    'dist/assets/css/app.css': [
                         '<%= srcDir %>assets/less/app.less',
                         '<%= srcDir %>app/components/home/less/home.less'
                     ]

@@ -1,5 +1,5 @@
 {
-  "directory": "vendor",
+  "directory": "src/vendor",
   "storage": {
           "packages": ".bower-cache",
           "registry": ".bower-registry"
