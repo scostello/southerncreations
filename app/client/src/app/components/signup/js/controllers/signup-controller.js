@@ -1,23 +1,26 @@
 define(function () {
     'use strict';
 
-    var controllerName = 'SignupController',
-        SignupController = function ($scope, Restangular) {
-            var baseSignup = Restangular.all('signup');
+    return {
+        name: 'SignupController',
+        fn: ['$scope', 'AuthService', function ($scope, AuthService) {
+            var vm = this;
 
-            $scope.newuser = {};
+            vm.newuser = {};
 
-            $scope.submit = function () {
-                if ($scope.newuser.password !== $scope.newuser.confirmpassword) {
+            vm.submit = function () {
+                if (vm.newuser.password !== vm.newuser.confirmpassword) {
                     return;
                 }
 
-                baseSignup.post($scope.newuser);
+                AuthService.signup(vm.newuser)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (err) {
+                        // error
+                    });
             };
-        };
-
-    return {
-        name: controllerName,
-        fn: ['$scope', 'Restangular', SignupController]
+        }]
     };
 });

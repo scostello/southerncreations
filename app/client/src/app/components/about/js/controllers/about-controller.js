@@ -3,10 +3,7 @@ define(function () {
 
     return {
         name: 'AboutController',
-        fn: ['$rootScope', '$timeout', function ($rootScope, $timeout) {
-            $timeout(function () {
-                $rootScope.$broadcast('boom');
-            }, 2000);
+        fn: ['$rootScope', function ($rootScope) {
         }]
     };
 });

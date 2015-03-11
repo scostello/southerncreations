@@ -8,9 +8,6 @@ define([
         module;
 
     module = angular.module(moduleName, [])
-        .config(['RestangularProvider', function (RestangularProvider) {
-            RestangularProvider.setBaseUrl('/api');
-        }])
         .controller(profileController.name, profileController.fn);
 
     return {

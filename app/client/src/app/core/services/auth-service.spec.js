@@ -1,11 +1,11 @@
 define([
     'app/app',
     'angularMocks',
-    './about-controller'
-], function(app, mocks, aboutController) {
+    './auth-service'
+], function(app, mocks, authService) {
     'use strict';
 
-    var $q, $rootScope, createAboutController;
+    var $q, $rootScope, createAboutContorller;
 
 
     describe('AboutController', function() {
@@ -14,7 +14,7 @@ define([
             $rootScope = $injector.get('$rootScope');
 
             var $controller = $injector.get('$controller');
-            createAboutController = function () {
+            createAboutContorller = function () {
                 return $controller(aboutController, {'$scope': $rootScope});
             };
         }));

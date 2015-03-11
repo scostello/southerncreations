@@ -1,6 +1,6 @@
 define([
     'angular',
-    'app/components/core/core.module'
+    './core/core.module'
 ], function (angular, coreModule) {
     'use strict';
 

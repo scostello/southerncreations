@@ -3,6 +3,14 @@ define(function () {
 
     return {
         name: 'HeaderController',
-        fn: [function () {}]
+        fn: ['SettingsService', 'PubSubService', function (SettingsService, PubSubService) {
+            var vm = this;
+            
+            vm.toggleMenu = toggleMenu;
+
+            function toggleMenu() {
+                PubSubService.publish(SettingsService.messages.menutoggle, 'something');
+            }
+        }]
     };
 });

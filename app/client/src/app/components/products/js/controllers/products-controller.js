@@ -1,11 +1,12 @@
 define(function () {
     'use strict';
 
-    var controllerName = 'ProductsController',
-        ProductsController = function () {};
-
     return {
-        name: controllerName,
-        fn: [ProductsController]
+        name: 'ProductsController',
+        fn: ['products', function (products) {
+            var vm = this;
+
+            vm.products = products;
+        }]
     };
 });

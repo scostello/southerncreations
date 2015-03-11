@@ -1,11 +1,11 @@
 define([
     'angular',
+    './services/core.services',
+    './controllers/core.controllers',
     'angularUiRouter',
     'ocLazyLoad',
-    'restangular',
-    'angularStorage',
     'angularJwt'
-], function (angular) {
+], function (angular, coreServices, coreControllers) {
     'use strict';
 
     var moduleName = 'southerncreations.core',
@@ -14,9 +14,9 @@ define([
     module = angular.module(moduleName, [
             'ui.router',
             'oc.lazyLoad',
-            'restangular',
-            'LocalStorageModule',
-            'angular-jwt'
+            'angular-jwt',
+            coreServices.name,
+            coreControllers.name
         ]
     )
     .config([
@@ -28,14 +28,13 @@ define([
         'jwtInterceptorProvider',
         function ($locationProvider, $urlRouterProvider, $stateProvider, $ocLazyLoadProvider, $httpProvider, jwtInterceptorProvider) {
 
-            jwtInterceptorProvider.tokenGetter = ['localStorageService', function (localStorageService) {
-                return localStorageService.get('jwt');
+            jwtInterceptorProvider.tokenGetter = ['AuthService', function (AuthService) {
+                return AuthService.getAuthToken();
             }];
 
             $httpProvider.interceptors.push('jwtInterceptor');
 
             $ocLazyLoadProvider.config({
-                debug: true,
                 jsLoader: requirejs
             });
 
@@ -48,12 +47,16 @@ define([
                     views: {
                         'header': {
                             templateUrl: '/static/app/components/partials/views/header.html',
-                            controller: 'HeaderController'
+                            controller: 'HeaderController',
+                            controllerAs: 'head'
                         },
-                        'footer': {templateUrl: '/static/app/components/partials/views/footer.html'}
+                        'footer': {templateUrl: '/static/app/components/partials/views/footer.html'},
+                        'side-menu': {
+                            templateUrl: '/static/app/components/partials/views/side-menu.html'
+                        }
                     },
                     resolve: {
-                        loadHeaderController: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        partialModules: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 {
                                     name: 'southerncreations.header',
@@ -72,11 +75,12 @@ define([
                     views: {
                         'content@': {
                             templateUrl: '/static/app/components/home/views/home.html',
-                            controller: 'HomeController'
+                            controller: 'HomeController',
+                            controllerAs: 'home'
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        homeModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.home',
                                 files: ['app/components/home/js/home-module']
@@ -89,15 +93,19 @@ define([
                     views: {
                         'content@': {
                             templateUrl: '/static/app/components/products/views/products.html',
-                            controller: 'ProductsController'
+                            controller: 'ProductsController',
+                            controllerAs: 'prd'
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        productsModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.products',
                                 files: ['app/components/products/js/products-module']
                             });
+                        }],
+                        products: ['ProductsService', function (ProductsService) {
+                            return ProductsService.getProducts();
                         }]
                     }
                 })
@@ -110,7 +118,7 @@ define([
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        aboutModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.about',
                                 files: ['app/components/about/js/about-module']
@@ -127,7 +135,7 @@ define([
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        contactModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.contact',
                                 files: ['app/components/contact/js/contact-module']
@@ -148,7 +156,7 @@ define([
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        loginModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.login',
                                 files: ['app/components/login/js/login-module']
@@ -161,11 +169,12 @@ define([
                     views: {
                         'content@': {
                             templateUrl: '/static/app/components/signup/views/signup.html',
-                            controller: 'SignupController'
+                            controller: 'SignupController',
+                            controllerAs: 'signup'
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        signupModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.signup',
                                 files: ['app/components/signup/js/signup-module']
@@ -182,7 +191,7 @@ define([
                         }
                     },
                     resolve: {
-                        loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        profileModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.profile',
                                 files: ['app/components/profile/js/profile-module']
@@ -200,12 +209,11 @@ define([
     .run([
         '$rootScope',
         '$state',
-        'localStorageService',
-        'jwtHelper',
-        function($rootScope, $state, localStorageService, jwtHelper) {
+        'AuthService',
+        function($rootScope, $state, AuthService) {
             $rootScope.$on('$stateChangeStart', function (evt, to) {
                 if (to.data && to.data.requiresLogin) {
-                    if (!localStorageService.get('jwt') || jwtHelper.isTokenExpired(localStorageService.get('jwt'))) {
+                    if (!AuthService.isLoggedIn()) {
                         evt.preventDefault();
                         $state.go('auth.login');
                     }

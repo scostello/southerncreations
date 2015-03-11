@@ -16,7 +16,12 @@ module.exports = function (app, router) {
                 };
 
             if (!_.every([body.username,  body.password], allDataSent)) {
-                return res.status(400).json({error: true, message: 'You must send the username and the password'});
+                return res
+                    .status(400)
+                    .json({
+                        error: true,
+                        message: 'You must send the username and the password'
+                    });
             }
 
             UserModel.byUsername(body.username, function (err, user) {
@@ -25,16 +30,28 @@ module.exports = function (app, router) {
                 }
 
                 if (!user) {
-                    return res.status(400).json({error: true, message: 'A user was not found with the provided username or password'});
+                    return res
+                        .status(400)
+                        .json({
+                            error: true,
+                            message: 'A user was not found with the provided username or password'
+                        });
                 }
 
                 if (!user.isValidPassword(body.password)) {
-                    return res.status(401).json({error: true, message: 'Invalid credentials'});
+                    return res
+                        .status(401)
+                        .json({
+                            error: true,
+                            message: 'Invalid credentials'
+                        });
                 }
 
-                user = user.toObject();
-
-                return res.status(200).json({token: jwt.sign(_.omit(user, 'password'), 'some new secret shit', {expiresInMinutes: 60 * 5 })});
+                return res
+                    .status(200)
+                    .json({
+                        token: jwt.sign(_.omit(user.toObject(), 'password'), 'some new secret shit', {expiresInMinutes: 60 * 5 })
+                    });
             });
         });
 
@@ -46,7 +63,12 @@ module.exports = function (app, router) {
                 };
 
             if (!_.every([body.username, body.email, body.password, body.confirmpassword], allDataSent)) {
-                return res.status(400).json({error: true, message: 'You must send the username and the password'});
+                return res
+                    .status(400)
+                    .json({
+                        error: true,
+                        message: 'You must send the username and the password'
+                    });
             }
 
             UserModel.byUsername(body.username, function (err, user) {
@@ -57,7 +79,12 @@ module.exports = function (app, router) {
                 }
 
                 if (user) {
-                    return res.status(400).json({error: true, message: 'A user with that username already exists'});
+                    return res
+                        .status(400)
+                        .json({
+                            error: true,
+                            message: 'A user with that username already exists'
+                        });
                 }
 
                 newUser = new UserModel({
@@ -67,10 +94,19 @@ module.exports = function (app, router) {
                 });
                 newUser.saveAsync()
                     .spread(function (user) {
-                        return res.status(201).json({user: user});
+                        return res
+                            .status(201)
+                            .json({
+                                user: user
+                            });
                     })
                     .catch(function (err) {
-                        return res.status(400).send({error: true, message: 'Something went wrong!'});
+                        return res
+                            .status(400)
+                            .send({
+                                error: true,
+                                message: 'Something went wrong!'
+                            });
                     });
             });
         });
@@ -81,7 +117,6 @@ module.exports = function (app, router) {
     });
 
     app.get('/^(login|signup)$', function (req, res) {
-        console.log(req.url);
         res.render('auth', viewConfig);
     });
 

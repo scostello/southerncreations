@@ -26,12 +26,17 @@ module.exports = function (grunt) {
         karma: {
             options: {
                 configFile: 'karma.conf.js'
+            },
+            dev: {
+                autowatch: false,
+                background: true,
+                browsers: ['Chrome']
             }
         },
         watch: {
             js: {
                 files: paths.js,
-                tasks: ['jshint']
+                tasks: ['jshint', 'karma:dev:run']
             },
             less: {
                 files: paths.less,

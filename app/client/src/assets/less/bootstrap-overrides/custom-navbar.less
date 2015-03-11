@@ -3,14 +3,13 @@
 
 
 .navbar {
-    margin-top: @navbar-height / 2;
     margin-bottom: 0;
     border-bottom: 1px solid #C9C9C9;
 
     &.navbar-utility {
         background: darken(@navbar-default-bg, 5%);
-        height: @navbar-height / 2;
-        min-height: @navbar-height / 2;
+        height: @navbar-utility-height;
+        min-height: @navbar-utility-height;
         margin: 0;
 
         .nav.navbar-utilitynav {
@@ -170,5 +169,18 @@
             }
 
         }
+    }
+}
+
+.navbar-side {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .menu-item {
+        display: block;
+        padding: 5px 10px;
     }
 }

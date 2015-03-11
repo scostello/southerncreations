@@ -3,21 +3,12 @@ define(function () {
 
     return {
         name: 'ProfileController',
-        fn: ['$scope', 'Restangular', 'localStorageService', 'jwtHelper', function ($scope, Restangular, localStorageService, jwtHelper) {
-            var token = localStorageService.get('jwt'),
-                baseProducts = Restangular.all('products');
+        fn: ['$scope', 'AuthService', function ($scope, AuthService) {
+            var user = AuthService.getUserContext();
 
-            $scope.profile = jwtHelper.decodeToken(token);
+            $scope.profile = user;
 
-            $scope.createProducts = function () {
-                baseProducts.post({foo: 'bar'})
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                    });
-            };
+            $scope.createProducts = function () {};
         }]
     };
 });

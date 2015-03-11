@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 {% include '../includes/head.html' %}
-<body>
-    <div ui-view="header"></div>
-    <div id="main">
-        <div ui-view="content"></div>
+<body ng-controller="MasterController as master">
+    <div id="application-container" ng-class="{'application-menu-open': master.menuopen}">
+        <div ui-view="side-menu"></div>
+
+        <div id="application-content">
+            <header id="header" ui-view="header"></header>
+
+            <div id="main-content" ui-view="content"></div>
+
+            <footer id="footer" ui-view="footer"></footer>
+        </div>
+
     </div>
-    <div ui-view="footer"></div>
     {% include '../includes/foot.html' %}
 </body>
 </html>

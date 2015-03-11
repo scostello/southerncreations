@@ -3,8 +3,7 @@ define(function () {
 
     return {
         name: 'LoginController',
-        fn: ['$scope', '$state', 'Restangular', 'localStorageService', 'jwtHelper', function ($scope, $state, Restangular, localStorageService, jwtHelper) {
-            var baseLogin = Restangular.all('login');
+        fn: ['$scope', '$state', 'AuthService', function ($scope, $state, AuthService) {
             $scope.user = {};
 
             $scope.submit = function () {
@@ -12,11 +11,12 @@ define(function () {
                     return;
                 }
 
-                baseLogin.post($scope.user)
-                    .then(function (response) {
-                        localStorageService.set('jwt', response.token);
-                        localStorageService.set('context', jwtHelper.decodeToken(response.token));
+                AuthService.login($scope.user)
+                    .then(function () {
                         $state.go('auth.profile');
+                    })
+                    .catch(function (err) {
+                        // error
                     });
             };
         }]
