@@ -2,7 +2,7 @@
 <html>
 {% include '../includes/head.html' %}
 <body ng-controller="MasterController as master">
-    <div id="application-container" ng-class="{'application-menu-open': master.menuopen}">
+    <div id="application-container" ng-class="{'application-menu-open': master.menuopen}" global-click menu-open="master.menuopen">
         <div ui-view="side-menu"></div>
 
         <div id="application-content">

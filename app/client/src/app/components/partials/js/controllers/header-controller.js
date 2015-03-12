@@ -9,7 +9,7 @@ define(function () {
             vm.toggleMenu = toggleMenu;
 
             function toggleMenu() {
-                PubSubService.publish(SettingsService.messages.menutoggle, 'something');
+                PubSubService.publish(SettingsService.messages.menutoggle);
             }
         }]
     };

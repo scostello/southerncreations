@@ -2,10 +2,11 @@ define([
     'angular',
     './services/core.services',
     './controllers/core.controllers',
+    './directives/core.directives',
     'angularUiRouter',
     'ocLazyLoad',
     'angularJwt'
-], function (angular, coreServices, coreControllers) {
+], function (angular, coreServices, coreControllers, coreDirectives) {
     'use strict';
 
     var moduleName = 'southerncreations.core',
@@ -16,7 +17,8 @@ define([
             'oc.lazyLoad',
             'angular-jwt',
             coreServices.name,
-            coreControllers.name
+            coreControllers.name,
+            coreDirectives.name
         ]
     )
     .config([
