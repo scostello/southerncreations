@@ -15,6 +15,10 @@ define(function () {
             PubSubService.subscribe(SettingsService.messages.menutoggle, function () {
                 vm.menuopen = !(vm.menuopen);
             });
+
+            PubSubService.subscribe('$stateChangeSuccess', function () {
+                vm.menuopen = false;
+            });
         }]
     };
 });

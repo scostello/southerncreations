@@ -7,7 +7,7 @@ define([
         name: 'globalClick',
         fn: ['$window', function ($window) {
             return {
-                restrict: 'A',
+                restrict: 'E',
                 scope: {
                     menuOpen: '='
                 },
