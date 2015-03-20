@@ -2,8 +2,9 @@
  * Created by scostello on 3/12/15.
  */
 define([
-    'angular'
-], function (angular) {
+    'angular',
+    'lodash'
+], function (angular, _) {
     'use strict';
 
     return {
@@ -15,7 +16,9 @@ define([
                     menuOpen: '='
                 },
                 link: function (scope) {
-                    angular.element($window).on('resize', function () {
+                    angular.element($window).on('resize', _.debounce(resizeWindow, 250));
+
+                    function resizeWindow() {
                         var width = this.innerWidth;
 
                         if (width > RESOLUTIONS.TABLET) {
@@ -23,7 +26,7 @@ define([
                                 scope.menuOpen = false;
                             });
                         }
-                    });
+                    }
                 }
             }
         }]
