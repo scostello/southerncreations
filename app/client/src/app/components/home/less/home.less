@@ -1,10 +1,15 @@
+@import (reference) "bootstrap-overrides/custom-variables";
+@import (reference) "bootstrap-overrides/custom-utilities";
+
 .page {
-    background: #fff;
+    background: @white;
 }
 
-.section-welcome {
+.welcome-wrap {
+    position: relative;
     height: 550px;
     width: 100%;
+    padding: 50px;
 }
 
 .welcome-logo-container {
@@ -26,12 +31,284 @@
 
 .welcome-message-container {
     font-size: 25px;
-    padding: 20px 85px 20px 0;
-    margin-top: 130px;
+    padding: 20px 65px 20px 0;
+    margin-top: 100px;
 }
 
-.splash-information-bar {
-    height: 40px;
+.btn-ordernow {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    line-height: 2.5;
+
+    i.glyphicon-chevron-right {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 25px;
+    }
+}
+
+.trust-bar-wrap {
     background: #323232;
+    color: @white;
+    padding: 10px 5px;
+
+    .security-item {
+        padding: 0 10px;
+        margin-top: 10px;
+    }
+
+    .icon-container-circle {
+        position: relative;
+        display: inline-block;
+        font-size: 25px;
+        font-style: italic;
+
+        i.fa {
+            position: absolute;
+        }
+    }
+
+    .information-message {
+        display: inline-block;
+        font-size: 15px;
+        .vertical-align;
+    }
+
+    .security-logo {
+        height: 30px;
+        width: auto;
+    }
+
+    .more-info {
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 100;
+        text-decoration: underline;
+    }
 }
 
+.philosophy-wrap {
+    float: left;
+    position: relative;
+    padding: 40px 75px;
+}
+
+.philosophy {
+    font-size: 20px;
+    padding: 30px 10px;
+    color: #8E8D8E;
+}
+
+.hex-logo {
+    height: 400px;
+}
+
+.services-wrap {
+    float: left;
+    background: #383838;
+    width: 100%;
+
+    .services {
+
+    }
+
+    article {
+        position: relative;
+
+        &.hover {
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0) scale(1,1);
+            transform: translateZ(0) scale(1,1);
+
+            &:after {
+                display: block;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: inherit;
+                -webkit-transition: 3s -webkit-transform cubic-bezier(.23, 1, .32, 1);
+                transition: 3s transform cubic-bezier(.23, 1, .32, 1);
+                opacity: .9;
+                -webkit-transform: scale(2) translateX(-100%) translateY(-100%) translateZ(0) rotate(-45deg);
+                transform: scale(2) translateX(-100%) translateY(-100%) translateZ(0) rotate(-45deg);
+            }
+
+            &:hover {
+
+                &:after {
+                    -webkit-transform: scale(2) rotate(-45deg) translateZ(0);
+                    transform: scale(2) rotate(-45deg) translateZ(0);
+                    -webkit-transition-duration: 1s;
+                    transition-duration: 1s;
+                }
+
+                .service-heading {
+                    opacity: 1;
+                    -webkit-transform: translateY(0) translateZ(0);
+                    transform: translateY(0) translateZ(0);
+                    -webkit-transition-delay: .25s;
+                    transition-delay: .25s;
+                    -webkit-transition-duration: .75s;
+                    transition-duration: .75s;
+                }
+            }
+        }
+    }
+
+    .image-background {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: hidden;
+        position: relative;
+
+        &:before {
+            display: block;
+            content: '';
+            padding-top: 56%;
+        }
+
+        img {
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .service-heading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background: transparent;
+        z-index: 1;
+        color: @white;
+        -webkit-transform: translateY(-20px) translateZ(0);
+        transform: translateY(-20px) translateZ(0);
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -ms-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+    }
+    
+    a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+}
+
+@media screen and (max-width: @screen-desktop) {
+    .welcome-logo {
+        height: 250px;
+    }
+
+    .welcome-message-container {
+        font-size: 20px;
+        padding: 20px 0;
+        margin-top: 100px;
+    }
+
+    .splash-information-bar {
+        .security-logo {
+            height: 20px;
+        }
+
+        .more-info {
+            margin-left: 10px;
+        }
+
+        .icon-container-circle {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .philosophy-wrap {
+        padding: 40px 15px;
+    }
+
+    .philosophy {
+        font-size: 15px;
+    }
+
+    .hex-logo {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: @screen-tablet) {
+    .welcome-logo {
+        height: 350px;
+    }
+
+    .welcome-message-container {
+        display: none;
+    }
+
+    .btn-ordernow {
+        display: block;
+    }
+
+    .section-heading {
+        text-align: center;
+    }
+
+    .hex-logo {
+        height: 350px;
+    }
+
+    .section-services {
+        padding: 30px 0;
+
+        .service-item {
+            float: left;
+            padding: 5px;
+            width: 100%;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @screen-phone) {
+    .welcome-logo {
+        height: 200px;
+    }
+
+    .section-welcome {
+        height: 400px;
+    }
+
+    .icon-container-circle {
+        height: 30px;
+        width: 30px;
+    }
+
+    .splash-information-bar {
+        .information-message {
+            font-size: 12px;
+        }
+    }
+}

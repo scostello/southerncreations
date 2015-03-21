@@ -15,7 +15,7 @@ define([
 
             var $controller = $injector.get('$controller');
             createAboutContorller = function () {
-                return $controller(aboutController, {'$scope': $rootScope});
+                return $controller(authService, {'$scope': $rootScope});
             };
         }));
 

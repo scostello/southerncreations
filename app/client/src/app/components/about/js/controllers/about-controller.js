@@ -3,7 +3,10 @@ define(function () {
 
     return {
         name: 'AboutController',
-        fn: ['$rootScope', function ($rootScope) {
-        }]
+        fn: AboutController
     };
+
+    function AboutController() {
+
+    }
 });
