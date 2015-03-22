@@ -1,7 +1,7 @@
 
 <div class="page page-home">
     <!-- Splash Carousel -->
-    <section class="welcome-wrap row">
+    <section class="welcome-wrap row-fluid">
         <div class="col-xs-12 col-sm-5 welcome-logo-container">
             <img class="welcome-logo" src="/static/assets/images/logo/southerncreations-full.svg" alt="southerncreations"/>
         </div>
@@ -18,31 +18,30 @@
     </section>
     <!-- End Splash Carousel -->
 
-    <!-- Splash Information Bar -->
-    <div class="trust-bar-wrap row text-center">
+    <!-- Trust Information Bar -->
+    <div class="trust-bar-wrap row no-margin">
         <div class="col-xs-12 col-md-6 guarantees-container">
-            <div class="col-xs-12 col-sm-6 security-item">
-                <div class="icon-container-circle"><i class="middle-align fa fa-usd"></i></div>
-                <div class="information-message">100% Money Back Guarantee</div>
+            <div class="col-xs-6 security-item">
+                <article class="no-wrap">
+                    <div class="icon-container-circle"><i class="middle-align fa fa-usd"></i></div>
+                    <div class="trust-message">100% Money Back Guarantee</div>
+                </article>
             </div>
-            <div class="col-xs-12 col-sm-6 security-item">
-                <div class="icon-container-circle"><i class="middle-align fa fa-lock"></i></div>
-                <div class="information-message">Secure Shopping</div>
+            <div class="col-xs-6 security-item">
+                <article class="no-wrap">
+                    <div class="icon-container-circle"><i class="middle-align fa fa-lock"></i></div>
+                    <div class="trust-message">Secure Shopping</div>
+                </article>
             </div>
         </div>
         <div class="col-xs-12 col-md-6 third-party-container">
-            <div class="col-xs-12 col-sm-4 security-item">
-                <img class="security-logo" src="/static/assets/images/logo/logo-mcafee.png" alt="McAfee"/>
-            </div>
-            <div class="col-xs-12 col-sm-4 security-item">
-                <img class="security-logo" src="/static/assets/images/logo/logo-paypal.png" alt="PayPal"/>
-            </div>
-            <div class="col-xs-12 col-sm-4 security-item">
-                <a href="#"><div class="more-info">More Info</div></a>
-            </div>
+            <div class="col-xs-6 col-sm-3 security-item"><i class="pw pw-trust-e"></i></div>
+            <div class="col-xs-6 col-sm-3 security-item"><i class="pw pw-paypal-new"></i></div>
+            <div class="col-xs-6 col-sm-3 security-item"><i class="pw pw-google-wallet"></i></div>
+            <div class="col-xs-6 col-sm-3 security-item"><i class="pw pw pw-braintree"></i></div>
         </div>
     </div>
-    <!-- End Splash Information Bar -->
+    <!-- End Trust Information Bar -->
 
     <!-- Philosophy -->
     <section class="philosophy-wrap row">
@@ -68,14 +67,20 @@
     <!-- End Philosophy -->
 
     <!-- Services -->
-    <section class="services-wrap row-fluid">
-        <div class="services flex-wrap">
+    <section class="services-wrap row no-pm">
+        <div class="services">
             <article class="col-xs-12 col-md-6 service-item hover no-pm" ng-style="{'background-color': service.backgroundColor}" ng-repeat="service in home.services">
                 <div class="image-background">
                     <img ng-src="{{service.src}}" ng-srcset="{{service.srcset | join}}" alt=""/>
                 </div>
-                <div class="service-heading">
-                    <h2 class="text-center">{{service.name}}</h2>
+                <div class="service-heading-container text-center">
+                    <div class="service-heading">
+                        <div class="service-icon-container">
+                            <img class="service-icon" ng-src="{{service.icon}}" alt=""/>
+                        </div>
+                        <hr/>
+                        <h2 class="text-center">{{service.name}}</h2>
+                    </div>
                 </div>
                 <a href="#" class="text-indent-hide">{{service.name}}</a>
             </article>

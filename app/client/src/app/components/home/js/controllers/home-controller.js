@@ -8,42 +8,46 @@ define(function () {
             vm.services = [
                 {
                     name: 'weddings',
-                    backgroundColor: '#f15c4f',
-                    src: 'https://stupid-studio.com/wp-content/uploads/2015/02/Skole200-hero1-750x466.jpg',
+                    backgroundColor: '#000',
+                    icon: '/static/assets/images/services/wedding-service-icon.svg',
+                    src: '/static/assets/images/services/wedding-service-750x499.jpg',
                     srcset: [
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/Skole200-hero1-750x466.jpg 750w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/Skole200-hero1-1280x795.jpg 1280w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/Skole200-hero1.jpg'
+                        '/static/assets/images/services/wedding-service-750x499.jpg 750w',
+                        '/static/assets/images/services/wedding-service-1200x798.jpg 1200w',
+                        '/static/assets/images/services/wedding-service.jpg'
                     ]
                 },
                 {
                     name: 'birthdays',
-                    backgroundColor: '#f15c4f',
-                    src: 'https://stupid-studio.com/wp-content/uploads/2015/01/wlgd-snap1-750x411.jpg',
+                    backgroundColor: '#000',
+                    icon: '/static/assets/images/services/birthday-service-icon.svg',
+                    src: '/static/assets/images/services/birthday-service-750x499.jpg',
                     srcset: [
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/wlgd-snap1-750x411.jpg 750w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/wlgd-snap1-1280x701.jpg 1280w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/wlgd-snap1.jpg'
+                        '/static/assets/images/services/birthday-service-750x499.jpg 750w',
+                        '/static/assets/images/services/birthday-service-1200x798.jpg 1200w',
+                        '/static/assets/images/services/birthday-service.jpg'
                     ]
                 },
                 {
                     name: 'showers',
-                    backgroundColor: '#f15c4f',
-                    src: 'https://stupid-studio.com/wp-content/uploads/2015/01/bang-750x469.jpg',
+                    backgroundColor: '#000',
+                    icon: '/static/assets/images/services/shower-service-icon.svg',
+                    src: '/static/assets/images/services/shower-service-750x500.jpg',
                     srcset: [
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/bang-750x469.jpg 750w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/bang-1280x800.jpg 1280w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/01/bang.jpg'
+                        '/static/assets/images/services/shower-service-750x500.jpg 750w',
+                        '/static/assets/images/services/shower-service-1200x800.jpg 1200w',
+                        '/static/assets/images/services/shower-service.jpg'
                     ]
                 },
                 {
                     name: 'special events',
-                    backgroundColor: '#f15c4f',
-                    src: 'https://stupid-studio.com/wp-content/uploads/2015/02/nelles-hero-750x500.jpg',
+                    backgroundColor: '#000',
+                    icon: '/static/assets/images/services/event-service-icon.svg',
+                    src: '/static/assets/images/services/event-service-750x500.jpg',
                     srcset: [
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/nelles-hero-750x500.jpg 750w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/nelles-hero-1280x853.jpg 1280w',
-                        'https://stupid-studio.com/wp-content/uploads/2015/02/nelles-hero.jpg'
+                        '/static/assets/images/services/event-service-750x500.jpg 750w',
+                        '/static/assets/images/services/event-service-1200x800.jpg 1200w',
+                        '/static/assets/images/services/event-service.jpg'
                     ]
                 }
             ];
