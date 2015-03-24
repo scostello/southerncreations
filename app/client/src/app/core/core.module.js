@@ -113,6 +113,24 @@ define([
                         }]
                     }
                 })
+                .state('app.catering', {
+                    url: '/catering',
+                    views: {
+                        'content@': {
+                            templateUrl: '/static/app/components/catering/views/catering.html',
+                            controller: 'CateringController',
+                            controllerAs: 'catering'
+                        }
+                    },
+                    resolve: {
+                        aboutModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'southerncreations.catering',
+                                files: ['app/components/catering/js/catering-module']
+                            });
+                        }]
+                    }
+                })
                 .state('app.about', {
                     url: '/about',
                     views: {

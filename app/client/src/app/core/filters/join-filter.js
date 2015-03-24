@@ -11,7 +11,7 @@ define([
         fn: [function () {
             return function (input) {
                 if (!_.isArray(input)) {
-                    input = [input]
+                    input = [input];
                 }
 
                 return input.join(',');

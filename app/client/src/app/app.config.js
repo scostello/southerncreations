@@ -48,7 +48,8 @@
             angularMocks: 'vendor/angular-mocks/angular-mocks',
             ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.min',
 
-            owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min'
+            owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min',
+            fitvid: 'vendor/fitvids/jquery.fitvids'
         },
 
         shim: {
@@ -85,6 +86,9 @@
             },
             ocLazyLoad: {
                 deps: ['angular']
+            },
+            fitvid: {
+                deps: ['jquery']
             }
         }
     });

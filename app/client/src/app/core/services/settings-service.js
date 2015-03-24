@@ -16,8 +16,12 @@ define(function () {
                     state: 'app.home'
                 },
                 {
-                    name: 'products',
+                    name: 'menu',
                     state: 'app.products'
+                },
+                {
+                    name: 'catering',
+                    state: 'app.catering'
                 },
                 {
                     name: 'about',

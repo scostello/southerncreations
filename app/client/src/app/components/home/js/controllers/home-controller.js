@@ -3,8 +3,11 @@ define(function () {
 
     return {
         name: 'HomeController',
-        fn: [function () {
+        fn: ['$state', function ($state) {
             var vm = this;
+
+            vm.goToFullMenu = goToFullMenu;
+
             vm.services = [
                 {
                     name: 'weddings',
@@ -66,7 +69,7 @@ define(function () {
                 {
                     name: 'goody name',
                     description: 'goody description',
-                    src: '/static/assets/images/products/cupcakes/strawberry.png'
+                    src: '/static/assets/images/products/muffins/banana-nut.png'
                 },
                 {
                     name: 'goody name',
@@ -84,6 +87,10 @@ define(function () {
                     src: '/static/assets/images/products/cookies/chocolate-chip.png'
                 }
             ];
+
+            function goToFullMenu() {
+                $state.go('app.products');
+            }
         }]
     };
 });

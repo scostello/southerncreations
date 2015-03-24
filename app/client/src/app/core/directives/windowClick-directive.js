@@ -4,7 +4,7 @@ define([
     'use strict';
 
     return {
-        name: 'globalClick',
+        name: 'windowClick',
         fn: ['$window', function ($window) {
             return {
                 restrict: 'E',

@@ -1,8 +1,9 @@
 define([
     'angular',
-    './globalClick-directive',
-    './windowResize-directive'
-], function (angular, globalClickDirective, windowResizeDirective) {
+    './windowClick-directive',
+    './windowResize-directive',
+    './fitvid-directive'
+], function (angular, windowClickDirective, windowResizeDirective, fitvidDirective) {
     'use strict';
 
     var moduleName = 'southerncreations.core.directives',
@@ -15,8 +16,9 @@ define([
             DESKTOP: 992,
             DESKTOP_LG: 1200
         })
-        .directive(globalClickDirective.name, globalClickDirective.fn)
-        .directive(windowResizeDirective.name, windowResizeDirective.fn);
+        .directive(windowClickDirective.name, windowClickDirective.fn)
+        .directive(windowResizeDirective.name, windowResizeDirective.fn)
+        .directive(fitvidDirective.name, fitvidDirective.fn);
 
     return {
         name: moduleName,
