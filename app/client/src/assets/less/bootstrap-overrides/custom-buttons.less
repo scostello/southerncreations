@@ -1,11 +1,28 @@
 .btn {
     font-size: 16px;
     border-radius: 0;
+    -webkit-box-shadow: white 0 0 0 3px inset, rgba(0, 0, 0, 0) 0 0 0;
+    -moz-box-shadow: white 0 0 0 3px inset, rgba(0, 0, 0, 0) 0 0 0;
+    box-shadow: white 0 0 0 3px inset, rgba(0, 0, 0, 0) 0 0 0;
     -webkit-transition: all 250ms;
     -moz-transition: all 250ms;
     -ms-transition: all 250ms;
     -o-transition: all 250ms;
     transition: all 250ms;
+}
+
+.btn-primary {
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+        background: @brand-primary;
+    }
+}
+
+.btn-lg {
+    font-size: 20px;
 }
 
 .btn-hollow {
