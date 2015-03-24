@@ -12,7 +12,7 @@
             <p class="welcome-message">
                 Etiam fermentum diam fermentum urna accumsan, eu eleifend arcu varius. Vestibulum tincidunt neque sit amet purus interdum, a accumsan risus tempor.
             </p>
-            <button class="btn btn-primary">Order Now</button>
+            <button class="btn btn-primary btn-hollow">Order Now</button>
         </div>
         <button class="btn btn-ordernow btn-primary">Order Now <i class="glyphicon glyphicon-chevron-right"></i></button>
     </section>
@@ -66,21 +66,30 @@
     </section>
     <!-- End Philosophy -->
 
+    <!--<hr class="diamond"/>-->
+
     <!-- Services -->
-    <section class="services-wrap row no-pm">
+    <section class="services-wrap row no-pm text-center">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <h1 class="section-heading">
+                <span>Services</span>
+                <hr/>
+            </h1>
+        </div>
+        <div class="clearfix"></div>
         <div class="services">
             <article class="col-xs-12 col-md-6 service-item hover no-pm" ng-style="{'background-color': service.backgroundColor}" ng-repeat="service in home.services">
                 <div class="image-background">
                     <img ng-src="{{service.src}}" ng-srcset="{{service.srcset | join}}" alt=""/>
                 </div>
                 <div class="service-heading-container text-center">
-                    <div class="service-heading">
+                    <header class="service-heading">
                         <div class="service-icon-container">
                             <img class="service-icon" ng-src="{{service.icon}}" alt=""/>
                         </div>
                         <hr/>
                         <h2 class="text-center">{{service.name}}</h2>
-                    </div>
+                    </header>
                 </div>
                 <a href="#" class="text-indent-hide">{{service.name}}</a>
             </article>
@@ -88,12 +97,40 @@
     </section>
     <!-- End Services -->
 
-    <!-- Goodies -->
-    <section class="goodies-wrap">
-        <div class="goodies flex-wrap">
+    <!--<hr class="diamond"/>-->
 
+    <!-- Goodies -->
+    <section class="goodies-wrap row no-pm text-center">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <h1 class="section-heading">
+                <span>Goodies</span>
+                <hr/>
+            </h1>
+        </div>
+        <div class="clearfix"></div>
+        <div class="goodies">
+            <article class="col-md-4 goody-item" ng-repeat="goody in home.goodies">
+                <a href="">
+                    <header class="goody-heading">
+                        <div class="details">
+                            <h2>{{goody.name}}</h2>
+                            <p>{{goody.description}}</p>
+                        </div>
+                    </header>
+                <span class="goody-image-container">
+                    <img ng-src="{{goody.src}}" alt=""/>
+                </span>
+                </a>
+            </article>
+            <button class="btn btn-primary btn-hollow">See Full Menu</button>
         </div>
     </section>
     <!-- End Goodies -->
+
+    <!-- Video -->
+    <section class="video-wrap">
+        
+    </section>
+    <!-- End Video -->
 
 </div>

@@ -51,6 +51,39 @@ define(function () {
                     ]
                 }
             ];
+
+            vm.goodies = [
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/cupcakes/chocolate-fudge.png'
+                },
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/cupcakes/pink-coconut.png'
+                },
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/cupcakes/strawberry.png'
+                },
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/specialty/cinnamon-roll.png'
+                },
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/specialty/strawberry-cheescake.png'
+                },
+                {
+                    name: 'goody name',
+                    description: 'goody description',
+                    src: '/static/assets/images/products/cookies/chocolate-chip.png'
+                }
+            ];
         }]
     };
 });

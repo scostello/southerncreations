@@ -50,7 +50,8 @@
 }
 
 .section-heading {
-    font-weight: 200;
+    color: #616161;
+    font-weight: 300;
 
     span {
         position: relative;
@@ -67,6 +68,7 @@
     }
 
     hr {
+        position: relative;
         margin-top: 6px;
         margin-bottom: 20px;
         border: 0;
@@ -76,6 +78,14 @@
     &.white {
         color: @white;
     }
+}
+
+hr.diamond {
+    display: block;
+    height: 20px;
+    width: 80%;
+    margin: 20px auto;
+    background: url('/static/assets/images/backgrounds/diamond-line.png');
 }
 
 .flex-wrap {
