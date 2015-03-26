@@ -2,8 +2,9 @@ define([
     'angular',
     './windowClick-directive',
     './windowResize-directive',
-    './fitvid-directive'
-], function (angular, windowClickDirective, windowResizeDirective, fitvidDirective) {
+    './fitvid-directive',
+    './owlCarousel-directive'
+], function (angular, windowClickDirective, windowResizeDirective, fitvidDirective, owlCarouselDirective) {
     'use strict';
 
     var moduleName = 'southerncreations.core.directives',
@@ -18,7 +19,8 @@ define([
         })
         .directive(windowClickDirective.name, windowClickDirective.fn)
         .directive(windowResizeDirective.name, windowResizeDirective.fn)
-        .directive(fitvidDirective.name, fitvidDirective.fn);
+        .directive(fitvidDirective.name, fitvidDirective.fn)
+        .directive(owlCarouselDirective.name, owlCarouselDirective.fn);
 
     return {
         name: moduleName,

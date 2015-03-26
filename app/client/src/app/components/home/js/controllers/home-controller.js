@@ -88,6 +88,12 @@ define(function () {
                 }
             ];
 
+            vm.testimonials = [
+                {
+
+                }
+            ];
+
             function goToFullMenu() {
                 $state.go('app.products');
             }
