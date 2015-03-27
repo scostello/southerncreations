@@ -45,8 +45,8 @@
 
     i.glyphicon-chevron-right {
         position: absolute;
-        top: 15px;
-        right: 20px;
+        top: 25px;
+        right: 25px;
         font-size: 25px;
     }
 }
@@ -338,31 +338,21 @@
 
 .testimonials-wrap {
     width: 100%;
-    padding: 20px 60px;
+    padding: 20px 10px;
 
     .testimonial {
-        background: #3fbf79;
-        padding: 30px 0px;
+        background: @white;
+        padding: 0 10px;
         margin: 10px;
-        color: #FFF;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
+        border: 1px solid #ddd;
         text-align: center;
-    }
 
-    .customNavigation{
-        text-align: center;
-    }
-
-    //use styles below to disable ugly selection
-    .customNavigation a{
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        p {
+            text-align: left;
+        }
     }
 }
 
@@ -437,6 +427,10 @@
     .video-wrap {
         width: 90%;
     }
+
+    .services-wrap {
+        padding: 20px 10px;
+    }
 }
 
 @media screen and (max-width: @screen-tablet) {
@@ -460,12 +454,28 @@
         height: 350px;
     }
 
-    .services-wrap {
-        padding: 20px 10px;
+    .trust-bar-wrap {
+        .guarantees-container {
+            .security-item {
+                width: 50%;
+            }
+        }
     }
 }
 
 @media screen and (max-width: 630px) {
+    .trust-bar-wrap {
+        .icon-container-circle {
+            height: 30px;
+            width: 30px;
+            font-size: 20px;
+        }
+
+        .trust-message {
+            font-size: 15px;
+        }
+    }
+
     .goodies-wrap {
 
         .goodies {
@@ -573,29 +583,6 @@
     }
 }
 
-@media screen and (max-width: 680px) {
-
-    .trust-bar-wrap {
-        .guarantees-container {
-
-        }
-        
-        .third-party-container {
-            padding: 0;
-        }
-
-        .icon-container-circle {
-            /*width: 35px;
-            height: 35px;
-            font-size: 25px;*/
-        }
-
-        .trust-message {
-            /*font-size: 15px;*/
-        }
-    }
-}
-
 @media screen and (max-width: @screen-phone) {
     .welcome-logo {
         height: 200px;
@@ -617,11 +604,15 @@
     .trust-bar-wrap {
 
         .trust-message {
-            font-size: 17px;
+            font-size: 20px;
         }
 
         .guarantees-container {
             text-align: left;
+
+            .security-item {
+                width: 100%;
+            }
         }
 
         .third-party-container {

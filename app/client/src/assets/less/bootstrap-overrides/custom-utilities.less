@@ -49,7 +49,7 @@
     }
 }
 
-.section-heading {
+h1.section-heading {
     color: #616161;
     font-weight: 300;
 
@@ -77,6 +77,10 @@
 
     &.white {
         color: @white;
+    }
+
+    @media screen and (max-width: @screen-tablet) {
+        font-size: 27px;
     }
 }
 
