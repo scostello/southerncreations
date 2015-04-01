@@ -17,7 +17,8 @@ module.exports = {
                 baseRoute: '/',
                 feature: {
                     css: [
-                        '/static/assets/css/app.css'
+                        '/static/assets/css/app.css',
+                        '/static/assets/css/auth.css'
                     ]
                 }
             };
@@ -26,7 +27,12 @@ module.exports = {
                 case 'login':
                     config = _.assign(config, {
                         title: 'Login - Southern Creations',
-                        description: 'Southern Creations - Login'
+                        description: 'Southern Creations - Login',
+                        feature: {
+                            css: [
+                                '/static/assets/css/auth.css'
+                            ]
+                        }
                     });
                     break;
             }

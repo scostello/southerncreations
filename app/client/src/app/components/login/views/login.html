@@ -1,15 +1,28 @@
-<div ng-controller="LoginController as login">
-    <div class="constrain">
-        <form ng-submit="submit()">
-            <div class="form-group">
-                <label for="username-email">Username or Email address</label>
-                <input ng-model="user.username" type="text" class="form-control" id="username-email" placeholder="Enter username or email" required>
+<div class="screen screen-auth">
+    <div class="auth-dialog">
+        <div class="auth-logo-container">
+            <img src="/static/assets/images/logo/southerncreations-small.svg" alt="sc-small"/>
+        </div>
+        <h3 class="auth-header text-center">Login</h3>
+        <form ng-submit="login.submit()">
+            <div class="material-group">
+                <input ng-model="login.user.username" type="text" class="material-input" id="email" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="email" class="material-label">Email</label>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="Password" required>
+            <div class="material-group">
+                <input ng-model="login.user.password" type="password" class="material-input" id="password" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="password" class="material-label">Password</label>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-full-width">Sign In</button>
+            <a class="forgot-link" href="/forgot">Forgot Password?</a>
         </form>
+        <div class="login-option-seperator">
+            <span class="seperator">Or</span>
+        </div>
+        <button class="btn btn-lg btn-facebook btn-full-width"><i class="fa fa-facebook-square"></i> Sign In With Facebook</button>
     </div>
 </div>

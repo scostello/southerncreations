@@ -1,7 +1,7 @@
 @import "bootstrap-overrides/bootstrap";
 @import "owl-overrides/owl";
 
-@sidemenu-width: 200px;
+@sidemenu-width: 220px;
 
 *, :before, :after {
     box-sizing: border-box;
@@ -30,20 +30,18 @@ a {
 }
 
 #application-content {
-    position: relative;
     right: 0;
-    height: 100%;
     perspective: 1000px;
-    -webkit-transition: -webkit-transform 500ms;
-    -moz-transition: transform 500ms;
-    -ms-transition: transform 500ms;
-    -o-transition: transform 500ms;
-    transition: transform 500ms;
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -ms-transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
 
     &:after {
         display: block;
         content: '';
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 0;
@@ -63,11 +61,11 @@ a {
     width: @sidemenu-width;
     height: 100%;
     background: @navbar-default-bg;
-    -webkit-transition: all 500ms;
-    -moz-transition: all 500ms;
-    -ms-transition: all 500ms;
-    -o-transition: all 500ms;
-    transition: all 500ms;
+    -webkit-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -ms-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
     -webkit-transform: translate3d(@sidemenu-width, 0, 0);
     -moz-transform: translate3d(@sidemenu-width, 0, 0);
     -ms-transform: translate3d(@sidemenu-width, 0, 0);
@@ -76,10 +74,9 @@ a {
     z-index: 1;
 
     h2 {
+        text-align: center;
         margin: 0;
         padding: 1em;
-        color: rgba(0,0,0,0.4);
-        text-shadow: 0 0 1px rgba(0,0,0,0.1);
         font-weight: 300;
         font-size: 2em;
     }
@@ -98,8 +95,8 @@ a {
         width: 100%;
         height: 100%;
         opacity: 1;
-        -webkit-transition: opacity 0.5s;
-        transition: opacity 0.5s;
+        -webkit-transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     #application-menu {

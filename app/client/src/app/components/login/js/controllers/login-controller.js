@@ -4,14 +4,15 @@ define(function () {
     return {
         name: 'LoginController',
         fn: ['$scope', '$state', 'AuthService', function ($scope, $state, AuthService) {
-            $scope.user = {};
+            var vm = this;
+            vm.user = {};
 
-            $scope.submit = function () {
-                if (!$scope.user.username || !$scope.user.password) {
+            vm.submit = function () {
+                if (!vm.user.username || !vm.user.password) {
                     return;
                 }
 
-                AuthService.login($scope.user)
+                AuthService.login(vm.user)
                     .then(function () {
                         $state.go('auth.profile');
                     })

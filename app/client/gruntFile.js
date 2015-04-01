@@ -66,6 +66,10 @@ module.exports = function (grunt) {
                     'src/assets/css/app.css': [
                         '<%= srcDir %>assets/less/app.less',
                         '<%= srcDir %>app/components/home/less/home.less'
+                    ],
+                    'src/assets/css/auth.css': [
+                        '<%= srcDir %>assets/less/auth.less',
+                        '<%= srcDir %>app/components/login/less/login.less'
                     ]
                 }
             }

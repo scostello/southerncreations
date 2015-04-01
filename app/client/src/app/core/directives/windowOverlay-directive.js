@@ -4,7 +4,7 @@ define([
     'use strict';
 
     return {
-        name: 'windowClick',
+        name: 'windowOverlay',
         fn: ['$window', function ($window) {
             return {
                 restrict: 'E',

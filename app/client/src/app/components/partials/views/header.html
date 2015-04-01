@@ -2,8 +2,11 @@
     <div class="constrain">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-utilitynav">
-                <li><a ui-sref="auth.login"><i class="fa fa-user"></i> Sign In</a></li>
-                <li><a ui-sref="#"><i class="fa fa-shopping-cart"></i> View Cart</a></li>
+                <li>
+                    <a ng-if="!head.isLoggedIn" ui-sref-active="active" ui-sref="auth.login"><i class="fa fa-user"></i> Sign In</a>
+                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Welcome, {{head.userContext().username}}</a>
+                </li>
+                <li><a ui-sref="#"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
         </div>
     </div>
@@ -20,7 +23,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active" ng-repeat="menuitem in master.menuitems">
+                <li ui-sref-active="active" ng-repeat="menuitem in ::master.menuitems">
                     <a class="menu-item" ui-sref="{{menuitem.state}}">{{menuitem.name}}</a>
                 </li>
             </ul>

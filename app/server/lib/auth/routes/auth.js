@@ -5,8 +5,11 @@ module.exports = function (app, router) {
     var _ = require('lodash'),
         mongoose = require('mongoose'),
         UserModel = mongoose.model('User'),
-        jwt = require('jsonwebtoken'),
-        viewConfig = app.get('config').getViewConfig('login');
+        jwt = require('jsonwebtoken');
+
+    app.get('/logout', function (req, res) {
+        res.redirect('/');
+    });
 
     router.route('/login')
         .post(function (req, res, next) {
@@ -110,15 +113,4 @@ module.exports = function (app, router) {
                     });
             });
         });
-
-    app.get('/logout', function (req, res) {
-        res.logout();
-        res.redirect('/');
-    });
-
-    app.get('/^(login|signup)$', function (req, res) {
-        res.render('auth', viewConfig);
-    });
-
-
 };

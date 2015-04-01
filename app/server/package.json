@@ -25,7 +25,8 @@
     "express-jwt": "~1.0.0",
     "jsonwebtoken": "~3.2.2",
     "bcrypt": "~0.8.1",
-    "bluebird": "~2.9.13"
+    "bluebird": "~2.9.13",
+    "twitter": "~1.2.5"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

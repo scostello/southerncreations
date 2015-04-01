@@ -1,8 +1,7 @@
 <aside id="application-menu">
-    <h2>Menu</h2>
     <nav class="navbar-side">
         <ul>
-            <li ui-sref-active="active" ng-repeat="menuitem in master.menuitems">
+            <li ui-sref-active="active" ng-repeat="menuitem in ::master.menuitems">
                 <a ui-sref="{{menuitem.state}}" class="menu-item">{{menuitem.name}}</a>
             </li>
         </ul>

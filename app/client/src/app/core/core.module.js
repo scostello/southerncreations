@@ -167,14 +167,40 @@ define([
                 })
                 .state('auth', {
                     url: '',
-                    abstract: true
+                    abstract: true,
+                    views: {
+                        'header': {
+                            templateUrl: '/static/app/components/partials/views/header.html',
+                            controller: 'HeaderController',
+                            controllerAs: 'head'
+                        },
+                        'footer': {templateUrl: '/static/app/components/partials/views/footer.html'},
+                        'side-menu': {
+                            templateUrl: '/static/app/components/partials/views/side-menu.html'
+                        }
+                    },
+                    resolve: {
+                        partialModules: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                {
+                                    name: 'southerncreations.header',
+                                    files: ['app/components/partials/js/header-module']
+                                },
+                                {
+                                    name: 'southerncreations.footer',
+                                    files: ['app/components/partials/js/footer-module']
+                                }
+                            ]);
+                        }]
+                    }
                 })
                 .state('auth.login', {
                     url: '/login',
                     views: {
                         'content@': {
                             templateUrl: '/static/app/components/login/views/login.html',
-                            controller: 'LoginController'
+                            controller: 'LoginController',
+                            controllerAs: 'login'
                         }
                     },
                     resolve: {

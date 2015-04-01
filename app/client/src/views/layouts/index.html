@@ -2,7 +2,7 @@
 <html>
 {% include '../includes/head.html' %}
 <body ng-controller="MasterController as master">
-    <window-click menu-open="master.menuopen"></window-click>
+    <window-overlay menu-open="master.menuopen"></window-overlay>
     <window-resize menu-open="master.menuopen"></window-resize>
 
     <div id="application-container" ng-class="{'application-menu-open': master.menuopen}">

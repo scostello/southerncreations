@@ -29,9 +29,12 @@
                 -moz-transition: color 0.3s;
                 transition: color 0.3s;
 
-                &:hover {
+                &:hover,
+                &:active,
+                &:focus,
+                &.active {
                     background: inherit;
-                    color: lighten(@brand-accent, 10%);
+                    color: @brand-primary;
                 }
             }
 
@@ -180,10 +183,35 @@
         margin: 0;
         padding: 0;
         list-style: none;
+
+        li {
+            &.active {
+                background: darken(@white, 5%);
+            }
+
+            &:last-child {
+                .menu-item {
+                    border-bottom: none;
+                }
+            }
+        }
     }
 
     .menu-item {
         display: block;
-        padding: 5px 10px;
+        padding: 20px 10px;
+        color: inherit;
+        font-size: 1.25em;
+        border-bottom: 1px dashed lighten(@brand-primary, 5%);
+        -webkit-transition: background .25s;
+        -moz-transition: background .25s;
+        -ms-transition: background .25s;
+        -o-transition: background .25s;
+        transition: background .25s;
+
+
+        &:hover {
+            background: darken(@white, 5%);
+        }
     }
 }

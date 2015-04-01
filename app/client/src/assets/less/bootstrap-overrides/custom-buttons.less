@@ -9,6 +9,7 @@
     -ms-transition: all 250ms;
     -o-transition: all 250ms;
     transition: all 250ms;
+    outline: none !important;
 }
 
 .btn-primary {
@@ -28,4 +29,21 @@
 .btn-hollow {
     color: @brand-primary;
     background: transparent;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.btn-facebook {
+    background: #4f6eae;
+    color: @white;
+
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+        color: @white;
+    }
 }
