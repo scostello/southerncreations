@@ -3,12 +3,15 @@ define(function () {
 
     return {
         name: 'ProfileController',
-        fn: ['$scope', 'AuthService', function ($scope, AuthService) {
-            var user = AuthService.getUserContext();
+        fn: ['$state', 'AuthService', function ($state, AuthService) {
+            var vm = this;
 
-            $scope.profile = user;
+            vm.user = AuthService.getUser();
+            vm.engageAdminMode = engageAdminMode;
 
-            $scope.createProducts = function () {};
+            function engageAdminMode() {
+                $state.go('auth.profile.admin');
+            }
         }]
     };
 });

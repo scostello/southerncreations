@@ -235,7 +235,8 @@ define([
                     views: {
                         'content@': {
                             templateUrl: '/static/app/components/profile/views/profile.html',
-                            controller: 'ProfileController'
+                            controller: 'ProfileController',
+                            controllerAs: 'profile'
                         }
                     },
                     resolve: {
@@ -248,6 +249,20 @@ define([
                     },
                     data: {
                         requiresLogin: true
+                    }
+                })
+                .state('auth.profile.admin', {
+                    url: '/admin',
+                    views: {
+                        'admin@auth.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin.html',
+                            controller: 'AdminController',
+                            controllerAs: 'admin'
+                        }
+                    },
+                    data: {
+                        requiresLogin: true,
+                        requiresAdminRights: true
                     }
                 });
 

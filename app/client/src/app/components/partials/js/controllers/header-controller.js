@@ -7,19 +7,16 @@ define(function () {
             var vm = this;
 
             vm.toggleMenu = toggleMenu;
-            vm.viewProfile = viewProfile;
+            vm.user = null;
             vm.isLoggedIn = false;
 
             function toggleMenu() {
                 PubSubService.publish(SettingsService.messages.menutoggle);
             }
 
-            function viewProfile() {
-
-            }
-
             $scope.$watch(AuthService.isLoggedIn, function (value) {
                 vm.isLoggedIn = value;
+                vm.user = AuthService.getUser();
             });
         }]
     };

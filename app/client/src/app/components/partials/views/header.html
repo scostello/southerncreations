@@ -4,7 +4,7 @@
             <ul class="nav navbar-utilitynav">
                 <li>
                     <a ng-if="!head.isLoggedIn" ui-sref-active="active" ui-sref="auth.login"><i class="fa fa-user"></i> Sign In</a>
-                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Welcome, {{head.userContext().username}}</a>
+                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Welcome, {{head.user.username}}</a>
                 </li>
                 <li><a ui-sref="#"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>

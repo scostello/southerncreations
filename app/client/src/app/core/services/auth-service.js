@@ -9,8 +9,9 @@ define(function () {
                 baseSignup = Restangular.all(API.BASE_SIGNIN);
 
             self.getAuthToken = getAuthToken;
-            self.getUserContext = getUserContext;
+            self.getUser = getUser;
             self.isLoggedIn = isLoggedIn;
+            self.inAdminMode = inAdminMode;
             self.login = login;
             self.signup = signup;
 
@@ -18,7 +19,7 @@ define(function () {
                 return localStorageService.get(AUTH.JWT_KEY);
             }
 
-            function getUserContext() {
+            function getUser() {
                 var token = self.getAuthToken();
                 return token ? jwtHelper.decodeToken(token) : void(0);
             }
@@ -48,6 +49,10 @@ define(function () {
 
             function signup(newUserData) {
                 return baseSignup.post(newUserData);
+            }
+
+            function inAdminMode() {
+                return self.isLoggedIn() && self.getUser().isAdmin;
             }
 
             function _setAuthToken(token) {

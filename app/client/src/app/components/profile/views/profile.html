@@ -1,4 +1,4 @@
-<div ng-controller="ProfileController">
-    <span ng-bind="profile.username"></span>
-    <button type="button" class="btn btn-primary" ng-click="createProducts()">Post Products</button>
+<div class="screen screen-profile">
+    <span ng-bind="profile.user.username"></span>
+    <div ui-view="admin"></div>
 </div>

@@ -3,7 +3,8 @@ define([
     './windowOverlay-directive',
     './windowResize-directive',
     './fitvid-directive',
-    './owlCarousel-directive'
+    './owlCarousel-directive',
+    'angularXEditable'
 ], function (angular, windowOverlay, windowResizeDirective, fitvidDirective, owlCarouselDirective) {
     'use strict';
 
