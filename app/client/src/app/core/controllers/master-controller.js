@@ -11,7 +11,7 @@ define(function () {
 
             vm.menuopen = false;
             vm.menuitems = SettingsService.menuitems;
-            vm.adminmode = false;
+            vm.isAdmin = false;
 
             PubSubService.subscribe(SettingsService.messages.menutoggle, function () {
                 vm.menuopen = !(vm.menuopen);
@@ -21,8 +21,8 @@ define(function () {
                 vm.menuopen = false;
             });
 
-            $scope.$watch(AuthService.inAdminMode, function (value) {
-                vm.adminmode = value;
+            $scope.$watch(AuthService.isAdmin, function (value) {
+                vm.isAdmin = value;
             });
         }]
     };

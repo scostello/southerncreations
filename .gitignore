@@ -68,3 +68,8 @@ modules/views/
 # Vagrant Files
 # --------------------
 .vagrant/
+
+# --------------------
+# Env Files
+# --------------------
+.env

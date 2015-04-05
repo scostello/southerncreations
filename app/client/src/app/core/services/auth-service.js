@@ -11,7 +11,7 @@ define(function () {
             self.getAuthToken = getAuthToken;
             self.getUser = getUser;
             self.isLoggedIn = isLoggedIn;
-            self.inAdminMode = inAdminMode;
+            self.isAdmin = isAdmin;
             self.login = login;
             self.signup = signup;
 
@@ -51,7 +51,7 @@ define(function () {
                 return baseSignup.post(newUserData);
             }
 
-            function inAdminMode() {
+            function isAdmin() {
                 return self.isLoggedIn() && self.getUser().isAdmin;
             }
 

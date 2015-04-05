@@ -3,7 +3,7 @@
 module.exports = function () {
     var mongoose = require('mongoose'),
         Promise = require('bluebird'),
-        uristring = process.env.MONGOLAB_URI || 'mongodb://webuser:webpassword@ds047911.mongolab.com:47911/southerncreations' || 'mongodb://localhost/southerncreations',
+        uristring = process.env.MONGOLAB_URI || 'mongodb://localhost/southerncreations',
         mongoOptions = { db: { safe: true } };
 
     Promise.promisifyAll(mongoose);

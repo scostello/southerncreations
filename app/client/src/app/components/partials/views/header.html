@@ -4,9 +4,14 @@
             <ul class="nav navbar-utilitynav">
                 <li>
                     <a ng-if="!head.isLoggedIn" ui-sref-active="active" ui-sref="auth.login"><i class="fa fa-user"></i> Sign In</a>
-                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Welcome, {{head.user.username}}</a>
+                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Hello, {{head.user.username}}</a>
                 </li>
-                <li><a ui-sref="#"><i class="fa fa-shopping-cart"></i></a></li>
+                <li>
+                    <a ui-sref="#" class="nav-cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="badge cart-count">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

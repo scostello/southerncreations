@@ -7,7 +7,6 @@ module.exports = {
     'development': {
         srcFolder: path.resolve(__dirname, '../client/src'),
         staticUrl: '/static',
-        cookieSecret: 'a mock cookie for security',
         accessLogPath: '/var/log/node/access.log',
         getViewConfig: function (view) {
             var config = {

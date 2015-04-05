@@ -26,7 +26,8 @@
     "jsonwebtoken": "~3.2.2",
     "bcrypt": "~0.8.1",
     "bluebird": "~2.9.13",
-    "twitter": "~1.2.5"
+    "twitter": "~1.2.5",
+    "dotenv": "~1.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
