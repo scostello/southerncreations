@@ -17,6 +17,7 @@ var paths = {
 module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('assemble-less');
 
     grunt.initConfig({
         projectDir: __dirname + '/',
@@ -60,7 +61,16 @@ module.exports = function (grunt) {
                         'src/vendor/',
                         'src/assets/less/'
                     ],
-                    dumpLineNumbers: 'comments'
+                    dumpLineNumbers: 'comments',
+                    imports: {
+                        reference: [
+                            'themes/theme.less'
+                        ],
+                        less: [
+                            'app/utilities.less',
+                            'themes/theme.less'
+                        ]
+                    }
                 },
                 files: {
                     'src/assets/css/app.css': [

@@ -25,9 +25,7 @@
                 padding-bottom: 0;
                 color: darken(@brand-accent, 30%);
                 line-height: @navbar-utility-height;
-                -webkit-transition: color 0.3s;
-                -moz-transition: color 0.3s;
-                transition: color 0.3s;
+                .transition(color 0.3s);
 
                 &:hover,
                 &:active,
@@ -174,44 +172,6 @@
                 }
             }
 
-        }
-    }
-}
-
-.navbar-side {
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        li {
-            &.active {
-                background: darken(@white, 5%);
-            }
-
-            &:last-child {
-                .menu-item {
-                    border-bottom: none;
-                }
-            }
-        }
-    }
-
-    .menu-item {
-        display: block;
-        padding: 20px 10px;
-        color: inherit;
-        font-size: 1.25em;
-        border-bottom: 1px dashed lighten(@brand-primary, 5%);
-        -webkit-transition: background .25s;
-        -moz-transition: background .25s;
-        -ms-transition: background .25s;
-        -o-transition: background .25s;
-        transition: background .25s;
-
-
-        &:hover {
-            background: darken(@white, 5%);
         }
     }
 }

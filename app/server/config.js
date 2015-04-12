@@ -8,35 +8,20 @@ module.exports = {
         srcFolder: path.resolve(__dirname, '../client/src'),
         staticUrl: '/static',
         accessLogPath: '/var/log/node/access.log',
-        getViewConfig: function (view) {
-            var config = {
-                appName: 'southerncreations',
-                title: 'Southern Creations',
-                description: 'Southern Creations - Baked Goodies, Hand Crafted Delights, and Custom Apparel',
-                baseRoute: '/',
-                feature: {
-                    css: [
-                        '/static/assets/css/app.css',
-                        '/static/assets/css/auth.css'
-                    ]
-                }
-            };
-
-            switch (view) {
-                case 'login':
-                    config = _.assign(config, {
-                        title: 'Login - Southern Creations',
-                        description: 'Southern Creations - Login',
-                        feature: {
-                            css: [
-                                '/static/assets/css/auth.css'
-                            ]
-                        }
-                    });
-                    break;
+        viewConfig: {
+            appName: 'southerncreations',
+            title: 'Southern Creations',
+            description: 'Southern Creations - Baked Goodies, Hand Crafted Delights, and Custom Apparel',
+            baseRoute: '/',
+            feature: {
+                js: [
+                    'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'
+                ],
+                css: [
+                    '/static/assets/css/app.css',
+                    '/static/assets/css/auth.css'
+                ]
             }
-
-            return config;
         },
         'production': {
             srcFolder: path.resolve(__dirname, '../client/dist'),

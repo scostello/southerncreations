@@ -5,13 +5,14 @@ define(function () {
     'use strict';
 
     return {
-        name: 'MasterController',
+        name: 'AppController',
         fn: ['$scope', 'SettingsService', 'PubSubService', 'AuthService', function ($scope, SettingsService, PubSubService, AuthService) {
             var vm = this;
 
             vm.menuopen = false;
             vm.menuitems = SettingsService.menuitems;
-            vm.isAdmin = false;
+            vm.user = null;
+            vm.isLoggedIn = false;
 
             PubSubService.subscribe(SettingsService.messages.menutoggle, function () {
                 vm.menuopen = !(vm.menuopen);
@@ -21,8 +22,9 @@ define(function () {
                 vm.menuopen = false;
             });
 
-            $scope.$watch(AuthService.isAdmin, function (value) {
-                vm.isAdmin = value;
+            $scope.$watch(AuthService.isLoggedIn, function (value) {
+                vm.isLoggedIn = value;
+                vm.user = AuthService.getUser();
             });
         }]
     };

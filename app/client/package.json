@@ -13,7 +13,6 @@
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-watch": "~0.6.1",
     "load-grunt-tasks": "~2.0.0",
-    "grunt-contrib-less": "~1.0.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-cssmin": "~0.12.1",
     "karma": "~0.12.31",
@@ -23,6 +22,7 @@
     "karma-requirejs": "~0.2.2",
     "karma-chrome-launcher": "~0.1.7",
     "karma-phantomjs-launcher": "~0.1.4",
-    "grunt-karma": "~0.10.1"
+    "grunt-karma": "~0.10.1",
+    "assemble-less": "~0.7.0"
   }
 }

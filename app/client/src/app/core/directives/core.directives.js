@@ -3,8 +3,9 @@ define([
     './windowOverlay-directive',
     './windowResize-directive',
     './fitvid-directive',
-    './owlCarousel-directive'
-], function (angular, windowOverlay, windowResizeDirective, fitvidDirective, owlCarouselDirective) {
+    './owlCarousel-directive',
+    './toggleState-directive'
+], function (angular, windowOverlay, windowResizeDirective, fitvidDirective, owlCarouselDirective, toggleStateDirective) {
     'use strict';
 
     var moduleName = 'southerncreations.core.directives',
@@ -20,7 +21,8 @@ define([
         .directive(windowOverlay.name, windowOverlay.fn)
         .directive(windowResizeDirective.name, windowResizeDirective.fn)
         .directive(fitvidDirective.name, fitvidDirective.fn)
-        .directive(owlCarouselDirective.name, owlCarouselDirective.fn);
+        .directive(owlCarouselDirective.name, owlCarouselDirective.fn)
+        .directive(toggleStateDirective.name, toggleStateDirective.fn);
 
     return {
         name: moduleName,

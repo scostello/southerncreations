@@ -20,6 +20,10 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+    {% for file in feature.js %}
+    <script src="{{file}}" type="text/javascript"></script>
+    {% endfor %}
+
     {% for file in feature.css %}
     <link rel="stylesheet" href="{{file}}">
     {% endfor %}

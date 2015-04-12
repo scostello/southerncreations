@@ -14,7 +14,7 @@ define(function () {
 
                 AuthService.login(vm.user)
                     .then(function () {
-                        $state.go('auth.profile');
+                        $state.go('app.profile');
                     })
                     .catch(function (err) {
                         // error

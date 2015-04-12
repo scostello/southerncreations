@@ -3,8 +3,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-utilitynav">
                 <li>
-                    <a ng-if="!head.isLoggedIn" ui-sref-active="active" ui-sref="auth.login"><i class="fa fa-user"></i> Sign In</a>
-                    <a ng-if="head.isLoggedIn" ui-sref-active="active" ui-sref="auth.profile"><i class="fa fa-user"></i> Hello, {{head.user.username}}</a>
+                    <a ng-if="!app.isLoggedIn" ui-sref-active="active" ui-sref="app.login"><i class="fa fa-user"></i> Sign In</a>
+                    <a ng-if="app.isLoggedIn" ui-sref-active="active" ui-sref="app.profile"><i class="fa fa-user"></i> Hello, {{app.user.username}}</a>
                 </li>
                 <li>
                     <a ui-sref="#" class="nav-cart">
@@ -16,19 +16,19 @@
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-default">
+<nav class="navbar topnavbar">
     <div class="constrain">
         <div class="navbar-header">
             <a class="navbar-brand" ui-sref=".home">
                 <img class="logo" src="/static/assets/images/logo/southerncreations-small.svg" alt="cupcake"/>
             </a>
-            <a href="#" ng-click="head.toggleMenu()" class="navbar-toggle collapsed">
+            <a href="#" toggle-state="offsidebar-open" class="navbar-toggle collapsed">
                 <div class="menu-toggle"></div>
             </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active" ng-repeat="menuitem in ::master.menuitems">
+                <li ui-sref-active="active" ng-repeat="menuitem in ::app.menuitems">
                     <a class="menu-item" ui-sref="{{menuitem.state}}">{{menuitem.name}}</a>
                 </li>
             </ul>

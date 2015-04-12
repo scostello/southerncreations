@@ -47,37 +47,14 @@ define([
             $stateProvider
                 .state('app', {
                     url: '',
-                    abstract: true,
-                    views: {
-                        'header': {
-                            templateUrl: '/static/app/components/partials/views/header.html',
-                            controller: 'HeaderController',
-                            controllerAs: 'head'
-                        },
-                        'footer': {templateUrl: '/static/app/components/partials/views/footer.html'},
-                        'side-menu': {
-                            templateUrl: '/static/app/components/partials/views/side-menu.html'
-                        }
-                    },
-                    resolve: {
-                        partialModules: ['$ocLazyLoad', function ($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                {
-                                    name: 'southerncreations.header',
-                                    files: ['app/components/partials/js/header-module']
-                                },
-                                {
-                                    name: 'southerncreations.footer',
-                                    files: ['app/components/partials/js/footer-module']
-                                }
-                            ]);
-                        }]
-                    }
+                    templateUrl: '/static/views/layouts/app.html',
+                    controller: 'AppController',
+                    controllerAs: 'app'
                 })
                 .state('app.home', {
                     url: '/',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/home/views/home.html',
                             controller: 'HomeController',
                             controllerAs: 'home'
@@ -95,7 +72,7 @@ define([
                 .state('app.products', {
                     url: '/products',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/products/views/products.html',
                             controller: 'ProductsController',
                             controllerAs: 'prd'
@@ -116,7 +93,7 @@ define([
                 .state('app.catering', {
                     url: '/catering',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/catering/views/catering.html',
                             controller: 'CateringController',
                             controllerAs: 'catering'
@@ -134,7 +111,7 @@ define([
                 .state('app.about', {
                     url: '/about',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/about/views/about.html',
                             controller: 'AboutController'
                         }
@@ -151,7 +128,7 @@ define([
                 .state('app.contact', {
                     url: '/contact',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/contact/views/contact.html',
                             controller: 'ContactController'
                         }
@@ -165,39 +142,10 @@ define([
                         }]
                     }
                 })
-                .state('auth', {
-                    url: '',
-                    abstract: true,
-                    views: {
-                        'header': {
-                            templateUrl: '/static/app/components/partials/views/header.html',
-                            controller: 'HeaderController',
-                            controllerAs: 'head'
-                        },
-                        'footer': {templateUrl: '/static/app/components/partials/views/footer.html'},
-                        'side-menu': {
-                            templateUrl: '/static/app/components/partials/views/side-menu.html'
-                        }
-                    },
-                    resolve: {
-                        partialModules: ['$ocLazyLoad', function ($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                {
-                                    name: 'southerncreations.header',
-                                    files: ['app/components/partials/js/header-module']
-                                },
-                                {
-                                    name: 'southerncreations.footer',
-                                    files: ['app/components/partials/js/footer-module']
-                                }
-                            ]);
-                        }]
-                    }
-                })
-                .state('auth.login', {
+                .state('app.login', {
                     url: '/login',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/login/views/login.html',
                             controller: 'LoginController',
                             controllerAs: 'login'
@@ -212,10 +160,10 @@ define([
                         }]
                     }
                 })
-                .state('auth.signup', {
+                .state('app.signup', {
                     url: '/signup',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/signup/views/signup.html',
                             controller: 'SignupController',
                             controllerAs: 'signup'
@@ -230,10 +178,10 @@ define([
                         }]
                     }
                 })
-                .state('auth.profile', {
+                .state('app.profile', {
                     url: '/profile',
                     views: {
-                        'content@': {
+                        'content@app': {
                             templateUrl: '/static/app/components/profile/views/profile.html',
                             controller: 'ProfileController',
                             controllerAs: 'profile'
@@ -251,10 +199,10 @@ define([
                         requiresLogin: true
                     }
                 })
-                .state('auth.profile.admin', {
+                .state('app.profile.admin', {
                     url: '/admin',
                     views: {
-                        'admin@auth.profile': {
+                        'admin@app.profile': {
                             templateUrl: '/static/app/components/profile/views/admin.html',
                             controller: 'AdminController',
                             controllerAs: 'admin'
@@ -278,7 +226,14 @@ define([
                 if (to.data && to.data.requiresLogin) {
                     if (!AuthService.isLoggedIn()) {
                         evt.preventDefault();
-                        $state.go('auth.login');
+                        $state.go('app.login');
+                    }
+                }
+
+                if (to.data && to.data.requiresAdminRights) {
+                    if (!AuthService.isAdmin()) {
+                        evt.preventDefault();
+                        $state.go('app.profile');
                     }
                 }
             });
