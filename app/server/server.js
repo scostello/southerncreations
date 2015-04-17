@@ -2,8 +2,6 @@
 
 require('dotenv').load();
 
-console.log(process.env);
-
 var http = require('http'),
     path = require('path');
 

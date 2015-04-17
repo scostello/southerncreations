@@ -64,11 +64,8 @@ module.exports = function (grunt) {
                     dumpLineNumbers: 'comments',
                     imports: {
                         reference: [
-                            'themes/theme.less'
-                        ],
-                        less: [
-                            'app/utilities.less',
-                            'themes/theme.less'
+                            'themes/theme.less',
+                            'vendor/elements.less'
                         ]
                     }
                 },
