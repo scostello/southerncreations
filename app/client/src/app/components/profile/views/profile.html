@@ -1,15 +1,34 @@
-<div class="screen screen-profile">
-    <header class="subnav-header">
+<!-- Profile Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-inner">
 
-    </header>
-    <div class="constrain profile-nav">
-        <ul class="list-inline pull-right">
-            <li ng-if="master.isAdmin">
-                <a ui-sref="auth.profile.admin" class="pull-right"><i class="fa fa-user-secret"></i> Admin Mode</a>
-            </li>
-            <li>
-                <a ui-sref="auth.profile" class="pull-right"><i class="fa fa-cogs"></i> Profile Settings</a>
-            </li>
-        </ul>
+        <!-- Profile Nav -->
+        <nav>
+            <ul class="nav">
+                <li class="nav-heading"><span>User Profile</span></li>
+                <li ui-sref-active="active" ng-repeat="profileItem in profile.profileItems">
+                    <a ui-sref="{{profileItem.state}}" class="">
+                        <em class="fa {{profileItem.iconCls}}"></em>
+                        <span>{{profileItem.name}}</span>
+                    </a>
+                </li>
+            </ul>
+            <ul ui-sref-active="active" ng-if="profile.user.isAdmin" class="nav">
+                <li class="nav-heading"><span>Admin Utilities</span></li>
+                <li ui-sref-active="active" ng-repeat="adminItem in profile.adminItems">
+                    <a ui-sref="{{adminItem.state}}" class="">
+                        <em class="fa {{adminItem.iconCls}}"></em>
+                        <span>{{adminItem.name}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Profile Nav -->
+
     </div>
-</div>
+</aside>
+<!-- End Profile Sidebar-->
+
+<!-- Profile Content -->
+<div ui-view="content" class="screen screen-profile"></div>
+<!-- End Profile Content -->

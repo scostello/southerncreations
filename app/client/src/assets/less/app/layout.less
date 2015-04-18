@@ -30,8 +30,8 @@
 @footer-hg:                               60px;
 
 @navbar-hg:                               @navbar-height;
+@navbar-utility-hg:                       @navbar-utility-height;
 @navbar-bg:                               @navbar-default-bg;
-@navbar-utility-hg:                       40px;
 
 @boxed-max-width:                         1140px;
 @z-index-main-section:                    111;
@@ -71,37 +71,6 @@ a {
     overflow-x: hidden;
     &.ng-leave {
         display: none;
-    }
-
-    // Contains the main sidebar
-    > .aside {
-        position: absolute;
-        width: @aside-wd;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index: @z-index-main-section - 1; // Hides behind the main section
-        .backface-visibility(hidden);
-        background-color: @aside-bg;
-
-        .aside-inner {
-            padding-top: @navbar-hg * 2;
-            height: 100%;
-            width: @aside-wd;
-            overflow: hidden;
-        }
-
-        > .nav-floating {
-            left: inherit;
-            margin-left: @aside-wd;
-            z-index: @z-index-main-section * 10;
-            min-width: 190px;
-            overflow: auto;
-        }
-
-        .dropdown-backdrop {
-            z-index: -1;
-        }
     }
 
     // Contains the main content
@@ -184,19 +153,6 @@ a {
 
         > aside {
             position: fixed;
-        }
-
-        /* only applied to sidebar */
-        > .aside {
-            /* safari fix */
-            height: 1px;
-            min-height: 100%;
-            /* ios blanks space fix */
-            > .aside-inner {
-                position: fixed;
-                top: 0;
-                bottom: 0;
-            }
         }
 
         > section {

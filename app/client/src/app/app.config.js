@@ -47,6 +47,7 @@
             angularJwt: 'vendor/angular-jwt/dist/angular-jwt.min',
             angularMocks: 'vendor/angular-mocks/angular-mocks',
             ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.min',
+            angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap.min',
 
             owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min',
             fitvid: 'vendor/fitvids/jquery.fitvids'
@@ -85,6 +86,9 @@
                 exports: 'angular.mock'
             },
             ocLazyLoad: {
+                deps: ['angular']
+            },
+            angularBootstrap: {
                 deps: ['angular']
             },
             owl: {

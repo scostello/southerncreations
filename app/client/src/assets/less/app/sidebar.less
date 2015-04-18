@@ -1,0 +1,85 @@
+/* ========================================================================
+   Component: offsidebar.less
+ ========================================================================== */
+
+//
+// A sidebar in offcanvas mode
+// Open status toggled via JS
+// -----------------------------------------
+
+@sidebar-bg:           #fff;
+@sidebar-border-color: greyscale(darken(@offsidebar-bg, 20%));
+@sidebar-color:        @text-color;
+@sidebar-wd:           @aside-wd;      // match the width with the main aside component
+
+.sidebar {
+    position: absolute;
+    width: @sidebar-wd;
+    height: 1px;
+    min-height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: @z-index-main-section - 1; // Hides behind the main section
+    .backface-visibility(hidden);
+    background-color: @sidebar-bg;
+
+    .sidebar-inner {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        background-color: inherit;
+        padding-top: @navbar-hg + @navbar-utility-hg;
+        width: @aside-wd;
+        overflow: hidden;
+    }
+
+    .nav-heading {
+        padding: 12px 15px;
+        color: @brand-primary;
+        font-size: 13px;
+        letter-spacing: .035em;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    nav > .nav {
+        margin-bottom: 0;
+        list-style: none;
+        position: relative;
+        padding-left: 0;
+        padding-right: 0;
+
+        > li {
+            position: relative;
+            display: block;
+            border-left: 3px solid transparent;
+            -webkit-transition: border-left-color 0.4s ease;
+            -o-transition: border-left-color 0.4s ease;
+            transition: border-left-color 0.4s ease;
+
+            &.active > a {
+                color: #719BC3;
+            }
+
+            > a {
+                position: relative;
+                display: block;
+                padding: 12px 24px;
+                color: #ababab;
+                letter-spacing: .025em;
+                font-weight: normal;
+
+                > em {
+                    width: 2em;
+                    display: inline-block;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    color: inherit;
+                }
+            }
+        }
+    }
+}

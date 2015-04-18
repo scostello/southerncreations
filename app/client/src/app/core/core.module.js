@@ -6,7 +6,8 @@ define([
     './filters/core.filters',
     'angularUiRouter',
     'ocLazyLoad',
-    'angularJwt'
+    'angularJwt',
+    'angularBootstrap'
 ], function (angular, coreServices, coreControllers, coreDirectives, coreFilters) {
     'use strict';
 
@@ -17,6 +18,7 @@ define([
             'ui.router',
             'oc.lazyLoad',
             'angular-jwt',
+            'ui.bootstrap',
             coreServices.name,
             coreControllers.name,
             coreDirectives.name,
@@ -180,6 +182,7 @@ define([
                 })
                 .state('app.profile', {
                     url: '/profile',
+                    abstract: true,
                     views: {
                         'content@app': {
                             templateUrl: '/static/app/components/profile/views/profile.html',
@@ -199,18 +202,100 @@ define([
                         requiresLogin: true
                     }
                 })
-                .state('app.profile.admin', {
-                    url: '/admin',
+                .state('app.profile.user', {
+                    url: '',
                     views: {
-                        'admin@app.profile': {
-                            templateUrl: '/static/app/components/profile/views/admin.html',
-                            controller: 'AdminController',
-                            controllerAs: 'admin'
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/profile-user.html',
+                            controller: 'ProfileUserController',
+                            controllerAs: 'profileUser'
                         }
+                    }
+                })
+                .state('app.profile.account', {
+                    url: '/account',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/profile-account.html',
+                            controller: 'ProfileAccountController',
+                            controllerAs: 'profileAccount'
+                        }
+                    }
+                })
+                .state('app.profile.orders', {
+                    url: '/orders',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/profile-orders.html',
+                            controller: 'ProfileOrdersController',
+                            controllerAs: 'profileOrders'
+                        }
+                    }
+                })
+                .state('app.profile.admin', {
+                    url: '',
+                    abstract: true,
+                    resolve: {
+                        adminModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'southerncreations.profile.admin',
+                                files: ['app/components/profile/js/admin-module']
+                            });
+                        }]
                     },
                     data: {
                         requiresLogin: true,
                         requiresAdminRights: true
+                    }
+                })
+                .state('app.profile.admin.dashboard', {
+                    url: '/dashboard',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin-dashboard.html',
+                            controller: 'AdminDashboardController',
+                            controllerAs: 'admin'
+                        }
+                    }
+                })
+                .state('app.profile.admin.reporting', {
+                    url: '/reporting',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin-reporting.html',
+                            controller: 'AdminReportingController',
+                            controllerAs: 'adminReporting'
+                        }
+                    }
+                })
+                .state('app.profile.admin.products', {
+                    url: '/products',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin-products.html',
+                            controller: 'AdminProductsController',
+                            controllerAs: 'adminProduct'
+                        }
+                    }
+                })
+                .state('app.profile.admin.schedule', {
+                    url: '/schedule',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin-schedule.html',
+                            controller: 'AdminScheduleController',
+                            controllerAs: 'adminSchedule'
+                        }
+                    }
+                })
+                .state('app.profile.admin.users', {
+                    url: '/users',
+                    views: {
+                        'content@app.profile': {
+                            templateUrl: '/static/app/components/profile/views/admin-users.html',
+                            controller: 'AdminUsersController',
+                            controllerAs: 'adminUsers'
+                        }
                     }
                 });
 

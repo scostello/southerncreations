@@ -14,7 +14,7 @@ define(function () {
 
                 AuthService.login(vm.user)
                     .then(function () {
-                        $state.go('app.profile');
+                        $state.go(AuthService.isAdmin() ? 'app.profile.admin.dashboard' : 'app.profile');
                     })
                     .catch(function (err) {
                         // error

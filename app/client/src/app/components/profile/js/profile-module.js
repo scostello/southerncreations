@@ -1,9 +1,10 @@
 define([
     'angular',
     './controllers/profile-controller',
-    './controllers/admin-controller',
-    './directives/adminProducts-directive'
-], function (angular, profileController, adminController, adminProductsDirective) {
+    './controllers/profileUser-controller',
+    './controllers/profileAccount-controller',
+    './controllers/profileOrders-controller'
+], function (angular, profileController, profileUserController, profileAccountController, profileOrdersController) {
     'use strict';
 
     var moduleName = 'southerncreations.profile',
@@ -11,8 +12,9 @@ define([
 
     module = angular.module(moduleName, [])
         .controller(profileController.name, profileController.fn)
-        .controller(adminController.name, adminController.fn)
-        .directive(adminProductsDirective.name, adminProductsDirective.fn);
+        .controller(profileUserController.name, profileUserController.fn)
+        .controller(profileAccountController.name, profileAccountController.fn)
+        .controller(profileOrdersController.name, profileOrdersController.fn);
 
     return {
         name: moduleName,

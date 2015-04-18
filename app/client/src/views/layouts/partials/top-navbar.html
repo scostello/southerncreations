@@ -4,7 +4,17 @@
             <ul class="nav navbar-utilitynav">
                 <li>
                     <a ng-if="!app.isLoggedIn" ui-sref-active="active" ui-sref="app.login"><i class="fa fa-user"></i> Sign In</a>
-                    <a ng-if="app.isLoggedIn" ui-sref-active="active" ui-sref="app.profile"><i class="fa fa-user"></i> Hello, {{app.user.username}}</a>
+                    <span ng-if="app.isLoggedIn" class="dropdown" dropdown>
+                        <a href dropdown-toggle>
+                            <i class="fa fa-user"></i>
+                            <span>Hello, {{app.user.username}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref=".profile">View Account</a></li>
+                            <li><a ng-click="app.logout()">Logout</a></li>
+                        </ul>
+                    </span>
+
                 </li>
                 <li>
                     <a ui-sref="#" class="nav-cart">

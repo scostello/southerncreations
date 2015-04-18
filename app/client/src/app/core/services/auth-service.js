@@ -13,6 +13,7 @@ define(function () {
             self.isLoggedIn = isLoggedIn;
             self.isAdmin = isAdmin;
             self.login = login;
+            self.logout = logout;
             self.signup = signup;
 
             function getAuthToken() {
@@ -47,6 +48,10 @@ define(function () {
                 return dfd.promise;
             }
 
+            function logout() {
+                _deleteAuthToken();
+            }
+
             function signup(newUserData) {
                 return baseSignup.post(newUserData);
             }
@@ -57,6 +62,10 @@ define(function () {
 
             function _setAuthToken(token) {
                 localStorageService.set(AUTH.JWT_KEY, token);
+            }
+
+            function _deleteAuthToken() {
+                localStorageService.set(AUTH.JWT_KEY, null);
             }
         }]
     };
