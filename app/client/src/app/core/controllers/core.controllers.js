@@ -1,16 +1,14 @@
 define([
     'angular',
-    './app-controller',
-    './auth-controller'
-],function (angular, appController, authController) {
+    './app-controller'
+],function (angular, appController) {
     'use strict';
 
     var moduleName = 'southerncreations.core.controllers',
         module;
 
     module = angular.module(moduleName, [])
-        .controller(appController.name, appController.fn)
-        .controller(authController.name, authController.fn);
+        .controller(appController.name, appController.fn);
 
     return {
         name: moduleName,

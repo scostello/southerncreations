@@ -5,9 +5,11 @@ define(function () {
         name: 'LoginController',
         fn: ['$scope', '$state', 'AuthService', function ($scope, $state, AuthService) {
             var vm = this;
+
+            vm.submit = submit;
             vm.user = {};
 
-            vm.submit = function () {
+            function submit() {
                 if (!vm.user.username || !vm.user.password) {
                     return;
                 }

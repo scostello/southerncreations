@@ -1,3 +1,30 @@
 <div class="">
     <h2>User Profile</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Basic Information</h4></div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">Username:</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">
+                                    <a href="#" editable-text="profile.user.username" onbeforesave="profile.validateUser($data)">{{profile.user.username}}</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">Email:</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">
+                                    <a href="#" editable-email="profile.user.email">{{profile.user.email}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

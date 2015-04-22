@@ -23,6 +23,9 @@ module.exports = {
                 ]
             }
         },
+        appSettings: {
+            'assetHost': '/static/assets/images/'
+        },
         'production': {
             srcFolder: path.resolve(__dirname, '../client/dist'),
             vendorFolder: path.resolve(__dirname, '../client/vendor'),

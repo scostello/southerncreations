@@ -3,7 +3,7 @@ define(function () {
 
     return {
         name: 'AuthService',
-        fn: ['$q', 'API',  'AUTH', 'Restangular', 'localStorageService', 'jwtHelper', function ($q, API, AUTH, Restangular, localStorageService, jwtHelper) {
+        fn: ['$q', 'API',  'STORAGE_KEYS', 'Restangular', 'localStorageService', 'jwtHelper', function ($q, API, STORAGE_KEYS, Restangular, localStorageService, jwtHelper) {
             var self = this,
                 baseLogin = Restangular.all(API.BASE_LOGIN),
                 baseSignup = Restangular.all(API.BASE_SIGNIN);
@@ -17,7 +17,7 @@ define(function () {
             self.signup = signup;
 
             function getAuthToken() {
-                return localStorageService.get(AUTH.JWT_KEY);
+                return localStorageService.get(STORAGE_KEYS.JWT);
             }
 
             function getUser() {
@@ -61,11 +61,11 @@ define(function () {
             }
 
             function _setAuthToken(token) {
-                localStorageService.set(AUTH.JWT_KEY, token);
+                localStorageService.set(STORAGE_KEYS.JWT, token);
             }
 
             function _deleteAuthToken() {
-                localStorageService.set(AUTH.JWT_KEY, null);
+                localStorageService.set(STORAGE_KEYS.JWT, null);
             }
         }]
     };

@@ -51,6 +51,16 @@ define(function () {
                     iconCls: 'fa-users'
                 }
             ];
+            vm.validateUser = validateUserProfile;
+            vm.updateUserProfile = updateUserProfile;
+
+            function validateUserProfile(data, field) {
+
+            }
+
+            function updateUserProfile() {
+
+            }
         }]
     };
 });

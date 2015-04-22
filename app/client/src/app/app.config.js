@@ -48,6 +48,7 @@
             angularMocks: 'vendor/angular-mocks/angular-mocks',
             ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.min',
             angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap.min',
+            angularXeditable: 'vendor/angular-xeditable/dist/js/xeditable.min',
 
             owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min',
             fitvid: 'vendor/fitvids/jquery.fitvids'
@@ -89,6 +90,9 @@
                 deps: ['angular']
             },
             angularBootstrap: {
+                deps: ['angular']
+            },
+            angularXeditable: {
                 deps: ['angular']
             },
             owl: {

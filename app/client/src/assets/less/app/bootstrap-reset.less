@@ -88,6 +88,25 @@ hr {
     }
 }
 
+.btn-editable {
+    .box-shadow(none);
+    .rounded(8px);
+    border: none;
+
+    &.btn-primary {
+        background-color: #27c24c;
+    }
+
+    &.btn-default {
+        color: #ccc;
+        border: 1px solid #dbdbdb;
+
+        &:hover {
+            background-color: darken(#fff, 5%);
+        }
+    }
+}
+
 /*----------------*
  *  END BUTTONS   *
  *----------------*/
@@ -211,6 +230,12 @@ hr {
     }
 }
 
+.form-group {
+    > .control-label {
+        color: #999;
+    }
+}
+
 @media @upto-tablet {
     // Remove Input Shadows on iPad
     input[type="text"],
@@ -223,4 +248,21 @@ hr {
 
 /*----------------*
  *   END FORMS    *
+ *----------------*/
+
+/*----------------*
+ *     PANELS     *
+ *----------------*/
+
+.panel {
+
+    &.panel-default {
+        > .panel-heading {
+            color: #719BCE
+        }
+    }
+}
+
+/*----------------*
+ *   END PANELS   *
  *----------------*/

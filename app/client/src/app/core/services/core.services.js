@@ -16,14 +16,16 @@ define([
             'restangular',
             'LocalStorageModule'
         ])
-        .constant('AUTH', {
-            'JWT_KEY': 'jwt'
+        .constant('STORAGE_KEYS', {
+            'JWT': 'jwt',
+            'SETTINGS': 'settings'
         })
         .constant('API', {
             'BASE': '/api',
             'BASE_LOGIN': 'login',
             'BASE_SIGNIN': 'signin',
-            'BASE_PRODUCTS': 'products'
+            'BASE_PRODUCTS': 'products',
+            'BASE_SETTINGS': 'settings'
         })
         .config(['RestangularProvider', 'API', function (RestangularProvider, API) {
             RestangularProvider.setBaseUrl(API.BASE);

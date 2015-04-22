@@ -51,7 +51,12 @@ define([
                     url: '',
                     templateUrl: '/static/views/layouts/app.html',
                     controller: 'AppController',
-                    controllerAs: 'app'
+                    controllerAs: 'app',
+                    resolve: {
+                        settings: ['SettingsService', function (SettingsService) {
+                            return SettingsService.getSettings();
+                        }]
+                    }
                 })
                 .state('app.home', {
                     url: '/',
