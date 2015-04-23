@@ -18,7 +18,8 @@ define([
         ])
         .constant('STORAGE_KEYS', {
             'JWT': 'jwt',
-            'SETTINGS': 'settings'
+            'SETTINGS': 'settings',
+            'CART': 'cart'
         })
         .constant('API', {
             'BASE': '/api',

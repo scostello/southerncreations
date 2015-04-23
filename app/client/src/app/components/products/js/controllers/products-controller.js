@@ -7,6 +7,11 @@ define(function () {
             var vm = this;
 
             vm.products = products;
+            vm.addItemToCart = addItemToCart;
+
+            function addItemToCart(data) {
+
+            }
         }]
     };
 });

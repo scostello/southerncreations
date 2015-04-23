@@ -1,9 +1,17 @@
 <div class="screen screen-products">
-    <div class="menu-banner"></div>
+    <div class="products-banner"></div>
 
-    <section class="product-category"></section>
-
-    <div ng-repeat="product in prd.products">
-        {{product.name}}
-    </div>
+    <section class="products-wrapper">
+        <ul class="products list-inline">
+            <li ng-repeat="product in prdCtrl.products" ng-click="prdCtrl.addItemToCart(product)" class="product col-xs-12 col-sm-4 col-md-3" >
+                <img class="product-image" src="http://placehold.it/200x200" alt="placeholder"/>
+                <div class="product-info">
+                    <dl>
+                        <dd>{{product.name}}</dd>
+                        <dd>{{product.pricing | currency}}</dd>
+                    </dl>
+                </div>
+            </li>
+        </ul>
+    </section>
 </div>

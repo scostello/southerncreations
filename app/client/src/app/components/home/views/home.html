@@ -50,8 +50,8 @@
                 <hr/>
             </h1>
             <article class="philosophy">
-                <p>{{::home.philosophy.p1 || 'empty'}}</p>
-                <p>{{::home.philosophy.p2 || 'empty'}}</p>
+                <p>{{::homeCtrl.philosophy.p1 || 'empty'}}</p>
+                <p>{{::homeCtrl.philosophy.p2 || 'empty'}}</p>
                 <button class="btn btn-lg btn-primary btn-hollow">Check It Out</button>
             </article>
         </div>
@@ -73,7 +73,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="services">
-            <article class="col-xs-12 col-md-6 service-item hover no-pm" ng-style="{'background-color': service.backgroundColor}" ng-repeat="service in home.services">
+            <article class="col-xs-12 col-md-6 service-item hover no-pm" ng-style="{'background-color': service.backgroundColor}" ng-repeat="service in homeCtrl.services">
                 <div class="image-background">
                     <img ng-src="{{service.src}}" ng-srcset="{{service.srcset | join}}" alt=""/>
                 </div>
@@ -102,7 +102,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="goodies">
-            <article class="goody-item" ng-repeat="goody in home.goodies">
+            <article class="goody-item" ng-repeat="goody in homeCtrl.goodies">
                 <a href="">
                     <header class="goody-heading">
                         <div class="details">
@@ -115,7 +115,7 @@
                 </span>
                 </a>
             </article>
-            <button class="btn btn-lg btn-primary btn-hollow" ng-click="home.goToFullMenu()">See Full Menu <i class="glyphicon glyphicon-chevron-right"></i></button>
+            <button class="btn btn-lg btn-primary btn-hollow" ng-click="homeCtrl.goToFullMenu()">See Full Menu <i class="glyphicon glyphicon-chevron-right"></i></button>
         </div>
     </section>
     <!-- End Goodies -->

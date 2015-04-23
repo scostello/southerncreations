@@ -64,7 +64,7 @@ define([
                         'content@app': {
                             templateUrl: '/static/app/components/home/views/home.html',
                             controller: 'HomeController',
-                            controllerAs: 'home'
+                            controllerAs: 'homeCtrl'
                         }
                     },
                     resolve: {
@@ -82,7 +82,7 @@ define([
                         'content@app': {
                             templateUrl: '/static/app/components/products/views/products.html',
                             controller: 'ProductsController',
-                            controllerAs: 'prd'
+                            controllerAs: 'prdCtrl'
                         }
                     },
                     resolve: {
