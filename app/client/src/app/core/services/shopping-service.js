@@ -1,4 +1,7 @@
-define(function () {
+define([
+    'lodash'
+],
+function (_) {
     'use strict';
 
     return {
@@ -11,10 +14,22 @@ define(function () {
 
         self.addItemToCart = addItemToCart;
         self.removeItemFromCart = removeItemFromCart;
-        self.getCartItems = getCartItems;
+        self.getShoppingCart = getShoppingCart;
 
         function addItemToCart(product) {
-            localStorageService.set(STORAGE_KEYS.CART, product);
+            var shoppingCart = self.getShoppingCart();
+
+            if (!shoppingCart.items[product.slug]) {
+                shoppingCart.items[product.slug] = _.assign({}, product, {
+                    count: 1
+                });
+                shoppingCart.count++;
+            } else {
+                shoppingCart.items[product.slug].count++;
+                shoppingCart.count++;
+            }
+
+            localStorageService.set(STORAGE_KEYS.CART, shoppingCart);
             _broadcastCartUpdate();
         }
 
@@ -22,12 +37,12 @@ define(function () {
 
         }
 
-        function getCartItems() {
-            return localStorageService.get(STORAGE_KEYS.CART);
+        function getShoppingCart() {
+            return localStorageService.get(STORAGE_KEYS.CART) || {count: 0, items: {}};
         }
 
         function _broadcastCartUpdate() {
-            $rootScope.$broadcast('cart:update', self.getCartItems());
+            $rootScope.$broadcast('cart:updated', self.getShoppingCart());
         }
     }
 });

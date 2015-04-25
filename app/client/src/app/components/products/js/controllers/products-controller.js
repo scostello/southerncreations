@@ -3,14 +3,15 @@ define(function () {
 
     return {
         name: 'ProductsController',
-        fn: ['products', function (products) {
+        fn: ['$state', 'products', 'ShoppingService', function ($state, products, ShoppingService) {
             var vm = this;
 
             vm.products = products;
-            vm.addItemToCart = addItemToCart;
+            vm.addItemToCart = ShoppingService.addItemToCart;
+            vm.showProductDetails = showProductDetails;
 
-            function addItemToCart(data) {
-
+            function showProductDetails(slug) {
+                $state.go('app.products.details', slug);
             }
         }]
     };

@@ -1,13 +1,17 @@
-define(function () {
+define([
+    'lodash'
+],
+function (_) {
     'use strict';
 
     return {
         name: 'AppController',
-        fn: ['$scope', '$state', 'settings', 'AuthService', function ($scope, $state, settings, AuthService) {
+        fn: ['$scope', '$state', 'settings', 'AuthService', 'ShoppingService', function ($scope, $state, settings, AuthService, ShoppingService) {
             var vm = this;
 
-            vm.menuopen = false;
+
             vm.menuitems = settings.menuitems;
+            vm.shoppingCart = ShoppingService.getShoppingCart();
             vm.user = null;
             vm.isLoggedIn = false;
             vm.logout = logout;
@@ -15,6 +19,10 @@ define(function () {
             $scope.$watch(AuthService.isLoggedIn, function (value) {
                 vm.isLoggedIn = value;
                 vm.user = AuthService.getUser();
+            });
+
+            $scope.$on('cart:updated', function (evt, cart) {
+                vm.shoppingCart = cart;
             });
 
             function logout() {

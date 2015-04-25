@@ -2,11 +2,12 @@ define([
     'angular',
     './settings-service',
     './products-service',
+    './shopping-service',
     './auth-service',
     './pubsub-service',
     'restangular',
     'angularStorage'
-], function (angular, settingsService, productsService, authService, pubsubService) {
+], function (angular, settingsService, productsService, shoppingService, authService, pubsubService) {
     'use strict';
 
     var moduleName = 'southerncreations.core.services',
@@ -33,6 +34,7 @@ define([
         }])
         .service(settingsService.name, settingsService.fn)
         .service(productsService.name, productsService.fn)
+        .service(shoppingService.name, shoppingService.fn)
         .service(authService.name, authService.fn)
         .service(pubsubService.name, pubsubService.fn);
 

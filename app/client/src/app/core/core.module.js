@@ -51,7 +51,7 @@ define([
                     url: '',
                     templateUrl: '/static/views/layouts/app.html',
                     controller: 'AppController',
-                    controllerAs: 'app',
+                    controllerAs: 'appCtrl',
                     resolve: {
                         settings: ['SettingsService', function (SettingsService) {
                             return SettingsService.getSettings();
@@ -95,6 +95,16 @@ define([
                         products: ['ProductsService', function (ProductsService) {
                             return ProductsService.getProducts();
                         }]
+                    }
+                })
+                .state('app.products.details', {
+                    url: '/:slug',
+                    views: {
+                        'content@app': {
+                            templateUrl: '/static/app/components/products/views/product-detail.html',
+                            controller: 'ProductDetailController',
+                            controllerAs: 'prdDetailCtrl'
+                        }
                     }
                 })
                 .state('app.catering', {

@@ -3,14 +3,16 @@
 
     <section class="products-wrapper">
         <ul class="products list-inline">
-            <li ng-repeat="product in prdCtrl.products" ng-click="prdCtrl.addItemToCart(product)" class="product col-xs-12 col-sm-4 col-md-3" >
-                <img class="product-image" src="http://placehold.it/200x200" alt="placeholder"/>
-                <div class="product-info">
-                    <dl>
-                        <dd>{{product.name}}</dd>
-                        <dd>{{product.pricing | currency}}</dd>
-                    </dl>
-                </div>
+            <li ng-repeat="product in prdCtrl.products" class="product col-xs-12 col-sm-4 col-md-3" >
+                <a href="#" ui-sref=".details({ slug: product.slug })">
+                    <img class="product-image" src="http://placehold.it/200x200" alt="placeholder"/>
+                    <div class="product-info">
+                        <dl>
+                            <dd>{{product.name}}</dd>
+                            <dd>{{product.pricing | currency}}</dd>
+                        </dl>
+                    </div>
+                </a>
             </li>
         </ul>
     </section>
