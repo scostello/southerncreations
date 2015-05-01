@@ -3,16 +3,11 @@ define(function () {
 
     return {
         name: 'ProductsController',
-        fn: ['$state', 'products', 'ShoppingService', function ($state, products, ShoppingService) {
+        fn: ['$state', 'menu', 'ShoppingService', function ($state, menu, ShoppingService) {
             var vm = this;
 
-            vm.products = products;
+            vm.products = menu.products;
             vm.addItemToCart = ShoppingService.addItemToCart;
-            vm.showProductDetails = showProductDetails;
-
-            function showProductDetails(slug) {
-                $state.go('app.products.details', slug);
-            }
         }]
     };
 });

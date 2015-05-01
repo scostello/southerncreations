@@ -76,8 +76,8 @@ define([
                         }]
                     }
                 })
-                .state('app.products', {
-                    url: '/products',
+                .state('app.menu', {
+                    url: '/menu',
                     views: {
                         'content@app': {
                             templateUrl: '/static/app/components/products/views/products.html',
@@ -92,12 +92,22 @@ define([
                                 files: ['app/components/products/js/products-module']
                             });
                         }],
-                        products: ['ProductsService', function (ProductsService) {
-                            return ProductsService.getProducts();
+                        menu: ['$q', 'ProductsService', function ($q, ProductsService) {
+                            var dfd = $q.defer();
+
+                            $q.all({
+                                    categories: ProductsService.getCategories(),
+                                    products: ProductsService.getProducts()
+                                })
+                                .then(function (menu) {
+                                    dfd.resolve(menu);
+                                });
+
+                            return dfd.promise;
                         }]
                     }
                 })
-                .state('app.products.details', {
+                .state('app.menu.details', {
                     url: '/:slug',
                     views: {
                         'content@app': {

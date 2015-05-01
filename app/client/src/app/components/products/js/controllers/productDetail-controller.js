@@ -6,16 +6,16 @@ function (_) {
 
     return {
         name: 'ProductDetailController',
-        fn: ['$stateParams', 'products', ProductDetailController]
+        fn: ['$stateParams', 'menu', ProductDetailController]
     };
 
-    function ProductDetailController($stateParams, products) {
+    function ProductDetailController($stateParams, menu) {
         var vm = this;
 
         vm.product = getProduct();
 
         function getProduct() {
-            var requestedProduct =  _.where(products, {slug: $stateParams.slug});
+            var requestedProduct =  _.where(menu.products, {slug: $stateParams.slug});
             return requestedProduct[0];
         }
     }

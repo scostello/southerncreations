@@ -2,18 +2,34 @@
     <div class="products-banner"></div>
 
     <section class="products-wrapper">
-        <ul class="products list-inline">
-            <li ng-repeat="product in prdCtrl.products" class="product col-xs-12 col-sm-4 col-md-3" >
-                <a href="#" ui-sref=".details({ slug: product.slug })">
-                    <img class="product-image" src="http://placehold.it/200x200" alt="placeholder"/>
-                    <div class="product-info">
-                        <dl>
-                            <dd>{{product.name}}</dd>
-                            <dd>{{product.pricing | currency}}</dd>
-                        </dl>
+        <div class="row">
+            <ul class="products list-inline">
+                <li ng-repeat="product in prdCtrl.products" class="product col-xs-12 col-sm-4 col-lg-3">
+                    <div class="panel panel-default panel-products">
+                        <div class="panel-heading">
+                            <h5>{{product.name}}</h5>
+                        </div>
+                        <div class="panel-body">
+                            <a href="#" ui-sref=".details({ slug: product.slug })">
+                                <img class="product-image" style="width: 100%" src="http://placehold.it/200x200" alt="placeholder"/>
+                            </a>
+                            <div class="product-info">
+                                <div class="product-price">{{product.pricing | currency}}</div>
+                                <ul class="list-inline">
+                                    <li>
+                                        <a href="#" ui-sref=".details({ slug: product.slug })">
+                                            <button class="btn btn-info">More Info</button>
+                                        </a>
+                                    </li>
+                                    <li class="pull-right">
+                                        <button class="btn btn-primary" ng-click="prdCtrl.addItemToCart(product)"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </a>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </section>
 </div>

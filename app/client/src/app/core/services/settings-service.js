@@ -19,7 +19,7 @@ function (_) {
                 },
                 {
                     name: 'menu',
-                    state: 'app.products'
+                    state: 'app.menu'
                 },
                 {
                     name: 'catering',

@@ -15,6 +15,8 @@
 @nav-top-bg-end:                @brand-info-light;
 @nav-header-bg:                 #fff;
 
+@nav-util-bg:                   darken(@navbar-default-bg, 5%);
+
 @nav-top-item-mobile:           @nav-top-bg;
 @nav-top-item-mobile-active:    darken(@nav-top-item-mobile, 20%);
 
@@ -30,7 +32,7 @@
     border-bottom: 1px solid #C9C9C9;
 
     &.navbar-utility {
-        background: darken(@navbar-default-bg, 5%);
+        background: @nav-util-bg;
         height: @navbar-utility-height;
         min-height: @navbar-utility-height;
         margin: 0;
@@ -38,11 +40,52 @@
         .nav.navbar-utilitynav {
             .navbar-nav;
 
-            & > li:last-child > a {
-                padding-right: 35px;
+            & > li.utility-user-profile {
+                padding: 0 15px;
+
+                ul.dropdown-profile-menu {
+                    top: @navbar-utility-hg - 5;
+                    left: -16px;
+                    min-width: 170px;
+                    margin-top: 0;
+                    background-color: @nav-util-bg;
+                    border-top: none;
+                    .border-radius(0);
+                    .box-shadow(none);
+
+                    > li {
+                        border-left: 2px solid #dfdfdf;
+
+                        a {
+                            font-size: 14px;
+                        }
+                    }
+                }
             }
 
-            & > li  a {
+            & > li.utility-shopping-cart {
+                position: relative;
+                border-left: 1px solid #dfdfdf;
+                border-right: 1px solid #dfdfdf;
+
+                a {
+                    margin: 0 15px;
+                    padding: 0;
+                }
+
+                .quickview-shopping-cart {
+                    display: none;
+                    position: absolute;
+                    top: @navbar-utility-hg - 5;
+                    right: 0;
+                    background-color: @nav-util-bg;
+                    width: 300px;
+                    padding: 15px;
+                    z-index: 1000;
+                }
+            }
+
+            & > li a {
                 font-size: 17px;
                 padding-top: 0;
                 padding-bottom: 0;

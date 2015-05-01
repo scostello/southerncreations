@@ -1,11 +1,11 @@
-.products-banner {
-    /*height: 30em;
-    width: 100%;
-    margin-bottom: 1em;*/
+.screen-products {
+    padding: 0 30px;
+    margin-bottom: 30px;
 }
 
 .products-wrapper {
     width: 100%;
+    padding-top: 20px;
 
     ul.products {
         > li.product {
@@ -13,5 +13,24 @@
             margin: 5px 0;
         }
     }
+
+    .product-info {
+        margin: 5px 0;
+        text-align: left;
+    }
+
+    .product-price {
+        color: @brand-primary;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: .085em;
+        margin: 10px 0;
+    }
 }
 
+.panel-products {
+    .panel-heading {
+        border-top: 3px solid @brand-info;
+        text-align: left;
+    }
+}

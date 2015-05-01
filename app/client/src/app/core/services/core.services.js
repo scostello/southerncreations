@@ -26,6 +26,7 @@ define([
             'BASE': '/api',
             'BASE_LOGIN': 'login',
             'BASE_SIGNIN': 'signin',
+            'BASE_CATEGORIES': 'categories',
             'BASE_PRODUCTS': 'products',
             'BASE_SETTINGS': 'settings'
         })
