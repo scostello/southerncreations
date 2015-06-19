@@ -5,7 +5,7 @@ define([
     'use strict';
 
     return {
-        name: 'fitvid',
+        name: 'scFitvid',
         fn: [function () {
             return {
                 restrict: 'AE',

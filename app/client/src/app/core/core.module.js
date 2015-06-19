@@ -7,7 +7,8 @@ define([
     'angularUiRouter',
     'ocLazyLoad',
     'angularJwt',
-    'angularBootstrap'
+    'angularBootstrap',
+    'angularXeditable'
 ], function (angular, coreServices, coreControllers, coreDirectives, coreFilters) {
     'use strict';
 
@@ -19,6 +20,7 @@ define([
             'oc.lazyLoad',
             'angular-jwt',
             'ui.bootstrap',
+            'xeditable',
             coreServices.name,
             coreControllers.name,
             coreDirectives.name,
@@ -34,12 +36,12 @@ define([
         'jwtInterceptorProvider',
         function ($locationProvider, $urlRouterProvider, $stateProvider, $ocLazyLoadProvider, $httpProvider, jwtInterceptorProvider) {
 
-            jwtInterceptorProvider.tokenGetter = ['AuthService', function (AuthService) {
-                return AuthService.getAuthToken();
+            /*jwtInterceptorProvider.tokenGetter = ['UserService', function (UserService) {
+                return UserService.getAuthToken();
             }];
 
             $httpProvider.interceptors.push('jwtInterceptor');
-
+            */
             $ocLazyLoadProvider.config({
                 jsLoader: requirejs
             });
@@ -169,13 +171,31 @@ define([
                         }]
                     }
                 })
+                .state('app.cart', {
+                    url: '/cart',
+                    views: {
+                        'content@app': {
+                            templateUrl: '/static/app/components/cart/views/cart.html',
+                            controller: 'CartController',
+                            controllerAs: 'cartCtrl'
+                        }
+                    },
+                    resolve: {
+                        cartModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'southerncreations.cart',
+                                files: ['app/components/cart/js/cart-module']
+                            });
+                        }]
+                    }
+                })
                 .state('app.login', {
                     url: '/login',
                     views: {
                         'content@app': {
                             templateUrl: '/static/app/components/login/views/login.html',
                             controller: 'LoginController',
-                            controllerAs: 'login'
+                            controllerAs: 'loginCtrl'
                         }
                     },
                     resolve: {
@@ -193,7 +213,7 @@ define([
                         'content@app': {
                             templateUrl: '/static/app/components/signup/views/signup.html',
                             controller: 'SignupController',
-                            controllerAs: 'signup'
+                            controllerAs: 'signupCtrl'
                         }
                     },
                     resolve: {
@@ -322,6 +342,16 @@ define([
                             controllerAs: 'adminUsers'
                         }
                     }
+                })
+                .state('app.cart.checkout', {
+                    url: '/checkout',
+                    views: {
+                        'content@app': {
+                            templateUrl: '/static/app/components/cart/views/checkout.html',
+                            controller: 'CartController',
+                            controllerAs: 'cartCtrl'
+                        }
+                    }
                 });
 
             $locationProvider.html5Mode({enabled: true, requireBase: false});
@@ -330,18 +360,23 @@ define([
     .run([
         '$rootScope',
         '$state',
-        'AuthService',
-        function($rootScope, $state, AuthService) {
+        'UserService',
+        'editableOptions',
+        'editableThemes',
+        function($rootScope, $state, UserService, editableOptions, editableThemes) {
+            editableThemes.bs3.buttonsClass = 'btn-sm btn-editable';
+            editableOptions.theme = 'bs3';
+
             $rootScope.$on('$stateChangeStart', function (evt, to) {
                 if (to.data && to.data.requiresLogin) {
-                    if (!AuthService.isLoggedIn()) {
+                    if (!UserService.isLoggedIn()) {
                         evt.preventDefault();
                         $state.go('app.login');
                     }
                 }
 
                 if (to.data && to.data.requiresAdminRights) {
-                    if (!AuthService.isAdmin()) {
+                    if (!UserService.isAdmin()) {
                         evt.preventDefault();
                         $state.go('app.profile');
                     }

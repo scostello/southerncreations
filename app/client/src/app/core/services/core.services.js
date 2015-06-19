@@ -2,25 +2,26 @@ define([
     'angular',
     './settings-service',
     './products-service',
-    './shopping-service',
-    './auth-service',
+    './cart-service',
+    './cartItem-factory',
     './pubsub-service',
-    'restangular',
-    'angularStorage'
-], function (angular, settingsService, productsService, shoppingService, authService, pubsubService) {
+    './user-service',
+    'angularStorage',
+    'angularCookies'
+], function (angular, settingsService, productsService, cartService, cartItemFactory, pubsubService, userService) {
     'use strict';
 
     var moduleName = 'southerncreations.core.services',
         module;
 
     module = angular.module(moduleName, [
-            'restangular',
-            'LocalStorageModule'
+            'LocalStorageModule',
+            'ngCookies'
         ])
         .constant('STORAGE_KEYS', {
             'JWT': 'jwt',
             'SETTINGS': 'settings',
-            'CART': 'cart'
+            'SESSION': 'session'
         })
         .constant('API', {
             'BASE': '/api',
@@ -28,16 +29,29 @@ define([
             'BASE_SIGNIN': 'signin',
             'BASE_CATEGORIES': 'categories',
             'BASE_PRODUCTS': 'products',
-            'BASE_SETTINGS': 'settings'
+            'BASE_SETTINGS': 'settings',
+            'BASE_USER': 'users'
         })
-        .config(['RestangularProvider', 'API', function (RestangularProvider, API) {
-            RestangularProvider.setBaseUrl(API.BASE);
-        }])
+        .constant('EVENTS', {
+            'CART_UPDATED': 'cart:updated',
+            'CART_ITEM_ADDED': 'cart:itemAdded',
+            'CART_ITEM_REMOVED': 'cart:itemRemoved'
+        })
+        .service(cartService.name, cartService.fn)
+        .factory(cartItemFactory.name, cartItemFactory.fn)
+        .service(userService.name, userService.fn)
         .service(settingsService.name, settingsService.fn)
         .service(productsService.name, productsService.fn)
-        .service(shoppingService.name, shoppingService.fn)
-        .service(authService.name, authService.fn)
-        .service(pubsubService.name, pubsubService.fn);
+        .service(pubsubService.name, pubsubService.fn)
+        .run(['$rootScope', '$cookies', 'ShoppingCartService', 'EVENTS', function ($rootScope, $cookies, ShoppingCartService, EVENTS) {
+
+            $rootScope.$on(EVENTS.CART_UPDATED, function () {
+                ShoppingCartService.save();
+            });
+
+            ShoppingCartService.init();
+            console.log($cookies.getAll());
+        }]);
 
     return {
         name: moduleName,

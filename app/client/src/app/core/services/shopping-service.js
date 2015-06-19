@@ -1,48 +1,27 @@
-define([
-    'lodash'
-],
-function (_) {
+define(function () {
     'use strict';
+
+    ShoppingService.$inject = ['$rootScope', 'EVENTS', 'ShoppingCart'];
+    function ShoppingService($rootScope, EVENTS, ShoppingCart) {
+        var self = this,
+            shoppingCart = new ShoppingCart();
+
+        self.shoppingCart = shoppingCart;
+        self.addItemToCart = _broadcastCartUpdate(shoppingCart.addItem);
+        self.updateItemInCart = _broadcastCartUpdate(shoppingCart.updateItem);
+        self.removeItemFromCart = _broadcastCartUpdate(shoppingCart.removeItem);
+
+        function _broadcastCartUpdate(func) {
+            return function () {
+                var args = Array.prototype.slice.call(arguments);
+                func.apply(shoppingCart, args);
+                $rootScope.$broadcast(EVENTS.CART_UPDATED, shoppingCart);
+            };
+        }
+    }
 
     return {
         name: 'ShoppingService',
-        fn: ['$rootScope', 'STORAGE_KEYS', 'localStorageService', ShoppingService]
+        fn: ShoppingService
     };
-
-    function ShoppingService($rootScope, STORAGE_KEYS, localStorageService) {
-        var self = this;
-
-        self.addItemToCart = addItemToCart;
-        self.removeItemFromCart = removeItemFromCart;
-        self.getShoppingCart = getShoppingCart;
-
-        function addItemToCart(product) {
-            var shoppingCart = self.getShoppingCart();
-
-            if (!shoppingCart.items[product.slug]) {
-                shoppingCart.items[product.slug] = _.assign({}, product, {
-                    count: 1
-                });
-                shoppingCart.count++;
-            } else {
-                shoppingCart.items[product.slug].count++;
-                shoppingCart.count++;
-            }
-
-            localStorageService.set(STORAGE_KEYS.CART, shoppingCart);
-            _broadcastCartUpdate();
-        }
-
-        function removeItemFromCart() {
-
-        }
-
-        function getShoppingCart() {
-            return localStorageService.get(STORAGE_KEYS.CART) || {count: 0, items: {}};
-        }
-
-        function _broadcastCartUpdate() {
-            $rootScope.$broadcast('cart:updated', self.getShoppingCart());
-        }
-    }
 });

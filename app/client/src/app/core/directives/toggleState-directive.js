@@ -4,7 +4,7 @@ define([
     'use strict';
 
     return {
-        name: 'toggleState',
+        name: 'scToggleState',
         fn: [function () {
             return {
                 restrict: 'A',

@@ -1,23 +1,19 @@
 [
   {
-    "name": "cake"
+    "name": "cakes"
   },
   {
-    "name": "cupcake"
+    "name": "cupcakes"
   },
   {
-    "name": "cookie"
+    "name": "cookies"
   },
   {
-    "name": "pie"
+    "name": "pies"
   },
   {
-    "name": "chocolate"
+    "name": "chocolates"
   },
   {
-    "name": "candy"
-  },
-  {
-    "name": "sweet-rolls"
-  }
+    "name": "specialty"
 ]

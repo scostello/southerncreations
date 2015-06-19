@@ -6,12 +6,11 @@ function (_) {
 
     return {
         name: 'SettingsService',
-        fn: ['$q', 'API', 'STORAGE_KEYS', 'Restangular', 'localStorageService', SettingsService]
+        fn: ['$q', '$http', 'API', 'STORAGE_KEYS', 'localStorageService', SettingsService]
     };
 
-    function SettingsService($q, API, STORAGE_KEYS, Restangular, localStorageService) {
+    function SettingsService($q, $http, API, STORAGE_KEYS, localStorageService) {
         var self = this,
-            baseSettings = Restangular.oneUrl(API.BASE_SETTINGS),
             menuitems = [
                 {
                     name: 'home',
@@ -44,17 +43,20 @@ function (_) {
             if (cachedSettings) {
                 dfd.resolve(cachedSettings);
             } else {
-                baseSettings.get()
-                    .then(function (settings) {
-                        _setStorageSettings(_.assign({}, settings, {
-                            menuitems: menuitems
-                        }));
+                $http({
+                    method: 'GET',
+                    url: '/api/settings'
+                })
+                .success(function (settings) {
+                    _setStorageSettings(_.assign({}, settings, {
+                        menuitems: menuitems
+                    }));
 
-                        dfd.resolve(settings);
-                    })
-                    .catch(function (err) {
-                        dfd.reject(err);
-                    });
+                    dfd.resolve(settings);
+                })
+                .error(function (err) {
+                    dfd.reject(err);
+                });
             }
 
             return dfd.promise;

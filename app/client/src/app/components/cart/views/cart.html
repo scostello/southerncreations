@@ -1,0 +1,57 @@
+<div class="screen screen-cart">
+    <div class="row-fluid">
+        <div class="col-xs-12 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Your Items</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-cart-items">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cartItem in cartCtrl.shoppingCart.items">
+                                <td>
+                                    <img class="thumbnail" src="http://placehold.it/100x100" alt="placeholder"/>
+                                    <span class="product-name">{{cartItem.name}}</span>
+                                </td>
+                                <td>{{cartItem.pricing | currency}}</td>
+                                <td>
+                                    <input class="form-control form-quantity" type="number" ng-model="cartItem.quantity" ng-change="cartCtrl.updateItem(cartItem)" size="4"/>
+                                </td>
+                                <td>{{cartItem.pricing * cartItem.quantity | currency}}</td>
+                                <td>
+                                    <button class="btn btn-blue" ng-click="cartCtrl.removeItem(cartItem)">Remove</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-xs-12">
+                        <h3 class="item-total text-right"><span>Total: {{cartCtrl.cartTotal | currency}}</span></h3>
+                    </div>
+                    <div class="col-xs-12">
+                        <ul class="list-inline pull-right">
+                            <li>
+                                <button class="btn btn-success">Proceed To Secure Checkout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Trust</h4>
+                </div>
+                <div class="panel-body"></div>
+            </div>
+        </div>
+    </div>
+</div>

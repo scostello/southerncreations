@@ -6,27 +6,18 @@ function (_) {
 
     return {
         name: 'AppController',
-        fn: ['$scope', '$state', 'settings', 'AuthService', 'ShoppingService', function ($scope, $state, settings, AuthService, ShoppingService) {
+        fn: ['$scope', '$state', 'settings', 'UserService', function ($scope, $state, settings, UserService) {
             var vm = this;
-
-
             vm.menuitems = settings.menuitems;
-            vm.shoppingCart = ShoppingService.getShoppingCart();
-            vm.user = null;
             vm.isLoggedIn = false;
             vm.logout = logout;
 
-            $scope.$watch(AuthService.isLoggedIn, function (value) {
+            $scope.$watch(UserService.isLoggedIn, function (value) {
                 vm.isLoggedIn = value;
-                vm.user = AuthService.getUser();
-            });
-
-            $scope.$on('cart:updated', function (evt, cart) {
-                vm.shoppingCart = cart;
             });
 
             function logout() {
-                AuthService.logout();
+                UserService.logout();
                 $state.go('app.home');
             }
         }]

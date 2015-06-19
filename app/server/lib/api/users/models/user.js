@@ -65,7 +65,7 @@ UserSchema.statics.byUsername = function(username, cb) {
         .exec(cb);
 };
 
-UserSchema.statics.byId = function(id, cb) {
+UserSchema.statics.load = function(id, cb) {
     this.findOne({_id: id})
         .exec(cb);
 };

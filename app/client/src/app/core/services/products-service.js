@@ -3,19 +3,22 @@ define(function () {
 
     return {
         name: 'ProductsService',
-        fn: ['Restangular', 'API', function (Restangular, API) {
-            var categoriesBase = Restangular.all(API.BASE_CATEGORIES),
-                productsBase = Restangular.all(API.BASE_PRODUCTS);
-
+        fn: ['$http', 'API', function ($http, API) {
             this.getCategories = getCategories;
             this.getProducts = getProducts;
 
             function getCategories() {
-                return categoriesBase.getList();
+                return $http({
+                    method: 'GET',
+                    url: '/api/categories'
+                });
             }
 
             function getProducts() {
-                return productsBase.getList();
+                return $http({
+                    method: 'GET',
+                    url: '/api/products'
+                });
             }
         }]
     };

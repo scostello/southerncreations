@@ -32,8 +32,7 @@ Category.find({}).remove().exec()
 
         var dfds = [];
         products.forEach(function (product) {
-            var category = _.find(categories, function (category) { return product.category === category.name; });
-            product.category = category;
+            product.category = _.find(categories, function (category) { return product.category === category.name; });
 
             dfds.push(Product.create(product));
         });

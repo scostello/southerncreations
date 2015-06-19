@@ -36,17 +36,17 @@
             domReady: 'vendor/requirejs-domready/domReady',
 
             jquery: 'vendor/jquery/dist/jquery.min',
-            lodash: 'vendor/lodash/dist/lodash.min',
+            lodash: 'vendor/lodash/lodash.min',
 
             angular: 'vendor/angular/angular',
             angularResource: 'vendor/angular-sanitize/angular-sanitize.min',
             angularSanitize: 'vendor/angular-resource/angular-resource.min',
             angularUiRouter: 'vendor/angular-ui-router/release/angular-ui-router.min',
-            restangular: 'vendor/restangular/dist/restangular.min',
+            angularCookies: 'vendor/angular-cookies/angular-cookies.min',
             angularStorage: 'vendor/angular-local-storage/dist/angular-local-storage.min',
             angularJwt: 'vendor/angular-jwt/dist/angular-jwt.min',
             angularMocks: 'vendor/angular-mocks/angular-mocks',
-            ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.min',
+            ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.require.min',
             angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap.min',
             angularXeditable: 'vendor/angular-xeditable/dist/js/xeditable.min',
 
@@ -73,8 +73,8 @@
             angularUiRouter: {
                 deps: ['angular']
             },
-            restangular: {
-                deps: ['angular', 'lodash']
+            angularCookies: {
+                deps: ['angular']
             },
             angularStorage: {
                 deps: ['angular']

@@ -73,7 +73,8 @@ module.exports = function (grunt) {
                     'src/assets/css/app.css': [
                         '<%= srcDir %>assets/less/app.less',
                         '<%= srcDir %>app/components/home/less/home.less',
-                        '<%= srcDir %>app/components/products/less/products.less'
+                        '<%= srcDir %>app/components/products/less/products.less',
+                        '<%= srcDir %>app/components/cart/less/cart.less'
                     ],
                     'src/assets/css/auth.css': [
                         '<%= srcDir %>assets/less/auth.less',

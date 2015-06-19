@@ -5,7 +5,7 @@ define([
     'use strict';
 
     return {
-        name: 'owlCarousel',
+        name: 'scOwlCarousel',
         fn: [function () {
             return {
                 restrict: 'E',

@@ -3,7 +3,7 @@ define(function () {
 
     return {
         name: 'LoginController',
-        fn: ['$scope', '$state', 'AuthService', function ($scope, $state, AuthService) {
+        fn: ['$scope', '$state', 'UserService', function ($scope, $state, UserService) {
             var vm = this;
 
             vm.submit = submit;
@@ -14,14 +14,14 @@ define(function () {
                     return;
                 }
 
-                AuthService.login(vm.user)
-                    .then(function () {
-                        $state.go(AuthService.isAdmin() ? 'app.profile.admin.dashboard' : 'app.profile');
+                UserService.login(vm.user)
+                    .then(function (user) {
+                        $state.go(user.isAdmin ? 'app.profile.admin.dashboard' : 'app.profile');
                     })
                     .catch(function (err) {
                         // error
                     });
-            };
+            }
         }]
     };
 });

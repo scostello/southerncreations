@@ -3,7 +3,7 @@ define(function () {
 
     return {
         name: 'SignupController',
-        fn: ['$scope', 'AuthService', function ($scope, AuthService) {
+        fn: ['$scope', 'UserService', function ($scope, UserService) {
             var vm = this;
 
             vm.newuser = {};
@@ -13,7 +13,7 @@ define(function () {
                     return;
                 }
 
-                AuthService.signup(vm.newuser)
+                UserService.signup(vm.newuser)
                     .then(function (response) {
                         console.log(response);
                     })

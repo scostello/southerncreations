@@ -4,15 +4,15 @@
             <img src="/static/assets/images/logo/southerncreations-small.svg" alt="sc-small"/>
         </div>
         <h3 class="auth-header text-center">Login</h3>
-        <form ng-submit="login.submit()">
+        <form ng-submit="loginCtrl.submit()">
             <div class="material-group">
-                <input ng-model="login.user.username" type="text" class="material-input" id="email" required>
+                <input ng-model="loginCtrl.user.username" type="text" class="material-input" id="email" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="email" class="material-label">Email</label>
             </div>
             <div class="material-group">
-                <input ng-model="login.user.password" type="password" class="material-input" id="password" required>
+                <input ng-model="loginCtrl.user.password" type="password" class="material-input" id="password" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="password" class="material-label">Password</label>

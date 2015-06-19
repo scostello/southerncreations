@@ -3,10 +3,8 @@ define(function () {
 
     return {
         name: 'ProfileController',
-        fn: ['$state', 'AuthService', function ($state, AuthService) {
+        fn: ['$state', function ($state) {
             var vm = this;
-
-            vm.user = AuthService.getUser();
             vm.profileItems = [
                 {
                     name: 'Profile',
