@@ -51,26 +51,26 @@ var UserSchema = new Schema({
 });
 
 // checking if password is valid
-UserSchema.methods.isValidPassword = function(password) {
+UserSchema.methods.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-UserSchema.statics.byEmail = function(email, cb) {
+UserSchema.statics.byEmail = function (email, cb) {
     this.findOne({email: email})
         .exec(cb);
 };
 
-UserSchema.statics.byUsername = function(username, cb) {
+UserSchema.statics.byUsername = function (username, cb) {
     this.findOne({username: username})
         .exec(cb);
 };
 
-UserSchema.statics.load = function(id, cb) {
+UserSchema.statics.load = function (id, cb) {
     this.findOne({_id: id})
         .exec(cb);
 };
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     var user = this;
 
     // only hash the password if it has been modified (or is new)

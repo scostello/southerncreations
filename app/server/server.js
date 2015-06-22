@@ -28,6 +28,8 @@ glob.sync('**/models/*.js').forEach(function (filePath) {
     require(path.join(__dirname, filePath));
 });
 
+//require('./lib/db/bootstrap');
+
 /**
  * Setting app configuration
  */
@@ -51,6 +53,7 @@ app.set('views', path.join(app.get('config').srcFolder, '/views/layouts/'));
  */
 app.use(cookieParser());
 app.use(session({
+        name: 'sc_sessionid',
         secret: 'yourothersecretcode',
         store: new redisStore({
             host: 'localhost',
@@ -69,11 +72,11 @@ require('./lib/middleware/static')(app);          // Add static file supports=
  * Adding custom routes
  */
 app.use('/api', router);
-require('./lib/api/categories/routes/categories')(router);
+require('./lib/api/root/routes/root')(app, router);
 require('./lib/api/products/routes/products')(router);
 require('./lib/api/settings/routes/settings')(app, router);
 require('./lib/api/users/routes/users')(router);
-require('./lib/api/carts/routes/carts')(router);
+require('./lib/api/orders/routes/orders')(router);
 require('./lib/web/routes/web')(app);
 
 if (app.get('env') === 'development') {

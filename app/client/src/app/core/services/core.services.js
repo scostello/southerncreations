@@ -6,9 +6,10 @@ define([
     './cartItem-factory',
     './pubsub-service',
     './user-service',
+    './webapi-factory',
     'angularStorage',
     'angularCookies'
-], function (angular, settingsService, productsService, cartService, cartItemFactory, pubsubService, userService) {
+], function (angular, settingsService, productsService, cartService, cartItemFactory, pubsubService, userService, webApiFactory) {
     'use strict';
 
     var moduleName = 'southerncreations.core.services',
@@ -18,11 +19,7 @@ define([
             'LocalStorageModule',
             'ngCookies'
         ])
-        .constant('STORAGE_KEYS', {
-            'JWT': 'jwt',
-            'SETTINGS': 'settings',
-            'SESSION': 'session'
-        })
+        .constant('STORAGE_KEYS', {})
         .constant('API', {
             'BASE': '/api',
             'BASE_LOGIN': 'login',
@@ -39,19 +36,11 @@ define([
         })
         .service(cartService.name, cartService.fn)
         .factory(cartItemFactory.name, cartItemFactory.fn)
+        .factory(webApiFactory.name, webApiFactory.fn)
         .service(userService.name, userService.fn)
         .service(settingsService.name, settingsService.fn)
         .service(productsService.name, productsService.fn)
-        .service(pubsubService.name, pubsubService.fn)
-        .run(['$rootScope', '$cookies', 'ShoppingCartService', 'EVENTS', function ($rootScope, $cookies, ShoppingCartService, EVENTS) {
-
-            $rootScope.$on(EVENTS.CART_UPDATED, function () {
-                ShoppingCartService.save();
-            });
-
-            ShoppingCartService.init();
-            console.log($cookies.getAll());
-        }]);
+        .service(pubsubService.name, pubsubService.fn);
 
     return {
         name: moduleName,

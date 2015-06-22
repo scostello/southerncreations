@@ -31,7 +31,8 @@
     "twitter": "~1.2.5",
     "dotenv": "~1.1.0",
     "redis": "~0.12.1",
-    "connect-redis": "~2.3.0"
+    "connect-redis": "~2.3.0",
+    "hat": "0.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

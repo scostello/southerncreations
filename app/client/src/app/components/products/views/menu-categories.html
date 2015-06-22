@@ -1,0 +1,10 @@
+<nav id="menu-categories">
+    <ol>
+        <li ng-repeat="product in menuProducts">
+            <a href="#" ui-sref=".product({productSlug: product.payload.slug})">
+                <img src="http://placehold.it/60x60" alt=""/>
+                <h3>{{product.payload.name}}</h3>
+            </a>
+        </li>
+    </ol>
+</nav>

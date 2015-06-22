@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var Product = require('../models/product'),
+    hypermedia = require('../../utils/hypermedia.js'),
     _ = require('lodash');
 
 /**
@@ -82,22 +83,38 @@ exports.destroy = function(req, res) {
  * Show a product
  */
 exports.show = function(req, res) {
-    res.json(req.product);
+    res.status(200).json(req.product);
+};
+
+exports.variantByIdentifier = function () {
+
 };
 
 /**
  * List of Products
  */
 exports.all = function(req, res) {
-    Product.find({})
-        .sort('-created')
-        .populate('category')
+    var fields = {
+        'name': 1,
+        'slug': 1,
+        'pricing.price': 1,
+        'variants.name': 1,
+        'variants.slug': 1,
+        'variants.sku': 1,
+        'variants.pricing.price': 1
+    };
+
+    Product.find({}, fields)
+        .sort('name')
         .exec(function(err, products) {
+            var hmList = _.map(products, function (product) {
+                return hypermedia.productHypermedia(product);
+            });
             if (err) {
                 return res.status(500).json({
                     error: 'Cannot list the products'
                 });
             }
-            res.json(products);
+            res.status(200).json(hmList);
         });
 };

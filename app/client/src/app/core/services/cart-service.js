@@ -5,10 +5,10 @@ define([
 
     return {
         name: 'ShoppingCartService',
-        fn: ['$rootScope', '$http', 'CartItem', 'EVENTS', ShoppingCartService]
+        fn: ['$rootScope', '$http', '$q', '$cookies', 'WebApi', 'CartItem', 'EVENTS', ShoppingCartService]
     };
 
-    function ShoppingCartService($rootScope, $http, CartItem, EVENTS) {
+    function ShoppingCartService($rootScope, $http, $q, $cookies, WebApi, CartItem, EVENTS) {
         var self = this;
 
         self.init = function () {
@@ -22,22 +22,52 @@ define([
             };
         };
 
-        self.restore = function (storedCart) {
-            var self = this;
-            self.init();
-            self.$cart.shipping = storedCart.shipping;
-            self.$cart.taxRate = storedCart.taxRate;
-            self.$cart.tax = storedCart.tax;
-
-            _.each(storedCart.items, function (item) {
-                self.$cart.items.push(new CartItem(item.getId(), item.getName(), item.getPrice(), item.getQuantity(), item.getData()));
-            });
-
-            self.save();
+        self.setOrderCookieKeys = function (cookieKeys) {
+            this.currentOrderNumber = cookieKeys.orderNumber;
+            this.currentOrderToken = cookieKeys.orderToken;
         };
 
-        self.save = function () {
-            return $http.post('/api/carts', this.getCart().toObject());
+        self.restore = function (root) {
+            var dfd = $q.defer(),
+                orderNumber = $cookies.get(this.currentOrderNumber),
+                orderToken = $cookies.get(this.currentOrderToken);
+
+            if (orderNumber && orderToken) {
+                WebApi.orders.getCurrent(root.links)
+                    .then(_successCb, _errorCb);
+            } else {
+                self.init();
+                dfd.resolve(self);
+            }
+
+            function _successCb(order) {
+                self.setCart(order);
+                dfd.resolve(self);
+            }
+
+            function _errorCb(err) {
+                dfd.reject(err);
+            }
+
+            return dfd.promise;
+        };
+
+        self.createOrder = function (links, data) {
+            var dfd = $q.defer();
+
+            WebApi.orders.createOrder(links, {data: data})
+                .then(_successCb, _errorCb);
+
+            function _successCb(order) {
+                self.setCart(order);
+                dfd.resolve(self);
+            }
+
+            function _errorCb(err) {
+                dfd.reject(err);
+            }
+
+            return dfd.promise;
         };
 
         self.setCart = function (cart) {
@@ -109,16 +139,29 @@ define([
 
         self.addItem = function (id, name, price, quantity, data) {
             var currentItem = this.getItemById(id),
+                orderNumber = $cookies.get('sc_currentOrderNumber'),
                 newItem;
+
+            if (!orderNumber) {
+                this.createOrder()
+                    .then(function (order) {
+
+                    }, function (err) {
+
+                    })
+            } else {
+                console.log('already created an order');
+            }
+
             if (currentItem) {
-                currentItem.setQuantity(quantity, false);
+                currentItem.setQuantity(quantity, true);
             } else {
                 newItem = new CartItem(id, name, price, quantity, data);
                 this.getCart().items.push(newItem);
-                $rootScope.$broadcast(EVENTS.CART_ITEM_ADDED, newItem);
+                //$rootScope.$broadcast(EVENTS.CART_ITEM_ADDED, newItem);
             }
 
-            $rootScope.$broadcast(EVENTS.CART_UPDATED, {});
+            //$rootScope.$broadcast(EVENTS.CART_UPDATED, {});
         };
 
         self.removeItemById = function (id) {

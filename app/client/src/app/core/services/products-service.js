@@ -4,21 +4,25 @@ define(function () {
     return {
         name: 'ProductsService',
         fn: ['$http', 'API', function ($http, API) {
-            this.getCategories = getCategories;
             this.getProducts = getProducts;
-
-            function getCategories() {
-                return $http({
-                    method: 'GET',
-                    url: '/api/categories'
-                });
-            }
+            this.getVariantById = getVariantById;
+            this.getVariantBySlug = getVariantBySlug;
+            this.getVariantBySku = getVariantBySku;
 
             function getProducts() {
-                return $http({
-                    method: 'GET',
-                    url: '/api/products'
-                });
+                return $http.get('/api/products');
+            }
+
+            function getVariantById(id) {
+                return $http.get('/api/products/' + id);
+            }
+
+            function getVariantBySlug(slug) {
+                return $http.get('/api/products/' + slug, {headers: {'X-ALTERNATE-IDENTIFIER': 'slug'}});
+            }
+
+            function getVariantBySku(sku) {
+                return $http.get('/api/products/' + sku, {headers: {'X-ALTERNATE-IDENTIFIER': 'sku'}});
             }
         }]
     };

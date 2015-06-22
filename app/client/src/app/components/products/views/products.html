@@ -1,30 +1,24 @@
 <div class="screen screen-products">
-    <div class="products-banner"></div>
 
-    <section class="products-wrapper">
+    <section class="products-wrapper col-xs-12" ng-repeat="product in prdCtrl.products">
+        <h2>{{product.name}}</h2>
+        <hr/>
         <div class="row">
             <ul class="products list-inline">
-                <li ng-repeat="product in prdCtrl.products" class="product col-xs-12 col-sm-4 col-lg-3">
+                <li ng-repeat="variant in product.variants" class="product col-xs-12 col-sm-4 col-lg-3">
                     <div class="panel panel-default panel-products">
                         <div class="panel-heading">
-                            <h5>{{product.name}}</h5>
+                            <h5>{{variant.name}}</h5>
                         </div>
                         <div class="panel-body">
-                            <a href="#" ui-sref=".details({ slug: product.slug })">
+                            <a href="#" ui-sref=".details({ variantSlug: variant.slug })">
                                 <img class="product-image" style="width: 100%" src="http://placehold.it/200x200" alt="placeholder"/>
                             </a>
                             <div class="product-info">
-                                <div class="product-price">{{product.pricing | currency}}</div>
-                                <ul class="list-inline">
-                                    <li>
-                                        <a href="#" ui-sref=".details({ slug: product.slug })">
-                                            <button class="btn btn-info">More Info</button>
-                                        </a>
-                                    </li>
-                                    <li class="pull-right">
-                                        <button class="btn btn-primary" ng-click="prdCtrl.addItemToCart(product)"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
-                                    </li>
-                                </ul>
+                                <div class="product-price">{{variant.pricing.price | currency}}</div>
+                                <a href="#" ui-sref=".details({ variantSlug: variant.slug })">
+                                    <button class="btn btn-info btn-full-width">More Info</button>
+                                </a>
                             </div>
                         </div>
                     </div>

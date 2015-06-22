@@ -1,89 +1,492 @@
 [
   {
-    "slug": "angel-cake",
-    "category": "cake",
-    "pricing": 110.00,
-    "isCustom": false,
-    "name": "Angel Cake",
-    "created": "2011-02-04",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["cake", "angel", "sponge", "cream", "light", "white"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
+    "name": "Cupcakes",
+    "description": "cupcake description",
+    "slug": "cupcakes",
+    "pricing": {
+      "price": 1.75
+    },
+    "meta": {
+      "description": "cupcake meta description",
+      "keyWords": ["cupcakes", "frosted"]
+    },
+    "variants": [
+      {
+        "name": "Vanilla Cupcake",
+        "description": "Vanilla Cupcake Description",
+        "productType": "cupcake",
+        "slug": "vanilla-cupcake",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Vanilla cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "vanilla", "light"],
+        "images": []
+      },
+      {
+        "name": "Princess Cupcake",
+        "description": "Princess Cupcake Description",
+        "productType": "cupcake",
+        "slug": "princess-cupcake",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Princess cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "pink", "light", "princess"],
+        "images": []
+      },
+      {
+        "name": "Deep Dark Cupcake",
+        "description": "Deep Dark Description",
+        "productType": "cupcake",
+        "slug": "deep-dark-cupcake",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Deep Dark cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "chocolate", "dark"],
+        "images": []
+      },
+      {
+        "name": "Cookies and Cream Cupcake",
+        "description": "Cookies and Cream Description",
+        "productType": "cupcake",
+        "slug": "deep-dark-cupcake",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Cookies and Cream cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "cookies", "cream", "dark"],
+        "images": []
+      }
+    ]
   },
   {
-    "slug": "red-velvet-cake",
-    "category": "cake",
-    "pricing": 95.00,
-    "isCustom": false,
-    "name": "Red Velvet Cake",
-    "created": "2011-04-06",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["cake", "red", "velvet", "cocoa"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
+    "name": "Mini Cupcakes",
+    "description": "Mini Cupcake description",
+    "slug": "mini-cupcakes",
+    "pricing": {
+      "price": 1.35
+    },
+    "meta": {
+      "description": "mini-cupcake meta description",
+      "keyWords": ["mini", "mini cupcake", "frosted"]
+    },
+    "variants": [
+      {
+        "name": "Red Velvet Mini Delights",
+        "description": "Red Velvet Description",
+        "productType": "mini-cupcake",
+        "slug": "red-velvet-delights",
+        "pricing": {
+          "price": 1.35
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Red Velvet Mini Delights cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "red", "velvet", "dark"],
+        "images": []
+      },
+      {
+        "name": "Princess Mini Delights",
+        "description": "Princess Mini Description",
+        "productType": "mini-cupcake",
+        "slug": "princess-delights",
+        "pricing": {
+          "price": 1.35
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Princess Mini Delights cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "princess", "pink", "mini", "light"],
+        "images": []
+      },
+      {
+        "name": "Deep Chocolate Mini Delights",
+        "description": "Deep Chocolate Mini Description",
+        "productType": "mini-cupcake",
+        "slug": "deep-chocolate-delights",
+        "pricing": {
+          "price": 1.35
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Deep Chocolate Mini Delights cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "chocolate", "mini", "dark"],
+        "images": []
+      },
+      {
+        "name": "Snickerdoodle Mini Delights",
+        "description": "Snickerdoodle Mini Description",
+        "productType": "mini-cupcake",
+        "slug": "snickerdoodle-delights",
+        "pricing": {
+          "price": 1.35
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Snickerdoodle Mini Delights cupcake description",
+        "awards": [],
+        "tags": ["cupcake", "snickerdoodle", "mini", "light"],
+        "images": []
+      }
+    ]
   },
   {
-    "slug": "wedding-cake",
-    "category": "cake",
-    "pricing": 120.00,
-    "isCustom": false,
-    "name": "Wedding Cake",
-    "created": "2012-08-19",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["cake", "wedding", "white", "fancy"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
+    "name": "Cakes",
+    "description": "Cakes description",
+    "slug": "cakes",
+    "pricing": {
+      "price": 30.00
+    },
+    "meta": {
+      "description": "cakes meta description",
+      "keyWords": ["cakes", "frosted"]
+    },
+    "variants": [
+      {
+        "name": "Red Velvet Slab",
+        "description": "Red Velvet Slab Description",
+        "productType": "cake",
+        "slug": "red-velvet-slab",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Red Velvet Slab cake description",
+        "awards": [],
+        "tags": ["cake", "red", "velvet", "dark"],
+        "images": []
+      },
+      {
+        "name": "Malt Chocolate Slab",
+        "description": "Malt Chocolate Slab Description",
+        "productType": "cake",
+        "slug": "malt-chocolate-slab",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Malt Chocolate Slab cake description",
+        "awards": [],
+        "tags": ["cake", "malt", "chocolate", "slab", "dark"],
+        "images": []
+      },
+      {
+        "name": "Amaretto Cream Slab",
+        "description": "Amaretto Cream Slab Description",
+        "productType": "cake",
+        "slug": "amaretto-cream-slab",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Amaretto Cream Slab cake description",
+        "awards": [],
+        "tags": ["cake", "amaretto", "cream", "slab", "light", "buttercream"],
+        "images": []
+      },
+      {
+        "name": "Tiramisu Slab",
+        "description": "Tiramisu Slab Description",
+        "productType": "cake",
+        "slug": "tiramisu-slab",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Tiramisu Slab cake description",
+        "awards": [],
+        "tags": ["cake", "tiramisu", "cream", "slab", "light", "yellow"],
+        "images": []
+      },
+      {
+        "name": "Strawberry Shortcake Slab",
+        "description": "Strawberry Shortcake Slab Description",
+        "productType": "cake",
+        "slug": "strawberry-shortcake-slab",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Strawberry Shortcake Slab cake description",
+        "awards": [],
+        "tags": ["cake", "strawberry", "shortcake", "slab", "light", "red"],
+        "images": []
+      }
+    ]
   },
   {
-    "slug": "vanilla-cupcake",
-    "category": "cupcake",
-    "pricing": 2.00,
-    "name": "Vanilla Cupcake",
-    "created": "2013-11-01",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["cupcake", "vanilla", "light"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
+    "name": "Cookies",
+    "description": "Cookies description",
+    "slug": "cookies",
+    "pricing": {
+      "price": 2.00
+    },
+    "meta": {
+      "description": "cookies meta description",
+      "keyWords": ["cookie"]
+    },
+    "variants": [
+      {
+        "name": "Chocolate Chip",
+        "description": "Chocolate Chip Description",
+        "productType": "cookie",
+        "slug": "chocolate-chip-cookie",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Chocolate Chip cookie description",
+        "awards": [],
+        "tags": ["cheesecake", "new york", "light", "red"],
+        "images": []
+      },
+      {
+        "name": "Snickerdoodle",
+        "description": "Snickerdoodle Description",
+        "productType": "cookie",
+        "slug": "snickerdoodle-cookie",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Snickerdoodle cookie description",
+        "awards": [],
+        "tags": ["cheesecake", "new york", "light", "red"],
+        "images": []
+      },
+      {
+        "name": "M&M",
+        "description": "M&M Description",
+        "productType": "cookie",
+        "slug": "mm-cookie",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "M&M cookie description",
+        "awards": [],
+        "tags": ["cheesecake", "new york", "light", "red"],
+        "images": []
+      },
+      {
+        "name": "Oatmeal Raisin",
+        "description": "Oatmeal Raisin Description",
+        "productType": "cookie",
+        "slug": "oatmeal-raisin-cookie",
+        "pricing": {
+          "price": 2.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Oatmeal Raisin cookie description",
+        "awards": [],
+        "tags": ["cheesecake", "new york", "light", "red"],
+        "images": []
+      }
+    ]
   },
   {
-    "slug": "pink-cupcake",
-    "category": "cupcake",
-    "pricing": 2.00,
-    "name": "Pink Cupcake",
-    "created": "2014-07-21",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["cupcake", "pink", "vanilla", "light"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "cinnamon-roll",
-    "pricing": 2.00,
-    "category": "sweet-rolls",
-    "name": "Cinnamon Rolls",
-    "created": "2015-02-02",
-    "ingredients": [],
-    "awards": [],
-    "tags": ["roll", "cinnamon", "sugar", "cream", "cheese"],
-    "images": {
-      "main": "",
-      "gallery": []
-    }
+    "name": "Cheesecakes",
+    "description": "Cheesecakes description",
+    "slug": "cheesecakes",
+    "pricing": {
+      "price": 30.00
+    },
+    "meta": {
+      "description": "cheesecakes meta description",
+      "keyWords": ["cheesecakes", "crust"]
+    },
+    "variants": [
+      {
+        "name": "New York",
+        "description": "New York Style Description",
+        "productType": "cheesecake",
+        "slug": "newyork-style-cheesecake",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "New York Style cheesecake description",
+        "awards": [],
+        "tags": ["cheesecake", "new york", "light", "red"],
+        "images": []
+      },
+      {
+        "name": "Banana Cream",
+        "description": "Banana Cream Description",
+        "productType": "cheesecake",
+        "slug": "banana-cream-cheesecake",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Banana Cream cheesecake description",
+        "awards": [],
+        "tags": ["cheesecake", "banana", "cream", "light"],
+        "images": []
+      },
+      {
+        "name": "Black Forest",
+        "description": "Black Forest Description",
+        "productType": "cheesecake",
+        "slug": "black-forest-cheesecake",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Black Forest cheesecake description",
+        "awards": [],
+        "tags": ["cheesecake", "black", "forest", "dark"],
+        "images": []
+      },
+      {
+        "name": "Double Chocolate Chip",
+        "description": "Double Chocolate Chip Description",
+        "productType": "cheesecake",
+        "slug": "double-chocolate-chip-cheesecake",
+        "pricing": {
+          "price": 35.00
+        },
+        "dimensions": {
+          "weight": 0.0,
+          "height": 0.0,
+          "width": 0.0,
+          "depth": 0.0
+        },
+        "isCustom": false,
+        "ingredients": "Double Chocolate Chip cheesecake description",
+        "awards": [],
+        "tags": ["cheesecake", "double", "chocolate", "ship", "dark"],
+        "images": []
+      }
+    ]
   }
 ]

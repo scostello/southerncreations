@@ -15,7 +15,7 @@ define([
                     $element.on('click', function (e) {
                         e.preventDefault();
 
-                        var classname = attrs.toggleState;
+                        var classname = attrs.scToggleState;
 
                         if (classname) {
                             if ($body.hasClass(classname)) {

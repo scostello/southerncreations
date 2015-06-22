@@ -3,10 +3,9 @@ define(function () {
 
     return {
         name: 'ProductsController',
-        fn: ['$state', 'menu', 'UserService', function ($state, menu, UserService) {
+        fn: ['products', function (products) {
             var vm = this;
-            vm.products = menu.products;
-            vm.addItemToCart = UserService.addItemToCart;
+            vm.products = products;
         }]
     };
 });

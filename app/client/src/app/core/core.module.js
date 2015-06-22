@@ -1,5 +1,6 @@
 define([
     'angular',
+    'lodash',
     './services/core.services',
     './controllers/core.controllers',
     './directives/core.directives',
@@ -9,7 +10,7 @@ define([
     'angularJwt',
     'angularBootstrap',
     'angularXeditable'
-], function (angular, coreServices, coreControllers, coreDirectives, coreFilters) {
+], function (angular, _, coreServices, coreControllers, coreDirectives, coreFilters) {
     'use strict';
 
     var moduleName = 'southerncreations.core',
@@ -55,8 +56,15 @@ define([
                     controller: 'AppController',
                     controllerAs: 'appCtrl',
                     resolve: {
-                        settings: ['SettingsService', function (SettingsService) {
-                            return SettingsService.getSettings();
+                        root: ['WebApi', function (WebApi) {
+                            return WebApi.app.getRoot();
+                        }],
+                        settings: ['root', function (root) {
+                            return root.payload.settings;
+                        }],
+                        shoppingCart: ['root', 'settings', 'ShoppingCartService', function (root, settings, ShoppingCartService) {
+                            ShoppingCartService.setOrderCookieKeys(settings.cookieKeys);
+                            return ShoppingCartService.restore(root);
                         }]
                     }
                 })
@@ -82,9 +90,12 @@ define([
                     url: '/menu',
                     views: {
                         'content@app': {
-                            templateUrl: '/static/app/components/products/views/products.html',
+                            templateUrl: '/static/app/components/products/views/index.html',
                             controller: 'ProductsController',
                             controllerAs: 'prdCtrl'
+                        },
+                        'product@app.menu': {
+                            templateUrl: '/static/app/components/products/views/menu-description.html'
                         }
                     },
                     resolve: {
@@ -94,29 +105,50 @@ define([
                                 files: ['app/components/products/js/products-module']
                             });
                         }],
-                        menu: ['$q', 'ProductsService', function ($q, ProductsService) {
-                            var dfd = $q.defer();
-
-                            $q.all({
-                                    categories: ProductsService.getCategories(),
-                                    products: ProductsService.getProducts()
-                                })
-                                .then(function (menu) {
-                                    dfd.resolve(menu);
-                                });
-
-                            return dfd.promise;
+                        products: ['root', 'WebApi', function (root, WebApi) {
+                            return WebApi.products.getAll(root.links);
                         }]
                     }
                 })
-                .state('app.menu.details', {
-                    url: '/:slug',
+                .state('app.menu.product', {
+                    url: '/:productSlug',
+                    views: {
+                        'product@app.menu': {
+                            templateUrl: '/static/app/components/products/views/product.html',
+                            controller: 'ProductVariantsController',
+                            controllerAs: 'prdVarCtrl'
+                        }
+                    },
+                    resolve: {
+                        currentProduct: ['$stateParams', 'products', function ($stateParams, products) {
+                            return _(products).pluck('payload').find({slug: $stateParams.productSlug}).valueOf();
+                        }]
+                    }
+                })
+                .state('app.menu.product.details', {
+                    url: '/:variantSlug',
                     views: {
                         'content@app': {
                             templateUrl: '/static/app/components/products/views/product-detail.html',
                             controller: 'ProductDetailController',
                             controllerAs: 'prdDetailCtrl'
                         }
+                    },
+                    resolve: {
+                        productDetails: ['$stateParams', '$q', 'currentProduct', 'ProductsService', function ($stateParams, $q, currentProduct, ProductsService) {
+                            var dfd = $q.defer(),
+                                currentVariant = _.find(currentProduct.variants, {slug: $stateParams.variantSlug});
+
+                            ProductsService.getVariantBySku(currentVariant.sku)
+                                .success(function (variant) {
+                                    dfd.resolve(variant);
+                                })
+                                .error(function (err) {
+                                    dfd.reject(err);
+                                });
+
+                            return dfd.promise;
+                        }]
                     }
                 })
                 .state('app.catering', {
@@ -129,7 +161,7 @@ define([
                         }
                     },
                     resolve: {
-                        aboutModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        cateringModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.catering',
                                 files: ['app/components/catering/js/catering-module']
