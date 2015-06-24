@@ -1,8 +1,6 @@
 'use strict';
 
-var _ = require('lodash'),
-    Q = require('q'),
-    mongoose = require('mongoose'),
+var Q = require('q'),
     products = require('./fixtures/products'),
     Product = require('../api/products/models/product.js');
 

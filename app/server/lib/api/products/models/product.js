@@ -45,6 +45,45 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    master: {
+        sku: {
+            type: String
+        },
+        name: {
+            type: String,
+            trim: true
+        },
+        description: String,
+        productType: String,
+        slug: {
+            type: String,
+            trim: true
+        },
+        pricing: {
+            price: {
+                type: Number,
+                default: 0
+            }
+        },
+        dimensions: {
+            weight: Number,
+            height: Number,
+            width: Number,
+            depth: Number
+        },
+        createdOn: {
+            type: Date,
+            default: Date.now()
+        },
+        isCustom: {
+            type: Boolean,
+            default: false
+        },
+        ingredients: String,
+        awards: Array,
+        tags: Array,
+        images: [{type: Schema.ObjectId, ref: 'Image'}]
+    },
     variants: [
         {
             sku: {

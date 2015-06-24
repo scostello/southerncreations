@@ -24,6 +24,9 @@ module.exports = function (router) {
         .put(utils.userFromToken, requiresAdmin, products.update)
         .delete(utils.userFromToken, requiresAdmin, products.destroy);
 
+    router.route('/products/:productId/variants')
+        .get(products.variants);
+
     // Finish with setting up the productId param
     router.param('productId', products.product);
 };

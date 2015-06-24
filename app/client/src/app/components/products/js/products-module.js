@@ -1,10 +1,10 @@
 define([
     'angular',
     './controllers/products-controller',
-    './controllers/productVariants-controller',
     './controllers/productDetail-controller',
-    './directives/menuProducts-directive'
-], function (angular, productsController, productVariantsController, productDetailController, menuProductsDirective) {
+    './directives/menuProducts-directive',
+    './directives/productVariants-directive'
+], function (angular, productsController, productDetailController, menuProductsDirective, productVariantsDirective) {
     'use strict';
 
     var moduleName = 'southerncreations.products',
@@ -12,9 +12,9 @@ define([
 
     module = angular.module(moduleName, [])
         .controller(productsController.name, productsController.fn)
-        .controller(productVariantsController.name, productVariantsController.fn)
         .controller(productDetailController.name, productDetailController.fn)
-        .directive(menuProductsDirective.name, menuProductsDirective.fn);
+        .directive(menuProductsDirective.name, menuProductsDirective.fn)
+        .directive(productVariantsDirective.name, productVariantsDirective.fn);
 
     return {
         name: moduleName,

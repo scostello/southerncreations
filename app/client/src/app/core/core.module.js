@@ -114,41 +114,16 @@ define([
                     url: '/:productSlug',
                     views: {
                         'product@app.menu': {
-                            templateUrl: '/static/app/components/products/views/product.html',
-                            controller: 'ProductVariantsController',
-                            controllerAs: 'prdVarCtrl'
+                            templateUrl: '/static/app/components/products/views/product.html'
                         }
-                    },
-                    resolve: {
-                        currentProduct: ['$stateParams', 'products', function ($stateParams, products) {
-                            return _(products).pluck('payload').find({slug: $stateParams.productSlug}).valueOf();
-                        }]
                     }
                 })
-                .state('app.menu.product.details', {
+                .state('app.menu.product.variant', {
                     url: '/:variantSlug',
                     views: {
-                        'content@app': {
-                            templateUrl: '/static/app/components/products/views/product-detail.html',
-                            controller: 'ProductDetailController',
-                            controllerAs: 'prdDetailCtrl'
+                        'product@app.menu': {
+                            templateUrl: '/static/app/components/products/views/product-variant.html'
                         }
-                    },
-                    resolve: {
-                        productDetails: ['$stateParams', '$q', 'currentProduct', 'ProductsService', function ($stateParams, $q, currentProduct, ProductsService) {
-                            var dfd = $q.defer(),
-                                currentVariant = _.find(currentProduct.variants, {slug: $stateParams.variantSlug});
-
-                            ProductsService.getVariantBySku(currentVariant.sku)
-                                .success(function (variant) {
-                                    dfd.resolve(variant);
-                                })
-                                .error(function (err) {
-                                    dfd.reject(err);
-                                });
-
-                            return dfd.promise;
-                        }]
                     }
                 })
                 .state('app.catering', {
@@ -157,7 +132,7 @@ define([
                         'content@app': {
                             templateUrl: '/static/app/components/catering/views/catering.html',
                             controller: 'CateringController',
-                            controllerAs: 'catering'
+                            controllerAs: 'cateringCtrl'
                         }
                     },
                     resolve: {

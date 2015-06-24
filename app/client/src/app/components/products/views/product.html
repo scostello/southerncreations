@@ -1,26 +1,5 @@
 <section class="product-wrapper">
-    <h2>{{prdVarCtrl.currentProduct.name}}</h2>
+    <h2>{{prdCtrl.currentProduct.payload.name}}</h2>
     <hr/>
-    <div class="row">
-        <ul class="products list-inline">
-            <li ng-repeat="variant in prdVarCtrl.currentProduct.variants" class="product col-xs-12 col-sm-4 col-lg-3">
-                <div class="panel panel-default panel-products">
-                    <div class="panel-heading">
-                        <h5>{{variant.name}}</h5>
-                    </div>
-                    <div class="panel-body">
-                        <a href="#" ui-sref=".details({ variantSlug: variant.slug })">
-                            <img class="product-image" style="width: 100%" src="http://placehold.it/200x200" alt="placeholder"/>
-                        </a>
-                        <div class="product-info">
-                            <div class="product-price">{{variant.pricing.price | currency}}</div>
-                            <a href="#" ui-sref="">
-                                <button class="btn btn-info btn-full-width">More Info</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <sc-product-variants variants="prdCtrl.variants" current-variant="prdCtrl.currentVariant"></sc-product-variants>
 </section>

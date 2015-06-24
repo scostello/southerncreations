@@ -6,17 +6,12 @@ function (_) {
 
     return {
         name: 'ProductDetailController',
-        fn: ['$stateParams', 'productDetails', ProductDetailController]
+        fn: ['$stateParams', ProductDetailController]
     };
 
-    function ProductDetailController($stateParams, productDetails) {
+    function ProductDetailController($stateParams) {
         var vm = this;
-        vm.product = getProduct();
 
-        console.log(productDetails);
-
-        function getProduct() {
-            return {};
-        }
+        console.log($stateParams);
     }
 });

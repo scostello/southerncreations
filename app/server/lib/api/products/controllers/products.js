@@ -86,6 +86,29 @@ exports.show = function(req, res) {
     res.status(200).json(req.product);
 };
 
+exports.variants = function (req, res) {
+    var productId = req.params.productId,
+        fields = {
+            'variants': 1
+        };
+
+    Product.findOne({_id: productId}, fields)
+        .sort('variants.name')
+        .exec(function (err, product) {
+            var hmList = _.map(product.variants, function (variant) {
+                return hypermedia.variantHypermedia(productId, variant);
+            });
+
+            if (err) {
+                return res.status(500).json({
+                    error: 'Cannot list the variants.'
+                });
+            }
+
+            res.status(200).json(hmList);
+        });
+};
+
 exports.variantByIdentifier = function () {
 
 };
@@ -97,11 +120,7 @@ exports.all = function(req, res) {
     var fields = {
         'name': 1,
         'slug': 1,
-        'pricing.price': 1,
-        'variants.name': 1,
-        'variants.slug': 1,
-        'variants.sku': 1,
-        'variants.pricing.price': 1
+        'pricing.price': 1
     };
 
     Product.find({}, fields)

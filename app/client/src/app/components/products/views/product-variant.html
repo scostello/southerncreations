@@ -2,16 +2,15 @@
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{prdDetailCtrl.product.name}}</div>
+                <div class="panel-heading">{{prdCtrl.currentVariant.payload.name}}</div>
                 <div class="panel-body">
                     <div class="col-xs-12 col-md-6">
                         <img style="width: 100%" src="http://placehold.it/500x500" alt=""/>
-
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <ul class="list-inline">
                             <li class="pull-right">
-                                <button class="btn btn-primary" ng-click="appCtrl.shoppingCart.addItem(prdDetailCtrl.product.slug, prdDetailCtrl.product.name, prdDetailCtrl.product.pricing, 1)"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+
                             </li>
                         </ul>
                     </div>

@@ -62,22 +62,23 @@ define([
                 create: postMaker('products'),
                 update: putMaker('self'),
                 delete: deleteMaker('self'),
-                variants: {
-                    getVariant: getMaker('self'),
-                    getVariants: getMaker('variants'),
-                    createVariant: postMaker('variants'),
-                    putVariant: putMaker('self'),
-                    deleteVariant: deleteMaker('self')
-                }
+                getVariants: getMaker('variants')
+            },
+            variants: {
+                getVariant: getMaker('self'),
+                getVariants: getMaker('variants'),
+                createVariant: postMaker('variants'),
+                putVariant: putMaker('self'),
+                deleteVariant: deleteMaker('self')
             },
             orders: {
                 getCurrent: getMaker('current_order'),
                 getOne: getMaker('self'),
                 getAll: getMaker('orders'),
                 create: postMaker('orders'),
-                delete: deleteMaker('self'),
-                lineitems: {}
-            }
+                delete: deleteMaker('self')
+            },
+            lineitems: {}
         };
     }
 });

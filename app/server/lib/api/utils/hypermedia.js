@@ -72,8 +72,8 @@ exports.userHypermedis = function (user) {
 
 exports.productHypermedia = function (product) {
     var hypermedia = {},
-        productBase = path.join('', 'products', product._id.toString()),
-        productBaseSlug = path.join('', 'products', product.slug);
+        productBase = path.join('/', 'products', product._id.toString()),
+        productBaseSlug = path.join('/', 'products', product.slug);
 
     hypermedia.links = [
         {
@@ -100,9 +100,9 @@ exports.productHypermedia = function (product) {
 
 exports.variantHypermedia = function (productId, variant) {
     var hypermedia = {},
-        variantBase = path.join('', 'products', productId, 'variants', variant._id),
-        variantBaseSlug = path.join('', 'products', productId, 'variants', variant.slug),
-        variantBaseSku = path.join('', 'products', productId, 'variants', variant.sku);
+        variantBase = path.join('', 'products', productId.toString(), 'variants', variant._id.toString()),
+        variantBaseSlug = path.join('', 'products', productId.toString(), 'variants', variant.slug.toString()),
+        variantBaseSku = path.join('', 'products', productId.toString(), 'variants', variant.sku.toString());
 
     hypermedia.links = [
         {

@@ -33,6 +33,10 @@ var OrderSchema = new Schema({
         type: String,
         default: 'cart'
     },
+    checkoutSteps: {
+        type: Array,
+        default: ['address', 'delivery', 'payment', 'confirm', 'complete']
+    },
     userId: {
         type: Schema.ObjectId,
         ref: 'User'
@@ -52,6 +56,10 @@ var OrderSchema = new Schema({
         default: Date.now()
     },
     completedAt: {
+        type: Date,
+        default: null
+    },
+    deletedOn: {
         type: Date,
         default: null
     },
