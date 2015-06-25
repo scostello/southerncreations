@@ -10,6 +10,7 @@ var mongoose = require('mongoose'),
 var validateEmail = [
     validate({
         validator: 'isEmail',
+        passIfEmpty: true,
         message: 'Invalid email address format'
     })
 ];
@@ -87,7 +88,17 @@ var OrderSchema = new Schema({
         type: String
     },
     lineItems: {
-        type: [{ type: Schema.ObjectId, ref: 'Product' }]
+        type: [
+            {
+                quantity: {
+                    type: Number
+                },
+                variant: {
+                    type: Schema.ObjectId,
+                    ref: 'Product.variants'
+                }
+            }
+        ]
     }
 });
 

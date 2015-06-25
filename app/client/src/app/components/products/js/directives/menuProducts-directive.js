@@ -12,7 +12,7 @@ define(function () {
                     currentProduct: '='
                 },
                 replace: true,
-                templateUrl: '/static/app/components/products/views/menu-categories.html',
+                templateUrl: '/static/app/components/products/js/directives/templates/menu-products.html',
                 controller: ['$state', function ($state) {
                     var self = this;
                     self.showProduct = function (product) {

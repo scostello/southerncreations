@@ -56,8 +56,16 @@ define([
                     controller: 'AppController',
                     controllerAs: 'appCtrl',
                     resolve: {
-                        root: ['WebApi', function (WebApi) {
-                            return WebApi.app.getRoot();
+                        root: ['$q', 'WebApi', function ($q, WebApi) {
+                            var dfd = $q.defer();
+
+                            WebApi.app.getRoot()
+                                .then(function (root) {
+                                    WebApi.root = root;
+                                    dfd.resolve(root);
+                                });
+
+                            return dfd.promise;
                         }],
                         settings: ['root', function (root) {
                             return root.payload.settings;
@@ -122,7 +130,9 @@ define([
                     url: '/:variantSlug',
                     views: {
                         'product@app.menu': {
-                            templateUrl: '/static/app/components/products/views/product-variant.html'
+                            templateUrl: '/static/app/components/products/views/product-variant.html',
+                            controller: 'ProductsController',
+                            controllerAs: 'prdCtrl'
                         }
                     }
                 })

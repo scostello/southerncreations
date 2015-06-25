@@ -52,24 +52,6 @@ define([
             return dfd.promise;
         };
 
-        self.createOrder = function (links, data) {
-            var dfd = $q.defer();
-
-            WebApi.orders.createOrder(links, {data: data})
-                .then(_successCb, _errorCb);
-
-            function _successCb(order) {
-                self.setCart(order);
-                dfd.resolve(self);
-            }
-
-            function _errorCb(err) {
-                dfd.reject(err);
-            }
-
-            return dfd.promise;
-        };
-
         self.setCart = function (cart) {
             if (cart) {
                 this.$cart = cart;
@@ -137,31 +119,73 @@ define([
             return +parseFloat(this.getSubTotal() + this.getTax() + this.getShipping).toFixed(2);
         };
 
-        self.addItem = function (id, name, price, quantity, data) {
-            var currentItem = this.getItemById(id),
-                orderNumber = $cookies.get('sc_currentOrderNumber'),
-                newItem;
+        self.getOrder = function () {
+            var dfd = $q.defer(),
+                orderNumber = $cookies.get('sc_currentOrderNumber');
 
             if (!orderNumber) {
-                this.createOrder()
-                    .then(function (order) {
-
-                    }, function (err) {
-
-                    })
+                WebApi.orders.create(WebApi.root.links, {data: {}})
+                    .then(_successCb, _errorCb);
             } else {
-                console.log('already created an order');
+                WebApi.orders.getCurrent(WebApi.root.links)
+                    .then(_successCb, _errorCb);
             }
 
-            if (currentItem) {
+            function _successCb(order) {
+                dfd.resolve(self.setCart(order));
+            }
+
+            function _errorCb(err) {
+                dfd.reject(err);
+            }
+
+            return dfd.promise;
+        };
+
+        self.addItem = function (item, quantity) {
+            var dfd = $q.defer();
+
+            self.getOrder()
+                .then(_successOrderCb)
+                .catch(_errorOrderCb)
+                .then(_successLineItemCb)
+                .catch(_errorLineItemCb);
+
+            // Add the line item upon successful order GET response
+            function _successOrderCb(order) {
+                return WebApi.orders.addLineItem(order.links, {
+                    data: {
+                        lineitem: {
+                            variantId: item.payload._id,
+                            quantity: quantity || 1
+                        }
+                    }
+                });
+            }
+
+            // Return the err
+            function _errorOrderCb(err) {
+                // TODO: Handle GET order error
+                return $q.reject(err);
+            }
+
+            function _successLineItemCb(lineItem) {
+                dfd.resolve(lineItem);
+            }
+
+            function _errorLineItemCb(err) {
+                // TODO: Handle POST lineitem error
+                dfd.reject(err);
+            }
+
+            /*if (currentItem) {
                 currentItem.setQuantity(quantity, true);
             } else {
                 newItem = new CartItem(id, name, price, quantity, data);
                 this.getCart().items.push(newItem);
-                //$rootScope.$broadcast(EVENTS.CART_ITEM_ADDED, newItem);
-            }
+            }*/
 
-            //$rootScope.$broadcast(EVENTS.CART_UPDATED, {});
+            return dfd.promise;
         };
 
         self.removeItemById = function (id) {

@@ -12,9 +12,10 @@ define(function () {
                     currentVariant: '='
                 },
                 replace: true,
-                templateUrl: '/static/app/components/products/views/product-variants.html',
-                controller: ['$state', function ($state) {
+                templateUrl: '/static/app/components/products/js/directives/templates/product-variants.html',
+                controller: ['$scope', '$state', function ($scope, $state) {
                     var self = this;
+
                     self.showVariant = function (variant) {
                         self.currentVariant = variant;
                         $state.go('app.menu.product.variant', {variantSlug: variant.payload.slug});

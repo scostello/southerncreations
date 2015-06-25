@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var Order = require('../models/order'),
+    hypermedia = require('../../utils/hypermedia.js'),
     hat = require('hat'),
     _ = require('lodash');
 
@@ -60,11 +61,10 @@ exports.create = function (req, res) {
 
     order.save(function (err) {
         if (err) {
-            return res.status(500).json({
-                error: 'Cannot save the order'
-            });
+            return res.status(500).json(err);
         }
-        res.status(201).json(order);
+
+        res.status(201).json(hypermedia.orderHypermedia(order));
     });
 };
 
@@ -72,9 +72,17 @@ exports.create = function (req, res) {
  * Update an order
  */
 exports.update = function (req, res) {
-    var order = req.order;
+    var order = req.order,
+        lineItems = _.map(req.body.lineitems, function (lineitem) {
+            return {
+                variant: lineitem.variantId,
+                quantity: lineitem.quantity
+            };
+        });
 
-    order = _.extend(order, req.body);
+    order = _.extend(order, {
+        lineItems: lineItems
+    });
 
     order.save(function (err) {
         if (err) {
@@ -82,8 +90,7 @@ exports.update = function (req, res) {
                 error: 'Cannot update the order'
             });
         }
-        res.json(order);
-
+        res.status(200).json(order);
     });
 };
 
@@ -108,7 +115,13 @@ exports.destroy = function (req, res) {
  * Show a order
  */
 exports.show = function (req, res) {
-    res.status(200).json(req.order);
+    var orderToken = req.query && req.query.order_token;
+
+    if (!orderToken || orderToken !== req.order.token) {
+        res.status(403).json({error: 'Unauthorized access to requested order.'})
+    }
+
+    res.status(200).json(hypermedia.orderHypermedia(req.order));
 };
 
 exports.showLineItems = function (req, res, next) {
@@ -126,7 +139,22 @@ exports.showLineItems = function (req, res, next) {
 };
 
 exports.addLineItem = function (req, res) {
-    var order = req.order;
+    var order = req.order,
+        lineItem = req.body.lineitem;
+
+    order.lineItems.push(lineItem);
+    order.save(function (err, order) {
+        var newestLineItem;
+
+        if (err) {
+            return res.status(500).json({
+                error: 'Cannot add item to order.'
+            });
+        }
+
+        newestLineItem = order.lineItems[order.lineItems.length - 1];
+        res.status(201).json(hypermedia.lineItemHypermedia(order.number, order.populate('lineItems').lineItems.id(newestLineItem._id)));
+    });
 };
 
 exports.updateLineItem = function (req, res) {

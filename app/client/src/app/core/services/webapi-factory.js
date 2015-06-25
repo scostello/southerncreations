@@ -53,6 +53,7 @@ define([
         }
 
         return {
+            root: null,
             app: {
                getRoot: getMaker(null, {override: '/api'})
             },
@@ -74,9 +75,11 @@ define([
             orders: {
                 getCurrent: getMaker('current_order'),
                 getOne: getMaker('self'),
+                update: putMaker('self'),
                 getAll: getMaker('orders'),
                 create: postMaker('orders'),
-                delete: deleteMaker('self')
+                delete: deleteMaker('self'),
+                addLineItem: postMaker('lineitems')
             },
             lineitems: {}
         };

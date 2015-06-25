@@ -12,33 +12,37 @@ define([
             vm.variants = [];
             vm.currentVariant = null;
 
-            $scope.$watch(function () {
-                return vm.currentProduct;
-            }, function (currentProduct) {
-                if (currentProduct) {
-                    WebApi.products.getVariants(currentProduct.links)
-                        .then(_successVariantsCb, _errorVariantsCb);
-                }
-            });
+            init();
 
-            if ($state.params.productSlug) {
-                vm.currentProduct = _.find(products, function (product) {
-                    return product.payload.slug === $state.params.productSlug;
-                });
-            }
-
-            function _successVariantsCb(variants) {
-                vm.variants = variants;
-
-                if ($state.params.variantSlug) {
-                    vm.currentVariant = _.find(variants, function (variant) {
-                        return variant.payload.slug === $state.params.variantSlug;
+            function init() {
+                if ($state.params.productSlug) {
+                    vm.currentProduct = _.find(products, function (product) {
+                        return product.payload.slug === $state.params.productSlug;
                     });
                 }
-            }
 
-            function _errorVariantsCb(err) {
-                vm.error = err.message;
+                $scope.$watch(function () {
+                    return vm.currentProduct;
+                }, function (currentProduct) {
+                    if (currentProduct) {
+                        WebApi.products.getVariants(currentProduct.links)
+                            .then(_successVariantsCb, _errorVariantsCb);
+                    }
+                });
+
+                function _successVariantsCb(variants) {
+                    vm.variants = variants;
+
+                    if ($state.params.variantSlug) {
+                        vm.currentVariant = _.find(variants, function (variant) {
+                            return variant.payload.slug === $state.params.variantSlug;
+                        });
+                    }
+                }
+
+                function _errorVariantsCb(err) {
+                    vm.error = err.message;
+                }
             }
         }]
     };

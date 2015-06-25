@@ -38,7 +38,7 @@ exports.rootHypermedia = function (session, root) {
     if (session.sc_currentOrderNumber && session.sc_currentOrderToken) {
         hypermedia.links.push({
             rel: 'current_order',
-            href: path.join(rootBase, 'orders', session.sc_currentOrderNumber, '?order_token=', session.sc_currentOrderToken),
+            href: path.join(rootBase, 'orders', session.sc_currentOrderNumber, '?order_token=' + session.sc_currentOrderToken),
             contentType: 'application/sc+json'
         });
     }
@@ -46,6 +46,45 @@ exports.rootHypermedia = function (session, root) {
     hypermedia.payload = root;
 
     return hypermedia;
+};
+
+exports.orderHypermedia = function (order) {
+    var hypermedia = {},
+        orderBase = path.join('/', 'orders', order.number);
+
+    hypermedia.links = [
+        {
+            rel: 'self',
+            href: orderBase,
+            contentType: 'application/sc.orders+json'
+        },
+        {
+            rel: 'lineitems',
+            href: path.join(orderBase, 'lineitems'),
+            contentType: 'application/sc.orders+json'
+        }
+    ];
+
+    hypermedia.payload = order;
+
+    return hypermedia
+};
+
+exports.lineItemHypermedia = function (orderNumber, lineItem) {
+    var hypermedia = {},
+        lineItemBase = path.join('/', 'orders', orderNumber, 'lineitems', lineItem._id.toString());
+
+    hypermedia.links = [
+        {
+            rel: 'self',
+            href: lineItemBase,
+            contentType: 'application/sc.lineitems+json'
+        }
+    ];
+
+    hypermedia.payload = lineItem;
+
+    return hypermedia
 };
 
 exports.userHypermedis = function (user) {
