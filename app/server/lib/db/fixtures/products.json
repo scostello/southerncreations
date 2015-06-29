@@ -1,14 +1,16 @@
 [
   {
-    "name": "Cupcakes",
-    "description": "cupcake description",
-    "slug": "cupcakes",
-    "pricing": {
-      "price": 1.75
-    },
-    "meta": {
-      "description": "cupcake meta description",
-      "keyWords": ["cupcakes", "frosted"]
+    "product": {
+      "name": "Cupcakes",
+      "description": "cupcake description",
+      "slug": "cupcakes",
+      "pricing": {
+        "price": 1.75
+      },
+      "meta": {
+        "description": "cupcake meta description",
+        "keyWords": ["cupcakes", "frosted"]
+      }
     },
     "variants": [
       {
@@ -94,15 +96,17 @@
     ]
   },
   {
-    "name": "Mini Cupcakes",
-    "description": "Mini Cupcake description",
-    "slug": "mini-cupcakes",
-    "pricing": {
-      "price": 1.35
-    },
-    "meta": {
-      "description": "mini-cupcake meta description",
-      "keyWords": ["mini", "mini cupcake", "frosted"]
+    "product": {
+      "name": "Mini Cupcakes",
+      "description": "Mini Cupcake description",
+      "slug": "mini-cupcakes",
+      "pricing": {
+        "price": 1.35
+      },
+      "meta": {
+        "description": "mini-cupcake meta description",
+        "keyWords": ["mini", "mini cupcake", "frosted"]
+      }
     },
     "variants": [
       {
@@ -188,15 +192,17 @@
     ]
   },
   {
-    "name": "Cakes",
-    "description": "Cakes description",
-    "slug": "cakes",
-    "pricing": {
-      "price": 30.00
-    },
-    "meta": {
-      "description": "cakes meta description",
-      "keyWords": ["cakes", "frosted"]
+    "product": {
+      "name": "Cakes",
+      "description": "Cakes description",
+      "slug": "cakes",
+      "pricing": {
+        "price": 30.00
+      },
+      "meta": {
+        "description": "cakes meta description",
+        "keyWords": ["cakes", "frosted"]
+      }
     },
     "variants": [
       {
@@ -302,15 +308,17 @@
     ]
   },
   {
-    "name": "Cookies",
-    "description": "Cookies description",
-    "slug": "cookies",
-    "pricing": {
-      "price": 2.00
-    },
-    "meta": {
-      "description": "cookies meta description",
-      "keyWords": ["cookie"]
+    "product": {
+      "name": "Cookies",
+      "description": "Cookies description",
+      "slug": "cookies",
+      "pricing": {
+        "price": 2.00
+      },
+      "meta": {
+        "description": "cookies meta description",
+        "keyWords": ["cookie"]
+      }
     },
     "variants": [
       {
@@ -396,15 +404,17 @@
     ]
   },
   {
-    "name": "Cheesecakes",
-    "description": "Cheesecakes description",
-    "slug": "cheesecakes",
-    "pricing": {
-      "price": 30.00
-    },
-    "meta": {
-      "description": "cheesecakes meta description",
-      "keyWords": ["cheesecakes", "crust"]
+    "product": {
+      "name": "Cheesecakes",
+      "description": "Cheesecakes description",
+      "slug": "cheesecakes",
+      "pricing": {
+        "price": 30.00
+      },
+      "meta": {
+        "description": "cheesecakes meta description",
+        "keyWords": ["cheesecakes", "crust"]
+      }
     },
     "variants": [
       {

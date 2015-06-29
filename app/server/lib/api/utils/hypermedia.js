@@ -72,7 +72,7 @@ exports.orderHypermedia = function (order) {
 
 exports.lineItemHypermedia = function (orderNumber, lineItem) {
     var hypermedia = {},
-        lineItemBase = path.join('/', 'orders', orderNumber, 'lineitems', lineItem._id.toString());
+        lineItemBase = path.join('/', 'orders', orderNumber.toString(), 'lineitems', lineItem._id.toString());
 
     hypermedia.links = [
         {
@@ -140,8 +140,7 @@ exports.productHypermedia = function (product) {
 exports.variantHypermedia = function (productId, variant) {
     var hypermedia = {},
         variantBase = path.join('', 'products', productId.toString(), 'variants', variant._id.toString()),
-        variantBaseSlug = path.join('', 'products', productId.toString(), 'variants', variant.slug.toString()),
-        variantBaseSku = path.join('', 'products', productId.toString(), 'variants', variant.sku.toString());
+        variantBaseSlug = path.join('', 'products', productId.toString(), 'variants', variant.slug.toString());
 
     hypermedia.links = [
         {
@@ -152,11 +151,6 @@ exports.variantHypermedia = function (productId, variant) {
         {
             rel: 'self_slug',
             href: variantBaseSlug,
-            contentType: 'application/sc.product-variants+json'
-        },
-        {
-            rel: 'self_sku',
-            href: variantBaseSku,
             contentType: 'application/sc.product-variants+json'
         }
     ];

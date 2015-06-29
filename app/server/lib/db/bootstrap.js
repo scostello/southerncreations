@@ -1,18 +1,25 @@
 'use strict';
 
 var Q = require('q'),
+    _ = require('lodash'),
     products = require('./fixtures/products'),
+    ProductVariant = require('../api/products/models/productvariant.js'),
     Product = require('../api/products/models/product.js');
 
-Product.find({}).remove().exec()
+ProductVariant.find({}).remove().exec()
     .then(function () {
-        var dfds = [];
-        products.forEach(function (product) {
-            dfds.push(Product.create(product));
-        });
+        return Product.find({}).remove().exec();
+    })
+    .then(function () {
+        _.each(products, function (product) {
 
-        Q.all(dfds)
-            .done(function () {
-                console.log('Finished populating products.');
-            });
+            (function (prd, variants) {
+                ProductVariant.collection.insert(variants, function (err, vs) {
+                    var product = new Product(prd);
+                    product.variants = _(vs.ops).pluck('_id').valueOf();
+                    product.save();
+                });
+            } (product.product, product.variants));
+
+        });
     });

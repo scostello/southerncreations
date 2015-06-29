@@ -1,21 +1,21 @@
-<div class="screen screen-product-detail">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{prdCtrl.currentVariant.payload.name}}</div>
-                <div class="panel-body">
-                    <div class="col-xs-12 col-md-6">
-                        <img style="width: 100%" src="http://placehold.it/500x500" alt=""/>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <ul class="list-inline">
-                            <li class="pull-right">
-                                <button class="btn btn-info" ng-click="appCtrl.shoppingCart.addItem(prdCtrl.currentVariant)">Add to Cart <i class="fa fa-shopping-cart"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="variant-detail-wrapper">
+    <div class="col-xs-12 col-md-8 col-lg-6">
+        <img style="width: 100%" src="http://placehold.it/500x500" alt=""/>
     </div>
-</div>
+    <div class="col-xs-12 col-md-4 col-lg-6">
+        <section class="variant-details">
+            <h1 class="variant-name">{{prdCtrl.currentVariant.payload.name}}</h1>
+            <hr/>
+            <h2 class="variant-price">{{prdCtrl.currentVariant.payload.pricing.price | currency}}</h2>
+            <h3 class="variant-description">{{prdCtrl.currentVariant.payload.description}}</h3>
+        </section>
+        <form name="">
+            <div class="form-group">
+                <select id="quantity" class="form-control" name="">
+                    <option value="{{q}}" ng-repeat="q in prdCtrl.variantFormOpts.quantity">{{prdCtrl.currentVariant.payload.name + ' (' + q + 'ct)'}}</option>
+                </select>
+            </div>
+            <button class="btn btn-full-width btn-info" ng-click="appCtrl.order.addLineItem(prdCtrl.currentVariant)">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+        </form>
+    </div>
+</section>

@@ -6,11 +6,11 @@ function (_) {
 
     return {
         name: 'AppController',
-        fn: ['$scope', '$state', 'settings', 'shoppingCart', 'UserService', function ($scope, $state, settings, shoppingCart, UserService) {
+        fn: ['$scope', '$state', 'settings', 'order', 'UserService', 'OrderService', function ($scope, $state, settings, order, UserService, OrderService) {
             var vm = this;
             vm.menuitems = settings.menuitems;
             vm.isLoggedIn = false;
-            vm.shoppingCart = shoppingCart;
+            vm.order = order;
             vm.logout = logout;
 
             $scope.$watch(UserService.isLoggedIn, function (value) {

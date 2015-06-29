@@ -2,14 +2,14 @@ define([
     'angular',
     './settings-service',
     './products-service',
-    './cart-service',
-    './cartItem-factory',
+    './order-service',
+    './lineItem-factory',
     './pubsub-service',
     './user-service',
     './webapi-factory',
     'angularStorage',
     'angularCookies'
-], function (angular, settingsService, productsService, cartService, cartItemFactory, pubsubService, userService, webApiFactory) {
+], function (angular, settingsService, productsService, orderService, lineItemFactory, pubsubService, userService, webApiFactory) {
     'use strict';
 
     var moduleName = 'southerncreations.core.services',
@@ -34,8 +34,8 @@ define([
             'CART_ITEM_ADDED': 'cart:itemAdded',
             'CART_ITEM_REMOVED': 'cart:itemRemoved'
         })
-        .service(cartService.name, cartService.fn)
-        .factory(cartItemFactory.name, cartItemFactory.fn)
+        .service(orderService.name, orderService.fn)
+        .factory(lineItemFactory.name, lineItemFactory.fn)
         .factory(webApiFactory.name, webApiFactory.fn)
         .service(userService.name, userService.fn)
         .service(settingsService.name, settingsService.fn)

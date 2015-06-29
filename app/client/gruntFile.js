@@ -65,7 +65,8 @@ module.exports = function (grunt) {
                     imports: {
                         reference: [
                             'themes/theme.less',
-                            'vendor/elements.less'
+                            'vendor/elements.less',
+                            'app/fonts.less'
                         ]
                     }
                 },

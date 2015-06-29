@@ -3,23 +3,11 @@ define(function () {
 
     return {
         name: 'CartController',
-        fn: [CartController]
+        fn: ['lineItems', CartController]
     };
 
-    function CartController() {
+    function CartController(lineItems) {
         var vm = this;
-
-        vm.updateItem = _updateProduct;
-        vm.removeItem = _removeItem;
-
-        function _updateProduct(product) {
-            vm.shoppingCart.updateItem(product);
-            vm.cartTotal = vm.shoppingCart.getCartTotal();
-        }
-
-        function _removeItem(product) {
-            vm.shoppingCart.removeItem(product);
-            vm.cartTotal = vm.shoppingCart.getCartTotal();
-        }
+        vm.lineItems = lineItems;
     }
 });

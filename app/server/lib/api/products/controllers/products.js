@@ -93,6 +93,7 @@ exports.variants = function (req, res) {
         };
 
     Product.findOne({_id: productId}, fields)
+        .populate('variants')
         .sort('variants.name')
         .exec(function (err, product) {
             var hmList = _.map(product.variants, function (variant) {

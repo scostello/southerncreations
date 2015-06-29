@@ -16,7 +16,7 @@ var LineItemSchema = new Schema({
     },
     variant: {
         type: Schema.ObjectId,
-        ref: 'Product.variants'
+        ref: 'ProductVariant'
     }
 });
 

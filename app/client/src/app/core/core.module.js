@@ -70,9 +70,9 @@ define([
                         settings: ['root', function (root) {
                             return root.payload.settings;
                         }],
-                        shoppingCart: ['root', 'settings', 'ShoppingCartService', function (root, settings, ShoppingCartService) {
-                            ShoppingCartService.setOrderCookieKeys(settings.cookieKeys);
-                            return ShoppingCartService.restore(root);
+                        order: ['root', 'settings', 'OrderService', function (root, settings, OrderService) {
+                            OrderService.setOrderCookieKeys(settings.cookieKeys);
+                            return OrderService.restore(root);
                         }]
                     }
                 })
@@ -203,6 +203,9 @@ define([
                                 name: 'southerncreations.cart',
                                 files: ['app/components/cart/js/cart-module']
                             });
+                        }],
+                        lineItems: ['order', function (order) {
+                            return order.getLineItems();
                         }]
                     }
                 })

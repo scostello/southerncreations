@@ -69,7 +69,7 @@ define([
                 getVariant: getMaker('self'),
                 getVariants: getMaker('variants'),
                 createVariant: postMaker('variants'),
-                putVariant: putMaker('self'),
+                update: putMaker('self'),
                 deleteVariant: deleteMaker('self')
             },
             orders: {
@@ -79,9 +79,12 @@ define([
                 getAll: getMaker('orders'),
                 create: postMaker('orders'),
                 delete: deleteMaker('self'),
-                addLineItem: postMaker('lineitems')
+                addLineItem: postMaker('lineitems'),
+                getLineItems: getMaker('lineitems')
             },
-            lineitems: {}
+            lineitems: {
+                update: putMaker('self')
+            }
         };
     }
 });

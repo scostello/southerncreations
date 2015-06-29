@@ -45,11 +45,7 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    master: {
-        sku: {
-            type: String
-        },
-        name: {
+    master: {name: {
             type: String,
             trim: true
         },
@@ -84,63 +80,12 @@ var ProductSchema = new Schema({
         tags: Array,
         images: [{type: Schema.ObjectId, ref: 'Image'}]
     },
-    variants: [
-        {
-            sku: {
-                type: String
-            },
-            name: {
-                type: String,
-                trim: true
-            },
-            description: String,
-            productType: String,
-            slug: {
-                type: String,
-                trim: true
-            },
-            pricing: {
-                price: {
-                    type: Number,
-                    default: 0
-                }
-            },
-            dimensions: {
-                weight: Number,
-                height: Number,
-                width: Number,
-                depth: Number
-            },
-            createdOn: {
-                type: Date,
-                default: Date.now()
-            },
-            isCustom: {
-                type: Boolean,
-                default: false
-            },
-            ingredients: String,
-            awards: Array,
-            tags: Array,
-            images: [{type: Schema.ObjectId, ref: 'Image'}]
-        }
-    ]
+    variants: [{type: Schema.ObjectId, ref: 'ProductVariant'}]
 });
 
 ProductSchema.statics.load = function(id, cb) {
     this.findOne({ _id: id })
         .exec(cb);
 };
-
-ProductSchema.pre('save', function (next) {
-    var product = this;
-
-    _.each(product.variants, function (variant) {
-        var skuPrefix = variant.name.match(/\b(\w)/g).join('').toUpperCase();
-        variant.sku = skuPrefix + hat(32);
-    });
-
-    next();
-});
 
 module.exports = mongoose.model('Product', ProductSchema);

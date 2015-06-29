@@ -87,19 +87,7 @@ var OrderSchema = new Schema({
     token: {
         type: String
     },
-    lineItems: {
-        type: [
-            {
-                quantity: {
-                    type: Number
-                },
-                variant: {
-                    type: Schema.ObjectId,
-                    ref: 'Product.variants'
-                }
-            }
-        ]
-    }
+    lineItems: [{type: Schema.ObjectId, ref: 'LineItem'}]
 });
 
 OrderSchema.statics.load = function(id, cb) {
@@ -108,7 +96,8 @@ OrderSchema.statics.load = function(id, cb) {
 };
 
 OrderSchema.statics.loadByNumber = function(number, cb) {
-    this.findOne({ number: number })
+    this.findOne({number: number})
+        .populate('lineItems')
         .exec(cb);
 };
 

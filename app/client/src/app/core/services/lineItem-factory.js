@@ -3,24 +3,27 @@ define([
 ], function (_) {
     'use strict';
 
-    CartItemFactory.$inject = ['$rootScope', '$log'];
-    function CartItemFactory($rootScope, $log) {
+    LineItemFactory.$inject = ['$rootScope', '$log'];
+    function LineItemFactory($rootScope, $log) {
 
-        var CartItem = function (id, name, price, quantity, data) {
+        var LineItem = function (lineItem) {
             var self = this;
 
-            if (!(self instanceof CartItem)) {
-                return new CartItem(id, name, price, quantity, data);
+            if (!(self instanceof LineItem)) {
+                return new LineItem(lineItem);
             }
 
-            self.setId(id);
-            self.setName(name);
-            self.setPrice(price);
-            self.setQuantity(quantity);
-            self.setData(data);
+            self.setLinks(lineItem.links);
+            self.setPayload(lineItem.payload);
         };
 
-        _.assign(CartItem.prototype, {
+        _.assign(LineItem.prototype, {
+            setLinks: function (links) {
+                this._links = links;
+            },
+            setPayload: function (payload) {
+                this._payload = payload;
+            },
             setId: function (id) {
                 if (id) {
                     this._id = id;
@@ -98,12 +101,12 @@ define([
             }
         });
 
-        return CartItem;
+        return LineItem;
     }
 
     return {
-        name: 'CartItem',
-        fn: CartItemFactory
+        name: 'LineItem',
+        fn: LineItemFactory
     };
 
 });

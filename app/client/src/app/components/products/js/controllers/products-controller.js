@@ -11,6 +11,9 @@ define([
             vm.currentProduct = null;
             vm.variants = [];
             vm.currentVariant = null;
+            vm.variantFormOpts = {
+                quantity: _.range(6, 49, 6)
+            };
 
             init();
 

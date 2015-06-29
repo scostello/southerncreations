@@ -16,24 +16,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="cartItem in cartCtrl.shoppingCart.items">
+                            <tr ng-repeat="lineItem in cartCtrl.lineItems">
                                 <td>
                                     <img class="thumbnail" src="http://placehold.it/100x100" alt="placeholder"/>
-                                    <span class="product-name">{{cartItem.name}}</span>
+                                    <span class="product-name">{{lineItem.payload.variant.name}}</span>
                                 </td>
-                                <td>{{cartItem.pricing | currency}}</td>
+                                <td>{{lineItem.payload.variant.pricing.price | currency}}</td>
                                 <td>
-                                    <input class="form-control form-quantity" type="number" ng-model="cartItem.quantity" ng-change="cartCtrl.updateItem(cartItem)" size="4"/>
+                                    <input class="form-control form-quantity" type="number" ng-model="lineItem.payload.quantity" ng-change="appCtrl.order.updateItem(lineItem)" size="4"/>
                                 </td>
-                                <td>{{cartItem.pricing * cartItem.quantity | currency}}</td>
+                                <td>{{lineItem.payload.variant.pricing.price * lineItem.payload.quantity | currency}}</td>
                                 <td>
-                                    <button class="btn btn-blue" ng-click="cartCtrl.removeItem(cartItem)">Remove</button>
+                                    <button class="btn btn-blue" ng-click="appCtrl.order.removeItem(lineItem)">Remove</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="col-xs-12">
-                        <h3 class="item-total text-right"><span>Total: {{cartCtrl.cartTotal | currency}}</span></h3>
+                        <h3 class="item-total text-right"><span>Total:</span></h3>
                     </div>
                     <div class="col-xs-12">
                         <ul class="list-inline pull-right">

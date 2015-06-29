@@ -25,7 +25,7 @@ module.exports = function (router) {
         .get(orders.showLineItems)
         .post(orders.addLineItem);
 
-    router.route('/orders/:orderNumber/lineitems/:lineItemNumber')
+    router.route('/orders/:orderNumber/lineitems/:lineItemId')
         .put(orders.updateLineItem)
         .delete(orders.removeLineItem);
 

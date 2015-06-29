@@ -3,11 +3,6 @@
 .screen-menu {
     margin: @category-menu-height 0 30px;
 
-    hr {
-        border-top: 2px solid @brand-primary-light;
-        margin: 10px 0 10px;
-    }
-
     #menu-categories {
         position: fixed;
         background-color: @brand-info;
@@ -42,13 +37,13 @@
             line-height: 18px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: lighten(@brand-info, 25%);
+            color: lighten(@brand-info, 35%);
         }
 
         ol li a {
             display: block;
             margin-top: 11px;
-            border-right: 1px solid #ffffff;
+            border-right: 1px solid lighten(@brand-info, 10%);
         }
     }
 
@@ -90,5 +85,30 @@
 
     img.product-image {
         width: 100%;
+    }
+}
+
+.variant-detail-wrapper {
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+
+    .variant-details {
+        text-align: center;
+
+        .variant-name {
+
+        }
+
+        .variant-price {
+            color: @brand-dark;
+            font-family: @font-family-raleway;
+            font-weight: bold;
+        }
+
+        .variant-description {
+            color: lighten(@brand-dark, 25%);
+            font-family: @font-family-pt-serif;
+        }
     }
 }
