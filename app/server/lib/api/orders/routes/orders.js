@@ -22,7 +22,6 @@ module.exports = function (router) {
         .delete(utils.userFromToken, orders.destroy);
 
     router.route('/orders/:orderNumber/lineitems')
-        .get(orders.showLineItems)
         .post(orders.addLineItem);
 
     router.route('/orders/:orderNumber/lineitems/:lineItemId')

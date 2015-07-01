@@ -3,26 +3,18 @@ define(function () {
 
     return {
         name: 'ProductsService',
-        fn: ['$http', 'API', function ($http, API) {
-            this.getProducts = getProducts;
-            this.getVariantById = getVariantById;
-            this.getVariantBySlug = getVariantBySlug;
-            this.getVariantBySku = getVariantBySku;
+        fn: ['$http', 'WebApi', function ($http, WebApi) {
+            var self = this;
 
-            function getProducts() {
-                return $http.get('/api/products');
+            self.getProducts = getProducts;
+            self.getVariants = getVariants;
+
+            function getProducts(root) {
+                return WebApi.products.getAll(root.links);
             }
 
-            function getVariantById(id) {
-                return $http.get('/api/products/' + id);
-            }
-
-            function getVariantBySlug(slug) {
-                return $http.get('/api/products/' + slug, {headers: {'X-ALTERNATE-IDENTIFIER': 'slug'}});
-            }
-
-            function getVariantBySku(sku) {
-                return $http.get('/api/products/' + sku, {headers: {'X-ALTERNATE-IDENTIFIER': 'sku'}});
+            function getVariants(product) {
+                return WebApi.products.getVariants(product.links);
             }
         }]
     };

@@ -43,6 +43,11 @@ define([
 
             $httpProvider.interceptors.push('jwtInterceptor');
             */
+
+            $httpProvider.defaults.headers.delete = {
+                'Content-Type': 'application/json;charset=utf-8'
+            };
+
             $ocLazyLoadProvider.config({
                 jsLoader: requirejs
             });
@@ -108,13 +113,24 @@ define([
                     },
                     resolve: {
                         productsModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            console.log('module');
                             return $ocLazyLoad.load({
                                 name: 'southerncreations.products',
                                 files: ['app/components/products/js/products-module']
                             });
                         }],
-                        products: ['root', 'WebApi', function (root, WebApi) {
-                            return WebApi.products.getAll(root.links);
+                        products: ['$q', 'root', 'ProductsService', function ($q, root, ProductsService) {
+                            var dfd = $q.defer();
+
+                            ProductsService.getProducts(root)
+                                .then(function (products) {
+                                    console.log(products);
+                                    dfd.resolve(products);
+                                }, function (err) {
+                                    dfd.reject(err);
+                                });
+
+                            return dfd.promise;
                         }]
                     }
                 })
@@ -203,9 +219,6 @@ define([
                                 name: 'southerncreations.cart',
                                 files: ['app/components/cart/js/cart-module']
                             });
-                        }],
-                        lineItems: ['order', function (order) {
-                            return order.getLineItems();
                         }]
                     }
                 })

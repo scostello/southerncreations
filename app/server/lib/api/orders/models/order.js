@@ -95,10 +95,13 @@ OrderSchema.statics.load = function(id, cb) {
         .exec(cb);
 };
 
-OrderSchema.statics.loadByNumber = function(number, cb) {
-    this.findOne({number: number})
+OrderSchema.statics.loadByNumber = function(number) {
+    return this.findOne({number: number})
         .populate('lineItems')
-        .exec(cb);
+        .exec()
+        .then(function (order) {
+            return order.populate({path: 'lineItems.variant', model: 'ProductVariant'}).execPopulate();
+        });
 };
 
 module.exports = mongoose.model('Order', OrderSchema);

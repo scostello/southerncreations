@@ -5,7 +5,7 @@ define([
 
     return {
         name: 'ProductsController',
-        fn: ['$scope', '$state', 'products', 'WebApi', function ($scope, $state, products, WebApi) {
+        fn: ['$scope', '$state', 'products', 'ProductsService', 'OrderService', function ($scope, $state, products, ProductsService, OrderService) {
             var vm = this;
             vm.products = products;
             vm.currentProduct = null;
@@ -14,38 +14,42 @@ define([
             vm.variantFormOpts = {
                 quantity: _.range(6, 49, 6)
             };
+            vm.addLineItem = _addLineItem;
 
-            init();
+            activate();
 
-            function init() {
+            function activate() {
                 if ($state.params.productSlug) {
                     vm.currentProduct = _.find(products, function (product) {
                         return product.payload.slug === $state.params.productSlug;
                     });
                 }
 
-                $scope.$watch(function () {
-                    return vm.currentProduct;
-                }, function (currentProduct) {
+                $scope.$watch(function () { return vm.currentProduct; }, function (currentProduct) {
                     if (currentProduct) {
-                        WebApi.products.getVariants(currentProduct.links)
-                            .then(_successVariantsCb, _errorVariantsCb);
+                        ProductsService.getVariants(currentProduct)
+                            .then(function (variants) {
+                                vm.variants = variants;
+
+                                if ($state.params.variantSlug) {
+                                    vm.currentVariant = _.find(variants, function (variant) {
+                                        return variant.payload.slug === $state.params.variantSlug;
+                                    });
+                                }
+                            }, function (err) {
+                                vm.error = err.message;
+                            });
                     }
                 });
+            }
 
-                function _successVariantsCb(variants) {
-                    vm.variants = variants;
+            function _addLineItem(quantity) {
+                OrderService.addLineItem(vm.currentVariant, quantity)
+                    .then(function (order) {
 
-                    if ($state.params.variantSlug) {
-                        vm.currentVariant = _.find(variants, function (variant) {
-                            return variant.payload.slug === $state.params.variantSlug;
-                        });
-                    }
-                }
-
-                function _errorVariantsCb(err) {
-                    vm.error = err.message;
-                }
+                    }, function (err) {
+                        vm.error = err.message;
+                    });
             }
         }]
     };

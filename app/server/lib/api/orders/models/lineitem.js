@@ -25,9 +25,8 @@ LineItemSchema.statics.load = function(id, cb) {
         .exec(cb);
 };
 
-LineItemSchema.statics.loadByNumber = function(number, cb) {
-    this.findOne({ number: number })
-        .exec(cb);
+LineItemSchema.statics.loadByNumber = function(number) {
+    return this.findOne({ number: number }).exec();
 };
 
 module.exports = mongoose.model('LineItem', LineItemSchema);
