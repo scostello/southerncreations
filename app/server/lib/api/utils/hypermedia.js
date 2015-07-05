@@ -32,6 +32,16 @@ exports.rootHypermedia = function (session, root) {
             rel: 'users',
             href: path.join(rootBase, 'users'),
             contentType: 'application/sc+json'
+        },
+        {
+            rel: 'login',
+            href: path.join(rootBase, 'users/login'),
+            contentType: 'application/sc+json'
+        },
+        {
+            rel: 'userexists',
+            href: path.join(rootBase, 'users/exists'),
+            contentType: 'application/sc+json'
         }
     ];
 
@@ -56,6 +66,11 @@ exports.orderHypermedia = function (order) {
         {
             rel: 'self',
             href: orderBase,
+            contentType: 'application/sc.orders+json'
+        },
+        {
+            rel: 'tag',
+            href: path.join(orderBase, 'tag'),
             contentType: 'application/sc.orders+json'
         },
         {
@@ -89,17 +104,12 @@ exports.lineItemHypermedia = function (orderNumber, lineItem) {
 
 exports.userHypermedis = function (user) {
     var hypermedia = {},
-        userBase = path.join('', 'users', user._id);
+        userBase = path.join('/', 'users', user._id);
 
     hypermedia.links = [
         {
             rel: 'self',
             href: userBase,
-            contentType: 'application/sc.users+json'
-        },
-        {
-            rel: 'shoppingCart',
-            href: path.join(userBase, 'shoppingcart'),
             contentType: 'application/sc.users+json'
         }
     ];

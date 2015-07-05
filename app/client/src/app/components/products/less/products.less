@@ -1,7 +1,12 @@
-@category-menu-height: 100px;
+@category-menu-height-desktop: 100px;
+@category-menu-height-tablet: 55px;
 
 .screen-menu {
-    margin: @category-menu-height 0 30px;
+    margin: @category-menu-height-desktop 0 30px;
+
+    @media (max-width: @screen-tablet) {
+        margin: @category-menu-height-tablet 0 30px;
+    }
 
     #menu-categories {
         position: fixed;
@@ -48,7 +53,11 @@
     }
 
     .sub-menu-screen {
-        margin-top: @category-menu-height;
+        margin-top: @category-menu-height-desktop;
+
+        @media (max-width: @screen-tablet) {
+            margin-top: @category-menu-height-tablet + 25;
+        }
     }
 }
 

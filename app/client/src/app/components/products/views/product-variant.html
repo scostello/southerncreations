@@ -11,9 +11,7 @@
         </section>
         <form name="">
             <div class="form-group">
-                <select id="quantity" class="form-control" name="">
-                    <option value="{{q}}" ng-repeat="q in prdCtrl.variantFormOpts.quantity">{{prdCtrl.currentVariant.payload.name + ' (' + q + 'ct)'}}</option>
-                </select>
+                <select ng-model="prdCtrl.variantQty" class="form-control" ng-options="option.name for option in prdCtrl.variantOptions"></select>
             </div>
             <button class="btn btn-full-width btn-info" ng-click="prdCtrl.addLineItem(1)">Add to Cart <i class="fa fa-shopping-cart"></i></button>
         </form>

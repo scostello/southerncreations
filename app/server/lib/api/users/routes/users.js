@@ -6,8 +6,7 @@ var users = require('../controllers/users.js'),
 module.exports = function (router) {
 
     router.route('/users')
-        .get(utils.userFromToken, users.all)
-        .post(utils.userFromToken, users.add);
+        .get(utils.userFromToken, users.all);
 
     router.route('/users/login')
         .post(users.login);
@@ -15,9 +14,11 @@ module.exports = function (router) {
     router.route('/users/signup')
         .post(users.signup);
 
+    router.route('/users/exists')
+        .get(users.exists);
+
     router.route('/users/:userId')
         .get(users.user, function (req, res) {
             res.status(200).json(req.user);
-        })
-        .put(utils.userFromToken, users.update);
+        });
 };

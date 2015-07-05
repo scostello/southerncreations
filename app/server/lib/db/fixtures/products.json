@@ -7,6 +7,10 @@
       "pricing": {
         "price": 1.75
       },
+      "options": {
+        "quantityInc": 6,
+        "quantityMax": 48
+      },
       "meta": {
         "description": "cupcake meta description",
         "keyWords": ["cupcakes", "frosted"]
@@ -103,6 +107,10 @@
       "pricing": {
         "price": 1.35
       },
+      "options": {
+        "quantityInc": 12,
+        "quantityMax": 48
+      },
       "meta": {
         "description": "mini-cupcake meta description",
         "keyWords": ["mini", "mini cupcake", "frosted"]
@@ -198,6 +206,10 @@
       "slug": "cakes",
       "pricing": {
         "price": 30.00
+      },
+      "options": {
+        "quantityInc": 1,
+        "quantityMax": 12
       },
       "meta": {
         "description": "cakes meta description",
@@ -315,6 +327,10 @@
       "pricing": {
         "price": 2.00
       },
+      "options": {
+        "quantityInc": 6,
+        "quantityMax": 48
+      },
       "meta": {
         "description": "cookies meta description",
         "keyWords": ["cookie"]
@@ -410,6 +426,10 @@
       "slug": "cheesecakes",
       "pricing": {
         "price": 30.00
+      },
+      "options": {
+        "quantityInc": 1,
+        "quantityMax": 12
       },
       "meta": {
         "description": "cheesecakes meta description",

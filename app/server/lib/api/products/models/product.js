@@ -45,7 +45,12 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    master: {name: {
+    options: {
+        quantityInc: Number,
+        quantityMax: Number
+    },
+    master: {
+        name: {
             type: String,
             trim: true
         },

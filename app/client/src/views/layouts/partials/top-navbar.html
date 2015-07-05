@@ -1,13 +1,10 @@
 <nav class="navbar navbar-utility">
     <div class="constrain">
-        <div class="collapse navbar-collapse">
+        <a href="#" sc-toggle-state="offsidebar-menu-open" class="navbar-toggle collapsed">
+            <div class="menu-toggle"></div>
+        </a>
+        <div class="collapsed navbar-collapse">
             <ul class="nav navbar-utilitynav">
-                <li class="utility-item utility-shopping-cart">
-                    <a ui-sref="app.cart" class="nav-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="badge cart-count">{{appCtrl.getTotalItems()}}</span>
-                    </a>
-                </li>
                 <li class="utility-item utility-user-profile">
                     <a ng-if="!appCtrl.isLoggedIn" ui-sref-active="active" ui-sref=".login"><i class="fa fa-user"></i> Sign In</a>
                     <div ng-if="appCtrl.isLoggedIn" class="dropdown" dropdown>
@@ -21,6 +18,12 @@
                         </ul>
                     </div>
                 </li>
+                <li class="utility-item utility-shopping-cart">
+                    <a href="#" sc-toggle-state="offsidebar-cart-open" class="nav-cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="badge cart-count">{{appCtrl.getTotalItems()}}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -31,12 +34,9 @@
             <a class="navbar-brand" ui-sref=".home">
                 <img class="logo" src="/static/assets/images/logo/southerncreations-small.svg" alt="cupcake"/>
             </a>
-            <a href="#" sc-toggle-state="offsidebar-open" class="navbar-toggle collapsed">
-                <div class="menu-toggle"></div>
-            </a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" ng-hide="appCtrl.isCheckoutState()">
                 <li ui-sref-active="active" ng-repeat="menuitem in ::appCtrl.menuitems">
                     <a class="menu-item" ui-sref="{{menuitem.state}}">{{menuitem.name}}</a>
                 </li>

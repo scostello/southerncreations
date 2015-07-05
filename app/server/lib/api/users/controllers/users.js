@@ -6,6 +6,8 @@
 var User = require('../models/user'),
     jwt = require('jsonwebtoken'),
     jwtSecret = process.env.JWT_SECRET,
+    hypermedia = require('../../utils/hypermedia.js'),
+    utils = require('../../utils/utils.js'),
     _ = require('lodash');
 
 /**
@@ -28,21 +30,17 @@ exports.user = function (req, res, next) {
     });
 };
 
-exports.update = function (req, res) {
-    User.load(req.params.userId, function (err, user) {
+exports.exists = function (req, res) {
+    var email = req.query && req.query.email;
 
-    });
-};
+    if (!email) {
+        res.status(500).json({error: 'Email parameter required'});
+    }
 
-exports.updateShoppingCart = function (req, res) {
-    User.findOneAndUpdate({_id: req.user._id}, {shoppingCart: req.body.shoppingCart}, {upsert: true}, function (err, user) {
-        if (err) {
-            return res.status(500).json({
-                error: 'Cannot update the user'
-            });
-        }
-        res.status(200).json(user);
-    });
+    User.findOne({email: email}).exec()
+        .then(function (user) {
+            res.status(200).json({userExists: !!(user)});
+        });
 };
 
 exports.add = function (req, res, next) {
@@ -51,49 +49,31 @@ exports.add = function (req, res, next) {
 
 exports.login = function (req, res, next) {
     var body = req.body,
-        allDataSent = function (data) {
-            return !_.isUndefined(data) && !_.isNull(data);
-        };
+        username = req.body && req.body.username,
+        password = req.body && req.body.password,
+        promise;
 
-    if (!_.every([body.username,  body.password], allDataSent)) {
-        return res
-            .status(400)
-            .json({
-                error: true,
-                message: 'You must send the username and the password'
-            });
+    if (!username || !password) {
+        return res.status(400).json({error: 'You must send the username and the password'});
     }
 
-    User.byUsername(body.username, function (err, user) {
-        if (err) {
-            return next(err);
-        }
+    promise = utils.isValidEmail(username) ? User.byEmail(username) : User.byUsername(username);
 
+    promise.then(function (user) {
         if (!user) {
-            return res
-                .status(400)
-                .json({
-                    error: true,
-                    message: 'A user was not found with the provided username or password'
-                });
+            return res.status(400).json({error: 'A user was not found with the provided username/email or password'});
         }
 
         if (!user.isValidPassword(body.password)) {
-            return res
-                .status(401)
-                .json({
-                    error: true,
-                    message: 'Invalid credentials'
-                });
+            return res.status(401).json({error: 'Invalid credentials'});
         }
 
         user = user.toObject();
         user = _.omit(user, 'password');
         user.token = jwt.sign(user, jwtSecret, {expiresInMinutes: 60 * 5});
+        req.session.auth_token = user.token;
 
-        return res
-            .status(200)
-            .json(user);
+        return res.status(200).json(hypermedia.userHypermedis(user));
     });
 };
 

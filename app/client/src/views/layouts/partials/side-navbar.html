@@ -1,8 +1,14 @@
-<div class="aside-inner">
+<div class="aside-inner menu-inner">
+    <div class="logo-container" sc-toggle-state="offsidebar-menu-open">
+        <button class="close close-menu"><span>&times;</span></button>
+        <img class="logo" src="/static/assets/images/logo/southerncreations-small-badge.png" alt=""/>
+    </div>
     <nav class="navbar-side">
         <ul class="nav">
             <li ui-sref-active="active" ng-repeat="menuitem in ::appCtrl.menuitems">
-                <a ui-sref="{{menuitem.state}}" class="menu-item">{{menuitem.name}}</a>
+                <a ui-sref="{{menuitem.state}}" class="menu-item">
+                    <span class="menu-item-name">{{menuitem.name}}</span>
+                </a>
             </li>
         </ul>
     </nav>

@@ -3,24 +3,21 @@ define(function () {
 
     return {
         name: 'scMenuProducts',
-        fn: [function () {
+        fn: ['$state', function ($state) {
             return {
                 restrict: 'E',
-                scope: true,
-                bindToController: {
+                scope: {
                     products: '=',
                     currentProduct: '='
                 },
                 replace: true,
                 templateUrl: '/static/app/components/products/js/directives/templates/menu-products.html',
-                controller: ['$state', function ($state) {
-                    var self = this;
-                    self.showProduct = function (product) {
-                        self.currentProduct = product;
+                link: function (scope) {
+                    scope.showProduct = function (product) {
+                        scope.currentProduct = product;
                         $state.go('app.menu.product', {productSlug: product.payload.slug});
                     };
-                }],
-                controllerAs: 'menuCategoryCtrl'
+                }
             };
         }]
     };

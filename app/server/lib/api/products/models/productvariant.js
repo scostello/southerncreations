@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    _ = require('lodash'),
     Schema = mongoose.Schema;
 
 var ProductVariantSchema = new Schema({

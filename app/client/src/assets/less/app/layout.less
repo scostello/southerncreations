@@ -137,13 +137,6 @@ a {
 // -----------------------------
 .layout-fixed {
 
-    @media (max-width: @boxed-max-width) {
-        &.aside-toggled,
-        &.offsidebar-open {
-            overflow-y: hidden;
-        }
-    }
-
     .wrapper {
         .topnavbar-wrapper {
             position: fixed;
@@ -153,12 +146,44 @@ a {
             background: @navbar-bg;
         }
 
+        .curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-color: #000;
+            -webkit-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out ;
+            -ms-transition: all .5s ease-in-out ;
+            -o-transition: all .5s ease-in-out ;
+            transition: all .5s ease-in-out ;
+            visibility: hidden;
+            z-index: @z-index-main-section + 15;
+            .transition(250ms);
+
+            &.curtain-visible {
+                visibility: visible;
+                opacity: 0.25;
+                cursor: pointer;
+            }
+        }
+
         > aside {
             position: fixed;
         }
 
         > section {
             margin-top: (@navbar-hg + @navbar-utility-hg) + 20px;
+
+            @media (max-width: @screen-tablet) {
+                margin-top: @navbar-utility-hg;
+            }
+
+            &.checkout-content {
+                margin-top: 0;
+            }
 
             &.no-nav {
                 margin-top: 30px;

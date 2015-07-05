@@ -49,7 +49,7 @@ define([
         self.setOrderCookieKeys = function (cookieKeys) {
             this.currentOrderNumber = cookieKeys && cookieKeys.orderNumber || null;
             this.currentOrderToken = cookieKeys && cookieKeys.orderToken || null;
-        };;
+        };
 
         /**
          * On application startup, we use the root api object to restore a previsouly saved order
@@ -62,7 +62,7 @@ define([
                 orderToken = $cookies.get(this.currentOrderToken);
 
             if (orderNumber && orderToken) {
-                WebApi.orders.getCurrent(root.links, {override: ['/orders', orderNumber].join('/') + '?order_token=' + orderToken})
+                WebApi.orders.getCurrent(root.links, {override: ['/api/orders', orderNumber].join('/') + '?order_token=' + orderToken})
                     .then(_successCb, _errorCb);
             } else {
                 dfd.resolve(this.init());
@@ -95,6 +95,8 @@ define([
             }
 
             function _successCb(order) {
+                $cookies.put(self.currentOrderNumber, order.payload.number);
+                $cookies.put(self.currentOrderToken, order.payload.token);
                 dfd.resolve(self.order(order));
             }
 
@@ -271,5 +273,51 @@ define([
 
             return itemTotal;
         };
+
+        self.getOrderItems = function () {
+            return this.order().payload.lineItems;
+        };
+
+        self.checkUserExists = function (payload) {
+            var dfd = $q.defer(),
+                order = this.order(),
+                payload = _.assign(payload, {
+                    order_token: $cookies.get(this.currentOrderToken)
+                });
+
+            WebApi.orders.tag(order.links, payload)
+                .then(function (order) {
+                    dfd.resolve(self.order(order));
+                }, function (err) {
+                    dfd.reject(err.message);
+                });
+
+            return dfd.promise;
+        };
+
+        self.tagOrder = function (payload) {
+            var dfd = $q.defer(),
+                order = this.order(),
+                payload = _.assign(payload, {
+                    order_token: $cookies.get(this.currentOrderToken)
+                });
+
+            WebApi.orders.tag(order.links, payload)
+                .then(function (order) {
+                    dfd.resolve(self.order(order));
+                }, function (err) {
+                    dfd.reject(err.message);
+                });
+
+            return dfd.promise;
+        };
+
+        self.isRegistered = function () {
+            var order = this.order(),
+                uid = order.payload.userId,
+                email = order.payload.email;
+
+            return !!(uid || email);
+        }
     }
 });

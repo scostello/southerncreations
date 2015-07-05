@@ -19,7 +19,7 @@ define([
                 var dfd = $q.defer(),
                     link = getLink(links, rel),
                     options = reqOptions || {},
-                    url = routeOptions && routeOptions.override || '/api' + link.href;
+                    url = routeOptions && routeOptions.override || options && options.override || '/api' + link.href;
 
                 $http(_.assign(options, {
                     method: method,
@@ -38,6 +38,10 @@ define([
 
         function getMaker(rel, routeOptions) {
             return requestMaker('GET', rel, routeOptions);
+        }
+
+        function patchMaker(rel, routeOptions) {
+            return requestMaker('PATCH', rel, routeOptions);
         }
 
         function postMaker(rel, routeOptions) {
@@ -76,6 +80,7 @@ define([
                 getCurrent: getMaker('current_order'),
                 getOne: getMaker('self'),
                 update: putMaker('self'),
+                tag: patchMaker('self'),
                 getAll: getMaker('orders'),
                 create: postMaker('orders'),
                 delete: deleteMaker('self'),
@@ -85,6 +90,11 @@ define([
             lineitems: {
                 update: putMaker('self'),
                 delete: deleteMaker('self')
+            },
+            users: {
+                login: postMaker('login'),
+                signup: postMaker('signup'),
+                userExists: getMaker('userexists')
             }
         };
     }

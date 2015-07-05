@@ -121,7 +121,8 @@ exports.all = function(req, res) {
     var fields = {
         'name': 1,
         'slug': 1,
-        'pricing.price': 1
+        'pricing.price': 1,
+        'options': 1
     };
 
     Product.find({}, fields)

@@ -55,14 +55,12 @@ UserSchema.methods.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-UserSchema.statics.byEmail = function (email, cb) {
-    this.findOne({email: email})
-        .exec(cb);
+UserSchema.statics.byEmail = function (email) {
+    return this.findOne({email: email}).exec();
 };
 
-UserSchema.statics.byUsername = function (username, cb) {
-    this.findOne({username: username})
-        .exec(cb);
+UserSchema.statics.byUsername = function (username) {
+    return this.findOne({username: username}).exec();
 };
 
 UserSchema.statics.load = function (id, cb) {

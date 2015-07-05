@@ -21,6 +21,9 @@ module.exports = function (router) {
         .put(utils.userFromToken, orders.update)
         .delete(utils.userFromToken, orders.destroy);
 
+    router.route('/orders/:orderNumber/tag')
+        .patch(utils.userFromToken, orders.tagOrder);
+
     router.route('/orders/:orderNumber/lineitems')
         .post(orders.addLineItem);
 

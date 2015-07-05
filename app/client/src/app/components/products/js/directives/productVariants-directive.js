@@ -3,25 +3,21 @@ define(function () {
 
     return {
         name: 'scProductVariants',
-        fn: [function () {
+        fn: ['$state', function ($state) {
             return {
                 restrict: 'E',
-                scope: true,
-                bindToController: {
+                scope: {
                     variants: '=',
                     currentVariant: '='
                 },
                 replace: true,
                 templateUrl: '/static/app/components/products/js/directives/templates/product-variants.html',
-                controller: ['$scope', '$state', function ($scope, $state) {
-                    var self = this;
-
-                    self.showVariant = function (variant) {
-                        self.currentVariant = variant;
+                link: function (scope) {
+                    scope.showVariant = function (variant) {
+                        scope.currentVariant = variant;
                         $state.go('app.menu.product.variant', {variantSlug: variant.payload.slug});
                     };
-                }],
-                controllerAs: 'prdVariantsCtrl'
+                }
             };
         }]
     };

@@ -25,7 +25,7 @@
 
 @menu-toggle-width:             40px;
 @menu-toggle-bar-height:        4px;
-
+@menu-toggle-color:             #aaa;
 
 .navbar {
     margin-bottom: 0;
@@ -40,8 +40,18 @@
         .nav.navbar-utilitynav {
             .navbar-nav;
 
+            float: right;
+            margin: 0;
+
+            & > li {
+                float: left;
+            }
+
             & > li.utility-user-profile {
-                padding: 0 15px;
+
+                > a {
+                    padding: 0 15px;
+                }
 
                 ul.dropdown-profile-menu {
                     top: @navbar-utility-hg - 5;
@@ -66,11 +76,9 @@
             & > li.utility-shopping-cart {
                 position: relative;
                 border-left: 1px solid #dfdfdf;
-                border-right: 1px solid #dfdfdf;
 
                 a {
-                    margin: 0 15px;
-                    padding: 0;
+                    padding: 0 15px;
                 }
             }
 
@@ -95,12 +103,67 @@
                 float: right;
             }
         }
+
+        .navbar-toggle {
+            float: left;
+            border: none;
+            padding: 15px 10px;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background: transparent;
+            }
+
+            .menu-toggle {
+                position: relative;
+                width: @menu-toggle-width;
+                height: @menu-toggle-bar-height;
+                background: @menu-toggle-color;
+                opacity: 1;
+                -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+                transition: opacity 0.3s, transform 0.3s;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: @menu-toggle-width;
+                    height: @menu-toggle-bar-height;
+                    background: @menu-toggle-color;
+                    top: -13px;
+                    left: 0;
+                    -webkit-transition: -webkit-transform 0.3s;
+                    -moz-transition: -moz-transform 0.3s;
+                    transition: transform 0.3s;
+                }
+
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: @menu-toggle-width;
+                    height: @menu-toggle-bar-height;
+                    background: @menu-toggle-color;
+                    top: 13px;
+                    left: 0;
+                    -webkit-transition: -webkit-transform 0.3s;
+                    -moz-transition: -moz-transform 0.3s;
+                    transition: transform 0.3s;
+                }
+            }
+        }
     }
 
     &.topnavbar {
         font-weight: 100;
         font-size: 23px;
         padding: 10px 0;
+
+        @media (max-width: @screen-tablet) {
+            display: none;
+        }
 
         .nav.navbar-nav {
             overflow: hidden;
@@ -156,57 +219,6 @@
                 height: 50px;
                 width: auto;
             }
-
-            .navbar-toggle {
-                border: none;
-                padding: 15px 10px;
-
-                &:hover,
-                &:active,
-                &:focus {
-                    background: transparent;
-                }
-
-                .menu-toggle {
-                    position: relative;
-                    width: @menu-toggle-width;
-                    height: @menu-toggle-bar-height;
-                    background: #DDDDDD;
-                    opacity: 1;
-                    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-                    -moz-transition: opacity 0.3s, -moz-transform 0.3s;
-                    transition: opacity 0.3s, transform 0.3s;
-
-                    &:before {
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        width: @menu-toggle-width;
-                        height: @menu-toggle-bar-height;
-                        background: #DDDDDD;
-                        top: -13px;
-                        left: 0;
-                        -webkit-transition: -webkit-transform 0.3s;
-                        -moz-transition: -moz-transform 0.3s;
-                        transition: transform 0.3s;
-                    }
-
-                    &:after {
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        width: @menu-toggle-width;
-                        height: @menu-toggle-bar-height;
-                        background: #DDDDDD;
-                        top: 13px;
-                        left: 0;
-                        -webkit-transition: -webkit-transform 0.3s;
-                        -moz-transition: -moz-transform 0.3s;
-                        transition: transform 0.3s;
-                    }
-                }
-            }
-
         }
     }
 }

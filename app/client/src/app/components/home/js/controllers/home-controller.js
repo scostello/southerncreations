@@ -16,7 +16,7 @@ define(function () {
             vm.services = [
                 {
                     name: 'weddings',
-                    backgroundColor: '#6C7A89',
+                    backgroundColor: '#3a3f51',
                     icon: '/static/assets/images/services/wedding-service-icon.svg',
                     src: '/static/assets/images/services/wedding-service-750x499.jpg',
                     srcset: [
@@ -27,7 +27,7 @@ define(function () {
                 },
                 {
                     name: 'birthdays',
-                    backgroundColor: '#6C7A89',
+                    backgroundColor: '#3a3f51',
                     icon: '/static/assets/images/services/birthday-service-icon.svg',
                     src: '/static/assets/images/services/birthday-service-750x499.jpg',
                     srcset: [
@@ -38,7 +38,7 @@ define(function () {
                 },
                 {
                     name: 'showers',
-                    backgroundColor: '#6C7A89',
+                    backgroundColor: '#3a3f51',
                     icon: '/static/assets/images/services/shower-service-icon.svg',
                     src: '/static/assets/images/services/shower-service-750x500.jpg',
                     srcset: [
@@ -49,7 +49,7 @@ define(function () {
                 },
                 {
                     name: 'special events',
-                    backgroundColor: '#6C7A89',
+                    backgroundColor: '#3a3f51',
                     icon: '/static/assets/images/services/event-service-icon.svg',
                     src: '/static/assets/images/services/event-service-750x500.jpg',
                     srcset: [

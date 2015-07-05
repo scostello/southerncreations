@@ -12,6 +12,13 @@ var mongoose = require('mongoose'),
     hat = require('hat'),
     _ = require('lodash');
 
+exports.verifyOrderToken = function (req, res, next) {
+    var order = req.order,
+        orderToken = req.body.order_token;
+
+    next();
+};
+
 /**
  * Find order by id
  */
@@ -91,6 +98,22 @@ exports.update = function (req, res) {
     });
 };
 
+exports.tagOrder = function (req, res) {
+    var order = req.order,
+        orderToken = req.query && req.query.order_token,
+        email = req.body.email;
+
+    if (!orderToken || orderToken !== order.token) {
+        res.status(403).json({error: 'Unauthorized access to requested order.'})
+    }
+
+    order.email = email;
+    order.save()
+        .then(function () {
+            req.status(200).json(hypermedia.orderHypermedia(order));
+        });
+};
+
 /**
  * Delete an order
  */
@@ -99,12 +122,10 @@ exports.destroy = function (req, res) {
 
     order.remove(function (err) {
         if (err) {
-            return res.status(500).json({
-                error: 'Cannot delete the order'
-            });
+            return res.status(500).json({error: 'Cannot delete the order'});
         }
-        res.json(order);
 
+        res.status(204).json(order);
     });
 };
 

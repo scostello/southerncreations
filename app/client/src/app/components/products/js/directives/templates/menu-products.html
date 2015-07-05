@@ -1,7 +1,7 @@
 <nav id="menu-categories">
     <ol>
-        <li ui-sref-active="active" ng-repeat="product in menuCategoryCtrl.products">
-            <a href="#" ng-click="menuCategoryCtrl.showProduct(product)">
+        <li ui-sref-active="active" ng-repeat="product in products">
+            <a href="#" ng-click="showProduct(product)">
                 <img src="http://placehold.it/60x60" alt=""/>
                 <h3>{{product.payload.name}}</h3>
             </a>

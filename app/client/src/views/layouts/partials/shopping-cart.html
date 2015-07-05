@@ -1,0 +1,97 @@
+<div class="aside-inner cart-inner" ng-controller="CartController as cartCtrl">
+    <div class="cart-switch" ng-switch on="cartCtrl.cartView">
+
+        <!-- Cart Contents -->
+        <div class="cart-contents" ng-switch-default>
+            <div class="cart-heading">
+                <h2>Cart</h2>
+            </div>
+            <div class="cart-body">
+                <ul class="cart-list">
+                    <li class="cart-list-item" ng-repeat="lineItem in appCtrl.getOrderItems()">
+                        <div class="item-details-container">
+                            <button class="close">&times;</button>
+                            <div class="item-name">
+                                <a class="" href="#">{{lineItem.payload.variant.name}}</a>
+                            </div>
+                            <div class="item-desciption">
+                                <span>{{lineItem.payload.variant.description}}</span>
+                            </div>
+                        </div>
+
+                        <div class="item-order-details-container">
+                            <div class="item-order-quantity">
+                                <span>{{lineItem.payload.quantity}}</span>
+                            </div>
+                            <div class="item-order-price">
+                                <span>{{lineItem.payload.quantity * lineItem.payload.variant.pricing.price | currency}}</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+            <footer class="cart-footer">
+                <div class="cart-order-details">
+                    <dl class="dl-horizontal">
+                        <dt>Subtotal:</dt>
+                        <dd>{{appCtrl.getOrderTotal() | currency}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>Shipping:</dt>
+                        <dd>{{appCtrl.getOrderTotal() | currency}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>Total:</dt>
+                        <dd class="total-price">{{appCtrl.getOrderTotal() | currency}}</dd>
+                    </dl>
+                </div>
+                <a href="#" class="btn btn-full-width btn-success" ng-click="cartCtrl.checkout()">Checkout</a>
+            </footer>
+        </div>
+        <!-- End Cart Contents -->
+
+        <!-- Check Email -->
+        <div class="cart-email" ng-switch-when="email">
+            <div class="tagline">Please provide your email address</div>
+            <form name="emailForm" ng-submit="cartCtrl.checkUser(emailForm.$valid)" novalidate>
+                <div class="material-group">
+                    <input ng-model="cartCtrl.order.email" ng-class="{'has-content': cartCtrl.order.email}" type="email" class="material-input" id="email" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label for="email" class="material-label">Email</label>
+                </div>
+                <button type="submit" class="btn btn-info btn-full-width" ng-disabled="emailForm.$invalid">Submit Email</button>
+            </form>
+        </div>
+        <!-- End Check Email -->
+
+        <!-- Login -->
+        <div class="cart-login" ng-switch-when="login">
+            <div class="tagline">Welcome Back</div>
+            <form name="loginForm" ng-submit="loginForm.proceedToCheckout(loginForm.$valid)" novalidate>
+                <div class="material-group">
+                    <input ng-model="cartCtrl.order.email" type="email" class="material-input" id="email" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label for="email" class="material-label">Email</label>
+                </div>
+                <div class="material-group">
+                    <input ng-model="cartCtrl.order.password" type="password" class="material-input" id="password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label for="password" class="material-label">Password</label>
+                </div>
+                <button type="submit" class="btn btn-info btn-full-width" ng-disabled="loginForm.$invalid">Submit</button>
+            </form>
+        </div>
+        <!-- End Login -->
+
+        <!-- Signup -->
+        <div class="cart-signup" ng-switch-when="signup">
+            <div class="tagline">Welcome Back</div>
+        </div>
+        <!-- End Signup -->
+
+    </div>
+</div>
