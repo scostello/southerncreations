@@ -28,7 +28,7 @@ module.exports = function (router) {
         .post(orders.addLineItem);
 
     router.route('/orders/:orderNumber/lineitems/:lineItemId')
-        .put(orders.updateLineItem)
+        .put(utils.userFromToken, orders.updateLineItem)
         .delete(orders.removeLineItem);
 
 

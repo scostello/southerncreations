@@ -3,10 +3,10 @@ define(function () {
 
     return {
         name: 'CartController',
-        fn: ['$state', 'OrderService', 'UserService', CartController]
+        fn: ['$scope', '$state', 'AppStateService', 'OrderService', 'UserService', CartController]
     };
 
-    function CartController($state, OrderService, UserService) {
+    function CartController($scope, $state, AppStateService, OrderService, UserService) {
         var vm = this,
             cartViews = {
                 email: 'email',
@@ -14,10 +14,17 @@ define(function () {
                 signup: 'signup'
             };
 
+        vm.cartView = null;
         vm.checkout = _checkout;
         vm.checkUser = _checkUser;
         vm.proceedToCheckout = _proceedToCheckout;
-        vm.tagOrder = _tagOrder;
+        vm.removeLineItem = _removeLineItem;
+
+        $scope.$watch(AppStateService.getCurrentShelf, function (shelf) {
+            if (!shelf) {
+                vm.cartView = null;
+            }
+        });
 
         function _checkout() {
             if (!OrderService.isRegistered()) {
@@ -54,15 +61,20 @@ define(function () {
             }
 
             UserService.login(payload)
-                .then(function (user) {
-
+                .then(function () {
+                    $state.go('app.checkout');
                 }, function (err) {
 
                 });
         }
 
-        function _tagOrder() {
-            OrderService.checkUserExists({email: vm.order.email});
+        function _removeLineItem(lineItem) {
+            OrderService.removeLineItem(lineItem)
+                .then(function () {
+
+                }, function (err) {
+
+                });
         }
     }
 });

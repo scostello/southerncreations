@@ -1,7 +1,7 @@
 <div class="aside-inner menu-inner">
-    <div class="logo-container" sc-toggle-state="offsidebar-menu-open">
-        <button class="close close-menu"><span>&times;</span></button>
-        <img class="logo" src="/static/assets/images/logo/southerncreations-small-badge.png" alt=""/>
+    <div class="logo-container">
+        <button class="close close-menu" ng-click="appCtrl.closeShelves()"><span>&times;</span></button>
+        <img class="logo" ng-click="appCtrl.closeShelves()" src="/static/assets/images/logo/southerncreations-small-badge.png" alt=""/>
     </div>
     <nav class="navbar-side">
         <ul class="nav">

@@ -368,8 +368,8 @@ define([
                         }
                     })
                     .state('app.checkout', {
-                        url: '',
-                        abtract: true,
+                        url: '/checkout',
+                        abstract: true,
                         views: {
                             'content@app': {
                                 templateUrl: '/static/views/layouts/checkout.html',
@@ -390,7 +390,12 @@ define([
                         }
                     })
                     .state('app.checkout.process', {
-
+                        url: '',
+                        views: {
+                            'checkout-content@app.checkout': {
+                                templateUrl: '/static/app/components/checkout/views/checkout-flow.html'
+                            }
+                        }
                     });
 
                 $locationProvider.html5Mode({enabled: true, requireBase: false});

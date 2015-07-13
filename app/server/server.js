@@ -73,6 +73,7 @@ require('./lib/middleware/static')(app);          // Add static file supports=
  */
 app.use('/api', router);
 require('./lib/api/root/routes/root')(app, router);
+require('./lib/api/addresses/routes/addresses')(router);
 require('./lib/api/products/routes/products')(router);
 require('./lib/api/settings/routes/settings')(app, router);
 require('./lib/api/users/routes/users')(router);

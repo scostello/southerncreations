@@ -4,7 +4,9 @@ var Q = require('q'),
     _ = require('lodash'),
     products = require('./fixtures/products'),
     ProductVariant = require('../api/products/models/productvariant.js'),
-    Product = require('../api/products/models/product.js');
+    Product = require('../api/products/models/product.js'),
+    Order = require('../api/orders/models/order.js'),
+    LineItem = require('../api/orders/models/lineitem.js');
 
 ProductVariant.find({}).remove().exec()
     .then(function () {

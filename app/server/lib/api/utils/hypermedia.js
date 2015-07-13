@@ -42,6 +42,16 @@ exports.rootHypermedia = function (session, root) {
             rel: 'userexists',
             href: path.join(rootBase, 'users/exists'),
             contentType: 'application/sc+json'
+        },
+        {
+            rel: 'addresses',
+            href: path.join(rootBase, 'addresses'),
+            contentType: 'application/sc+json'
+        },
+        {
+            rel: 'zipcodes',
+            href: path.join(rootBase, 'zipcodes/search'),
+            contentType: 'application/sc+json'
         }
     ];
 
@@ -104,7 +114,7 @@ exports.lineItemHypermedia = function (orderNumber, lineItem) {
 
 exports.userHypermedis = function (user) {
     var hypermedia = {},
-        userBase = path.join('/', 'users', user._id);
+        userBase = path.join('/', 'users', user._id.toString());
 
     hypermedia.links = [
         {

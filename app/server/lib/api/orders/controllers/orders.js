@@ -60,9 +60,6 @@ exports.create = function (req, res) {
     order.number = hat(64);
     order.token = hat(64);
 
-    req.session.sc_currentOrderNumber = order.number;
-    req.session.sc_currentOrderToken = order.token;
-
     order.save(function (err) {
         if (err) {
             return res.status(500).json(err);

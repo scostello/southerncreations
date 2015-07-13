@@ -3,11 +3,30 @@ define(function () {
 
     return {
         name: 'CheckoutController',
-        fn: [CheckoutController]
+        fn: ['AddressesService', CheckoutController]
     };
 
-    function CheckoutController() {
+    function CheckoutController(AddressesService) {
         var vm = this;
-        vm.something = 'THIS IS IN CHECKOUT CONTROLLER';
+        vm.checkout = {
+            billing: {},
+            shipping: {},
+            payment: {}
+        };
+        vm.zipcodeSearch = zipcodeSearch;
+
+        function zipcodeSearch() {
+            var zipcode = vm.checkout.shipping.zipcode;
+
+            if (zipcode) {
+                AddressesService.zipcodeSearch(zipcode)
+                    .then(function (data) {
+                        vm.checkout.shipping.city = data.city;
+                        vm.checkout.shipping.state = data.state;
+                    }, function (err) {
+
+                    });
+            }
+        }
     }
 });

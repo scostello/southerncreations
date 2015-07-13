@@ -1,6 +1,6 @@
 <nav class="navbar navbar-utility">
     <div class="constrain">
-        <a href="#" sc-toggle-state="offsidebar-menu-open" class="navbar-toggle collapsed">
+        <a href="#" ng-click="appCtrl.openMenuShelf()" class="navbar-toggle collapsed">
             <div class="menu-toggle"></div>
         </a>
         <div class="collapsed navbar-collapse">
@@ -19,7 +19,7 @@
                     </div>
                 </li>
                 <li class="utility-item utility-shopping-cart">
-                    <a href="#" sc-toggle-state="offsidebar-cart-open" class="nav-cart">
+                    <a href="#" ng-click="appCtrl.openCartShelf()" class="nav-cart">
                         <i class="fa fa-shopping-cart"></i>
                         <span class="badge cart-count">{{appCtrl.getTotalItems()}}</span>
                     </a>

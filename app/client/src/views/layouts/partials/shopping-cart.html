@@ -10,7 +10,7 @@
                 <ul class="cart-list">
                     <li class="cart-list-item" ng-repeat="lineItem in appCtrl.getOrderItems()">
                         <div class="item-details-container">
-                            <button class="close">&times;</button>
+                            <button class="close" ng-click="cartCtrl.removeLineItem(lineItem)">&times;</button>
                             <div class="item-name">
                                 <a class="" href="#">{{lineItem.payload.variant.name}}</a>
                             </div>
@@ -69,7 +69,7 @@
         <!-- Login -->
         <div class="cart-login" ng-switch-when="login">
             <div class="tagline">Welcome Back</div>
-            <form name="loginForm" ng-submit="loginForm.proceedToCheckout(loginForm.$valid)" novalidate>
+            <form name="loginForm" ng-submit="cartCtrl.proceedToCheckout(loginForm.$valid)" novalidate>
                 <div class="material-group">
                     <input ng-model="cartCtrl.order.email" type="email" class="material-input" id="email" required>
                     <span class="highlight"></span>

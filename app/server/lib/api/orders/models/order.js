@@ -36,7 +36,7 @@ var OrderSchema = new Schema({
     },
     checkoutSteps: {
         type: Array,
-        default: ['address', 'delivery', 'payment', 'confirm', 'complete']
+        default: ['cart', 'address', 'delivery', 'payment', 'confirm', 'complete']
     },
     userId: {
         type: Schema.ObjectId,

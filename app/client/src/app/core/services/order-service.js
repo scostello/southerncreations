@@ -5,10 +5,10 @@ define([
 
     return {
         name: 'OrderService',
-        fn: ['$rootScope', '$q', '$cookies', 'WebApi', 'LineItem', 'EVENTS', OrderService]
+        fn: ['$rootScope', '$q', '$cookies', 'WebApi', 'EVENTS', OrderService]
     };
 
-    function OrderService($rootScope, $q, $cookies, WebApi, LineItem, EVENTS) {
+    function OrderService($rootScope, $q, $cookies, WebApi, EVENTS) {
         var self = this;
 
         self.$order = {};

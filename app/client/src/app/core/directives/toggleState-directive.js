@@ -5,30 +5,30 @@ define([
 
     return {
         name: 'scToggleState',
-        fn: [function () {
+        fn: ['$rootScope', function ($rootScope) {
             return {
                 restrict: 'A',
+                scope: {
+                    curtainState: '='
+                },
                 link: function (scope, element, attrs) {
-                    var $curtain = $('#curtain'),
-                        $body = $('body');
+                    var $body = $('body');
 
-                    element.on('click', function (e) {
-                        e.preventDefault();
-
+                    scope.showSidebar = function () {
                         var classname = attrs.scToggleState;
+                        $body.addClass(classname);
+                        $rootScope.$broadcast('curtain:show');
+                        //$curtain.removeClass('curtain-visible').off('click');
+                    };
 
-                        if (classname) {
-                            if ($body.hasClass(classname)) {
-                                $body.removeClass(classname);
-                                $curtain.removeClass('curtain-visible').off('click');
-                            } else {
-                                $body.addClass(classname);
-                                $curtain.addClass('curtain-visible').off('click').on('click', function (e) {
-                                    $body.removeClass(classname);
-                                    $curtain.removeClass('curtain-visible');
-                                });
-                            }
-                        }
+                    scope.closeCurtain = function () {
+                        var classname = attrs.scToggleState;
+                        $body.removeClass(classname);
+                        $rootScope.$broadcast('curtain:close');
+                    };
+
+                    $rootScope.$on('shelf:close', function () {
+                        $body.removeClass(classname);
                     });
                 }
             };

@@ -95,6 +95,9 @@ define([
                 login: postMaker('login'),
                 signup: postMaker('signup'),
                 userExists: getMaker('userexists')
+            },
+            addresses: {
+                zipcodeSearch: getMaker('zipcodes')
             }
         };
     }
