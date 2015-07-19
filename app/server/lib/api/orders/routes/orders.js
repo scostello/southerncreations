@@ -1,6 +1,7 @@
 'use strict';
 
 var orders = require('../controllers/orders.js'),
+    checkout = require('../controllers/checkout.js'),
     utils = require('../../utils/utils.js');
 
 module.exports = function (router) {
@@ -31,6 +32,11 @@ module.exports = function (router) {
         .put(utils.userFromToken, orders.updateLineItem)
         .delete(orders.removeLineItem);
 
+    router.route('/orders/:orderNumber/paymenttoken')
+        .get(checkout.generateToken);
+
+    router.route('/checkouts/:orderNumber/next')
+        .put(checkout.nextState, orders.show);
 
     router.param('orderId', orders.order);
     router.param('orderNumber', orders.orderByNumber);

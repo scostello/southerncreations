@@ -33,7 +33,8 @@
     "redis": "~0.12.1",
     "connect-redis": "~2.3.0",
     "hat": "0.0.3",
-    "request-promise": "~0.4.2"
+    "request-promise": "~0.4.2",
+    "braintree": "~1.27.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

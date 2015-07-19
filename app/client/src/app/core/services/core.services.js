@@ -2,15 +2,13 @@ define([
     'angular',
     './appState-service',
     './addresses-service',
-    './settings-service',
     './products-service',
     './order-service',
-    './pubsub-service',
     './user-service',
     './webapi-factory',
     'angularStorage',
     'angularCookies'
-], function (angular, appStateService, addressesService, settingsService, productsService, orderService, pubsubService, userService, webApiFactory) {
+], function (angular, appStateService, addressesService, productsService, orderService, userService, webApiFactory) {
     'use strict';
 
     var moduleName = 'southerncreations.core.services',
@@ -40,9 +38,7 @@ define([
         .service(orderService.name, orderService.fn)
         .factory(webApiFactory.name, webApiFactory.fn)
         .service(userService.name, userService.fn)
-        .service(settingsService.name, settingsService.fn)
-        .service(productsService.name, productsService.fn)
-        .service(pubsubService.name, pubsubService.fn);
+        .service(productsService.name, productsService.fn);
 
     return {
         name: moduleName,

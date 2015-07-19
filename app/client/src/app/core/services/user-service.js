@@ -19,7 +19,7 @@ define([
             }
 
             return this.$user;
-        };
+        }
 
         function login(userData) {
             var dfd = $q.defer();

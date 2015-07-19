@@ -1,0 +1,35 @@
+<div class="payment-info">
+
+
+    <form name="paymentForm" ng-submit="submitPayment(paymentForm.$valid)" novalidate>
+        <div class="form-group">
+            <div class="cc-input-container cc-input-number-container">
+                <label for="ccNumber">Card number</label>
+                <input type="text" id="ccNumber" class="form-control col-xs-8" name="ccNumber" cc-number data-braintree-name="number" ng-model="card.number" placeholder="4111111111111111"/>
+            </div>
+            <div class="cc-input-container cc-input-cvv-container">
+                <label for="ccCode">CVV <i class="fa fa-question-circle"></i></label>
+                <input type="text" id="ccCode" class="form-control col-xs-4" name="ccCode" cc-cvc cc-type="paymentForm.ccNumber.$ccType" ng-model="card.code" placeholder="111"/>
+            </div>
+            <!--<h2>{{paymentForm.ccNumber.$ccType || 'Unknown'}}</h2>-->
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="cc-input-container cc-input-name-container">
+                <label for="ccHolder">Name (as it appears on the card)</label>
+                <input type="text" id="ccHolder" class="form-control" name="ccHolder" data-braintree-name="cardholder_name" ng-model="card.holder" placeholder="John Smith"/>
+            </div>
+            <div class="cc-input-container cc-input-expry-container">
+                <label>Expiration</label>
+                <div class="cc-input-expry-year-container">
+                    <input type="text" class="form-control" cc-exp-month name="ccExpMonth" data-braintree-name="expiration_month" ng-model="card.expiration.month" placeholder="MM">
+                </div>
+                <span>/</span>
+                <div class="cc-input-expry-year-container">
+                    <input type="text" class="form-control" cc-exp-year name="ccExpYear" data-braintree-name="expiration_year" ng-model="card.expiration.year" placeholder="YY">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -69,7 +69,6 @@ define([
             }
 
             function _successCb(order) {
-                console.log(order);
                 dfd.resolve(self.order(order));
             }
 
@@ -274,50 +273,55 @@ define([
             return itemTotal;
         };
 
+        /**
+         * Returns the current order's listItems
+         * @returns {Array}
+         */
         self.getOrderItems = function () {
             return this.order().payload.lineItems;
         };
 
-        self.checkUserExists = function (payload) {
-            var dfd = $q.defer(),
-                order = this.order(),
-                payload = _.assign(payload, {
-                    order_token: $cookies.get(this.currentOrderToken)
-                });
-
-            WebApi.orders.tag(order.links, payload)
-                .then(function (order) {
-                    dfd.resolve(self.order(order));
-                }, function (err) {
-                    dfd.reject(err.message);
-                });
-
-            return dfd.promise;
-        };
-
-        self.tagOrder = function (payload) {
-            var dfd = $q.defer(),
-                order = this.order(),
-                payload = _.assign(payload, {
-                    order_token: $cookies.get(this.currentOrderToken)
-                });
-
-            WebApi.orders.tag(order.links, payload)
-                .then(function (order) {
-                    dfd.resolve(self.order(order));
-                }, function (err) {
-                    dfd.reject(err.message);
-                });
-
-            return dfd.promise;
-        };
-
+        /**
+         * Check if the current order has a userId or email attached
+         * @returns {boolean}
+         */
         self.isRegistered = function () {
             var order = this.order(),
                 uid = order.payload.userId,
                 email = order.payload.email;
 
             return !!(uid || email);
-        }
+        };
+
+        /**
+         * Request a braintree client token
+         * @returns {*}
+         */
+        self.getPaymentToken = function () {
+            var order = this.order();
+            return WebApi.orders.getPaymentToken(order.links);
+        };
+
+        /**
+         * Advances the order to the next state in the checkout state machine
+         * @param payload
+         * @returns {*}
+         */
+        self.nextOrderState = function (payload) {
+            var self = this,
+                dfd = $q.defer(),
+                order = this.order(),
+                orderToken = $cookies.get(self.currentOrderToken);
+
+            WebApi.checkouts.nextState(order.links, {data: payload, params: {order_token: orderToken}})
+                .then(function (order) {
+                    dfd.resolve(self.order(order));
+                })
+                .catch(function (err) {
+                    dfd.reject(err);
+                });
+
+            return dfd.promise;
+        };
     }
 });

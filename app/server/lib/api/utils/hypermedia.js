@@ -52,6 +52,11 @@ exports.rootHypermedia = function (session, root) {
             rel: 'zipcodes',
             href: path.join(rootBase, 'zipcodes/search'),
             contentType: 'application/sc+json'
+        },
+        {
+            rel: 'states',
+            href: path.join(rootBase, 'addresses/states'),
+            contentType: 'application/sc+json'
         }
     ];
 
@@ -70,12 +75,18 @@ exports.rootHypermedia = function (session, root) {
 
 exports.orderHypermedia = function (order) {
     var hypermedia = {},
-        orderBase = path.join('/', 'orders', order.number);
+        orderBase = path.join('/', 'orders', order.number),
+        checkoutBase = path.join('/', 'checkouts', order.number);
 
     hypermedia.links = [
         {
             rel: 'self',
             href: orderBase,
+            contentType: 'application/sc.orders+json'
+        },
+        {
+            rel: 'checkouts',
+            href: path.join(checkoutBase, 'next'),
             contentType: 'application/sc.orders+json'
         },
         {
@@ -86,6 +97,11 @@ exports.orderHypermedia = function (order) {
         {
             rel: 'lineitems',
             href: path.join(orderBase, 'lineitems'),
+            contentType: 'application/sc.orders+json'
+        },
+        {
+            rel: 'paymenttoken',
+            href: path.join(orderBase, 'paymenttoken'),
             contentType: 'application/sc.orders+json'
         }
     ];

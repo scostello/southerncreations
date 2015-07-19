@@ -12,12 +12,6 @@ var mongoose = require('mongoose'),
     hat = require('hat'),
     _ = require('lodash');
 
-exports.verifyOrderToken = function (req, res, next) {
-    var order = req.order,
-        orderToken = req.body.order_token;
-
-    next();
-};
 
 /**
  * Find order by id
@@ -55,6 +49,7 @@ exports.create = function (req, res) {
 
     if (req.user) {
         order.userId = req.user._id;
+        order.email = req.user.email;
     }
 
     order.number = hat(64);
@@ -112,7 +107,9 @@ exports.tagOrder = function (req, res) {
 };
 
 /**
- * Delete an order
+ * Delete the current order
+ * @param req
+ * @param res
  */
 exports.destroy = function (req, res) {
     var order = req.order;
@@ -127,7 +124,9 @@ exports.destroy = function (req, res) {
 };
 
 /**
- * Show a order
+ * Return the requested order
+ * @param req
+ * @param res
  */
 exports.show = function (req, res) {
     var order = req.order,
@@ -142,11 +141,14 @@ exports.show = function (req, res) {
         return hypermedia.lineItemHypermedia(order.number, lineItem);
     });
 
-    console.log(orderObj.lineItems);
-
     res.status(200).json(hypermedia.orderHypermedia(orderObj));
 };
 
+/**
+ * Add line item to current order
+ * @param req
+ * @param res
+ */
 exports.addLineItem = function (req, res) {
     var order = req.order,
         lineitem = req.body.lineitem,
@@ -171,6 +173,11 @@ exports.addLineItem = function (req, res) {
         });
 };
 
+/**
+ * Update a line item within the current order
+ * @param req
+ * @param res
+ */
 exports.updateLineItem = function (req, res) {
     var order = req.order,
         lineItem = _.find(order.lineItems, function (lineItem) {
@@ -200,6 +207,11 @@ exports.updateLineItem = function (req, res) {
         });
 };
 
+/**
+ * Remove a line item from the current order
+ * @param req
+ * @param res
+ */
 exports.removeLineItem = function (req, res) {
     var order = req.order,
         lineItem = _.find(order.lineItems, function (lineItem) {
@@ -223,7 +235,9 @@ exports.removeLineItem = function (req, res) {
 };
 
 /**
- * List of Orders
+ * List all orders
+ * @param req
+ * @param res
  */
 exports.all = function(req, res) {
     Order.find({}).exec()

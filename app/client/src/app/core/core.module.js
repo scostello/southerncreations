@@ -5,6 +5,7 @@ define([
     './controllers/core.controllers',
     './directives/core.directives',
     './filters/core.filters',
+    'angularAnimate',
     'angularUiRouter',
     'ocLazyLoad',
     'angularJwt',
@@ -15,6 +16,7 @@ define([
 
     var moduleName = 'southerncreations.core',
         deps = [
+            'ngAnimate',
             'ui.router',
             'oc.lazyLoad',
             'angular-jwt',
@@ -372,7 +374,7 @@ define([
                         abstract: true,
                         views: {
                             'content@app': {
-                                templateUrl: '/static/views/layouts/checkout.html',
+                                templateUrl: '/static/app/components/checkout/views/checkout.html',
                                 controller: 'CheckoutController',
                                 controllerAs: 'checkoutCtrl'
                             }
@@ -383,17 +385,44 @@ define([
                                     name: 'southerncreations.checkout',
                                     files: ['app/components/checkout/js/checkout-module']
                                 });
+                            }],
+                            states: ['AddressesService', 'root', function (AddressesService, root) {
+                                return AddressesService.getStates(root.links);
                             }]
                         },
                         data: {
                             isCheckout: true
                         }
                     })
-                    .state('app.checkout.process', {
+                    .state('app.checkout.address', {
                         url: '',
                         views: {
                             'checkout-content@app.checkout': {
-                                templateUrl: '/static/app/components/checkout/views/checkout-flow.html'
+                                templateUrl: '/static/app/components/checkout/views/checkout-address.html'
+                            }
+                        }
+                    })
+                    .state('app.checkout.delivery', {
+                        url: '',
+                        views: {
+                            'checkout-content@app.checkout': {
+                                templateUrl: '/static/app/components/checkout/views/checkout-delivery.html'
+                            }
+                        }
+                    })
+                    .state('app.checkout.payment', {
+                        url: '',
+                        views: {
+                            'checkout-content@app.checkout': {
+                                templateUrl: '/static/app/components/checkout/views/checkout-payment.html'
+                            }
+                        }
+                    })
+                    .state('app.checkout.confirmation', {
+                        url: '',
+                        views: {
+                            'checkout-content@app.checkout': {
+                                templateUrl: '/static/app/components/checkout/views/checkout-confirmation.html'
                             }
                         }
                     });
@@ -438,7 +467,7 @@ define([
                 });
 
                 $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-                    console.log(arguments)
+                    console.log(arguments);
                 });
             }]);
 

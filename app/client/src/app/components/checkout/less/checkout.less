@@ -1,3 +1,64 @@
 .screen-checkout-flow {
     padding: 15px 0;
+
+    #address-form {
+
+        .city-container {
+            padding-right: 5px;
+        }
+
+        .form-button-container {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .address2 {
+            margin-top: 5px;
+        }
+    }
+
+    .cc-input-container {
+        float: left;
+        padding: 5px;
+
+        label {
+            display: block;
+        }
+
+        &.cc-input-number-container {
+            width: 80%;
+        }
+
+        &.cc-input-cvv-container {
+            width: 20%;
+        }
+
+        &.cc-input-name-container {
+            width: 60%;
+        }
+
+        &.cc-input-expry-container {
+            width: 40%;
+
+            .cc-input-expry-month-container,
+            .cc-input-expry-year-container {
+                float: left;
+                width: 47.5%;
+
+                input {
+                    text-align: center;
+                }
+
+                ~ span {
+                    float: left;
+                    text-align: center;
+                    width: 5%;
+                    padding: 13px 0;
+                    font-size: 20px;
+                }
+            }
+        }
+
+
+    }
 }

@@ -27,10 +27,20 @@ define(function () {
         });
 
         function _checkout() {
+            var orderState = OrderService.order().payload.state;
+
             if (!OrderService.isRegistered()) {
                 vm.cartView = cartViews.email;
+            } else if (orderState !== 'cart') {
+                $state.go('app.checkout.' + orderState);
             } else {
-                $state.go('app.checkout');
+                OrderService.nextOrderState()
+                    .then(function (order) {
+                        $state.go('app.checkout.' + order.payload.state);
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
             }
         }
 
@@ -42,7 +52,8 @@ define(function () {
             UserService.userExists(vm.order.email)
                 .then(function (data) {
                     vm.cartView = data.userExists ? cartViews.login : cartViews.signup;
-                }, function (err) {
+                })
+                .catch(function (err) {
                     console.log(err);
                 });
         }
@@ -62,9 +73,16 @@ define(function () {
 
             UserService.login(payload)
                 .then(function () {
-                    $state.go('app.checkout');
-                }, function (err) {
-
+                    return OrderService.nextOrderState();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+                .then(function (order) {
+                    $state.go('app.checkout.' + order.payload.state);
+                })
+                .catch(function (err) {
+                    console.log(err);
                 });
         }
 
@@ -72,7 +90,8 @@ define(function () {
             OrderService.removeLineItem(lineItem)
                 .then(function () {
 
-                }, function (err) {
+                })
+                .catch(function () {
 
                 });
         }

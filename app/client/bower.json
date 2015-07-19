@@ -22,7 +22,6 @@
     "angular-jwt": "~0.0.9",
     "angular-local-storage": "~0.2.2",
     "angular-cookies": "~1.4.1",
-    "angular-bootstrap": "~0.13.0",
     "angular-xeditable": "~0.1.9",
     "ocLazyLoad": "~1.0.1",
     "bootstrap": "~3.3.5",
@@ -33,10 +32,14 @@
     "fontawesome": "~4.3.0",
     "modernizr": "~2.8.3",
     "jquery": "~2.1.4",
-    "lodash": "~3.9.3"
+    "lodash": "~3.9.3",
+    "braintree-web": "~2.9.0",
+    "angular-credit-cards": "~2.3.5",
+    "angular-bootstrap": "~0.13.0",
+    "angular-animate": "~1.4.3"
   },
   "resolutions": {
-    "angular": "1.4.1",
+    "angular": "1.4.3",
     "angular-sanitize": "~1.4.1",
     "angular-local-storage": "~0.2.2",
     "ocLazyLoad": "~1.0.1",

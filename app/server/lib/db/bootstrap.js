@@ -2,13 +2,22 @@
 
 var Q = require('q'),
     _ = require('lodash'),
+    states = require('./fixtures/states'),
     products = require('./fixtures/products'),
     ProductVariant = require('../api/products/models/productvariant.js'),
+    State = require('../api/addresses/models/state.js'),
     Product = require('../api/products/models/product.js'),
     Order = require('../api/orders/models/order.js'),
     LineItem = require('../api/orders/models/lineitem.js');
 
-ProductVariant.find({}).remove().exec()
+State.find({}).remove().exec()
+    .then(function () {
+        State.collection.insert(states, function () {
+            console.log('States inserted');
+        })
+    });
+
+/*ProductVariant.find({}).remove().exec()
     .then(function () {
         return Product.find({}).remove().exec();
     })
@@ -24,4 +33,4 @@ ProductVariant.find({}).remove().exec()
             } (product.product, product.variants));
 
         });
-    });
+    });*/

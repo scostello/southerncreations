@@ -43,8 +43,7 @@ define([
                 });
 
                 $scope.$watch(function () { return vm.currentVariant; }, function (currentVariant) {
-                    var vOpts = [],
-                        min, max, inc;
+                    var min, max, inc;
 
                     if (currentVariant) {
                         min = inc = vm.currentProduct.payload.options.quantityInc;

@@ -46,7 +46,10 @@
                         <dd class="total-price">{{appCtrl.getOrderTotal() | currency}}</dd>
                     </dl>
                 </div>
-                <a href="#" class="btn btn-full-width btn-success" ng-click="cartCtrl.checkout()">Checkout</a>
+                <button class="btn btn-full-width btn-success" ng-disabled="appCtrl.getTotalItems() === 0" ng-click="cartCtrl.checkout()">Checkout</button>
+                <button class="btn btn-full-width btn-paypal" ng-disabled="appCtrl.getTotalItems() === 0" ng-click="cartCtrl.checkout()">
+                    <span>Checkout with </span><img class="paypal" src="/static/assets/images/icons/payments/paypal-text.png" alt="paypal"/></span>
+                </button>
             </footer>
         </div>
         <!-- End Cart Contents -->

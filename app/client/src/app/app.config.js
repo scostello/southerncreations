@@ -39,19 +39,21 @@
             lodash: 'vendor/lodash/lodash.min',
 
             angular: 'vendor/angular/angular',
-            angularResource: 'vendor/angular-sanitize/angular-sanitize.min',
-            angularSanitize: 'vendor/angular-resource/angular-resource.min',
+            angularAnimate: 'vendor/angular-animate/angular-animate.min',
             angularUiRouter: 'vendor/angular-ui-router/release/angular-ui-router.min',
             angularCookies: 'vendor/angular-cookies/angular-cookies.min',
             angularStorage: 'vendor/angular-local-storage/dist/angular-local-storage.min',
             angularJwt: 'vendor/angular-jwt/dist/angular-jwt.min',
             angularMocks: 'vendor/angular-mocks/angular-mocks',
             ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.require.min',
-            angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap.min',
+            angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap-tpls',
             angularXeditable: 'vendor/angular-xeditable/dist/js/xeditable.min',
+            angularCreditCards: 'vendor/angular-credit-cards/release/angular-credit-cards',
 
             owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min',
-            fitvid: 'vendor/fitvids/jquery.fitvids'
+            fitvid: 'vendor/fitvids/jquery.fitvids',
+
+            braintree: 'vendor/braintree-web/dist/braintree'
         },
 
         shim: {
@@ -64,10 +66,7 @@
             angular: {
                 exports: 'angular'
             },
-            angularResource: {
-                deps: ['angular']
-            },
-            angularSanitize: {
+            angularAnimate: {
                 deps: ['angular']
             },
             angularUiRouter: {
@@ -95,11 +94,17 @@
             angularXeditable: {
                 deps: ['angular']
             },
+            angularCreditCards: {
+                deps: ['angular']
+            },
             owl: {
                 deps: ['jquery']
             },
             fitvid: {
                 deps: ['jquery']
+            },
+            braintree: {
+                exports: 'braintree'
             }
         }
     });

@@ -61,20 +61,16 @@ define([
             app: {
                getRoot: getMaker(null, {override: '/api'})
             },
-            products: {
-                getOne: getMaker('self'),
-                getAll: getMaker('products'),
-                create: postMaker('products'),
-                update: putMaker('self'),
-                delete: deleteMaker('self'),
-                getVariants: getMaker('variants')
+            addresses: {
+                zipcodeSearch: getMaker('zipcodes'),
+                getStates: getMaker('states')
             },
-            variants: {
-                getVariant: getMaker('self'),
-                getVariants: getMaker('variants'),
-                createVariant: postMaker('variants'),
+            checkouts: {
+                nextState: putMaker('checkouts')
+            },
+            lineitems: {
                 update: putMaker('self'),
-                deleteVariant: deleteMaker('self')
+                delete: deleteMaker('self')
             },
             orders: {
                 getCurrent: getMaker('current_order'),
@@ -85,19 +81,28 @@ define([
                 create: postMaker('orders'),
                 delete: deleteMaker('self'),
                 getLineItems: getMaker('lineitems'),
-                addLineItem: postMaker('lineitems')
+                addLineItem: postMaker('lineitems'),
+                getPaymentToken: getMaker('paymenttoken')
             },
-            lineitems: {
+            products: {
+                getOne: getMaker('self'),
+                getAll: getMaker('products'),
+                create: postMaker('products'),
                 update: putMaker('self'),
-                delete: deleteMaker('self')
+                delete: deleteMaker('self'),
+                getVariants: getMaker('variants')
             },
             users: {
                 login: postMaker('login'),
                 signup: postMaker('signup'),
                 userExists: getMaker('userexists')
             },
-            addresses: {
-                zipcodeSearch: getMaker('zipcodes')
+            variants: {
+                getVariant: getMaker('self'),
+                getVariants: getMaker('variants'),
+                createVariant: postMaker('variants'),
+                update: putMaker('self'),
+                deleteVariant: deleteMaker('self')
             }
         };
     }

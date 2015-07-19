@@ -1,0 +1,81 @@
+<h3 class="text-center">Shipping Address</h3>
+<form id="address-form" name="addressForm" ng-submit="checkoutCtrl.submitAddressInfo(addressForm.$valid)" novalidate>
+
+    <!-- Delivery Information -->
+    <section class="shipping-form">
+        <div class="form-group col-xs-12">
+            <label for="shipping-full-name">Full Name</label>
+            <span ng-show="addressForm.shippingFullName.$invalid && !addressForm.shippingFullName.$pristine" class="form-error">error</span>
+            <input id="shipping-full-name" type="text" name="shippingFullName" class="form-control" ng-model="checkoutCtrl.checkout.shipping.fullName" placeholder="John Smith" required/>
+        </div>
+        <div class="form-group col-xs-12">
+            <label for="shipping-street-address-1">Street Address</label>
+            <span ng-show="addressForm.shippingStreetAddress1.$invalid && !addressForm.shippingStreetAddress1.$pristine" class="form-error">error</span>
+            <input id="shipping-street-address-1" type="text" name="shippingStreetAddress1" class="form-control" ng-model="checkoutCtrl.checkout.shipping.streetAddress1" placeholder="123 Main St" required/>
+            <input id="shipping-street-address-2" type="text" name="shippingStreetAddress2" class="form-control address2" ng-model="checkoutCtrl.checkout.shipping.streetAddress2" placeholder="Apt. 123"/>
+        </div>
+        <div class="zipcode-container form-group col-xs-12 col-md-6">
+            <label for="shipping-zipcode">Zipcode</label>
+            <span ng-show="addressForm.shippingZipcode.$invalid && !addressForm.shippingZipcode.$pristine" class="form-error">error</span>
+            <input id="shipping-zipcode" type="text" name="shippingZipcode" class="form-control" ng-change="checkoutCtrl.zipcodeSearch()" ng-model="checkoutCtrl.checkout.shipping.zipcode" ng-pattern="/^(\d{5}-\d{4}|\d{5})$/" placeholder="Eg. 11111" required/>
+        </div>
+        <div class="city-state-container form-group col-xs-12 col-md-6">
+            <div class="city-container col-xs-6 no-padding">
+                <label for="shipping-city">City</label>
+                <span ng-show="addressForm.shippingCity.$invalid && !addressForm.shippingCity.$pristine" class="form-error">error</span>
+                <input id="shipping-city" type="text" name="shippingCity" class="form-control" ng-model="checkoutCtrl.checkout.shipping.city" placeholder="City/Town" required/>
+            </div>
+            <div class="state-container col-xs-6 no-padding">
+                <label for="shipping-state">State</label>
+                <span ng-show="addressForm.shippingState.$invalid && !addressForm.shippingState.$pristine" class="form-error">error</span>
+                <select id="shipping-state" name="shippingState" class="form-control" ng-options="for state in checkoutCtrl.states track by state.abbreviation" ng-model="checkoutCtrl.checkout.shipping.state"></select>
+            </div>
+        </div>
+        <div class="phone-container form-group col-xs-12 col-md-6">
+            <label for="shipping-phonenumber">Phone Number <a href="#" tooltip="Herro"><i class="fa fa-info-circle"></i></a></label>
+            <input id="shipping-phonenumber" type="text" name="phonenumber" class="form-control" ng-model="checkoutCtrl.checkout.shipping.phoneNumber" placeholder="555-555-5555" required/>
+        </div>
+        <div class="form-group col-xs-12">
+            <label for="use-shipping-toggle" class="checkbox-inline" ng-init="checkoutCtrl.checkout.billing.useShipping = true">
+                <input id="use-shipping-toggle" type="checkbox" ng-model="checkoutCtrl.checkout.billing.useShipping"/> Use this address as Billing Address?
+            </label>
+        </div>
+    </section>
+    <!-- End Delivery Information -->
+
+    <!-- Billing Information -->
+    <section class="billing-form" ng-show="!checkoutCtrl.checkout.billing.useShipping">
+        <div class="form-group col-xs-12">
+            <label for="billing-full-name">Full Name</label>
+            <input id="billing-full-name" type="text" name="fullName" class="form-control" ng-model="checkoutCtrl.checkout.billing.fullName" placeholder="John Smith" required/>
+        </div>
+        <div class="form-group col-xs-12">
+            <label for="billing-street-address">Street Address</label>
+            <input id="billing-street-address" type="text" name="streetAddress" class="form-control" ng-model="checkoutCtrl.checkout.billing.streetAddress1" placeholder="123 Main St" required/>
+            <input id="billing-street-address-2" type="text" name="streetAddress2" class="form-control address2" ng-model="checkoutCtrl.checkout.billing.streetAddress2s" placeholder="Apt. 123"/>
+        </div>
+        <div class="zipcode-container form-group col-xs-12 col-md-6">
+            <label for="billing-zipcode">Zipcode</label>
+            <input id="billing-zipcode" type="text" name="zipcode" class="form-control" ng-change="checkoutCtrl.zipcodeSearch()" ng-model="checkoutCtrl.checkout.billing.zipcode" ng-pattern="/^(\d{5}-\d{4}|\d{5})$/" placeholder="Eg. 11111" required/>
+        </div>
+        <div class="city-state-container form-group col-xs-12 col-md-6">
+            <div class="city-container col-xs-6 no-padding">
+                <label for="billing-city">City</label>
+                <input id="billing-city" type="text" name="city" class="form-control" ng-model="checkoutCtrl.checkout.billing.city" placeholder="City/Town" required/>
+            </div>
+            <div class="state-container col-xs-6 no-padding">
+                <label for="billing-state">State</label>
+                <input id="billing-state" type="text" name="state" class="form-control" ng-model="checkoutCtrl.checkout.billing.state" placeholder="State" required/>
+            </div>
+        </div>
+        <div class="phone-container form-group col-xs-12 col-md-6">
+            <label for="billing-phonenumber">Phone Number <a href="#"><i class="fa fa-info-circle"></i></a></label>
+            <input id="billing-phonenumber" type="text" name="phonenumber" class="form-control" ng-model="checkoutCtrl.checkout.billing.phoneNumber" placeholder="555-555-5555" required/>
+        </div>
+    </section>
+    <!-- End Billing Information -->
+
+    <div class="form-button-container col-xs-12">
+        <button type="submit" class="btn btn-success pull-right col-xs-12">Proceed To Delivery Options</button>
+    </div>
+</form>
