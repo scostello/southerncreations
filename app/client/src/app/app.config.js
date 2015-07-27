@@ -32,28 +32,40 @@
         urlArgs: '_=' + (new Date()).getTime(),
 
         paths: {
-
+            // Require.js Plugins
             domReady: 'vendor/requirejs-domready/domReady',
 
+            // Utility Libs
             jquery: 'vendor/jquery/dist/jquery.min',
             lodash: 'vendor/lodash/lodash.min',
+            moment: 'vendor/moment/min/moment.min',
 
+            // Angular Libs
             angular: 'vendor/angular/angular',
             angularAnimate: 'vendor/angular-animate/angular-animate.min',
-            angularUiRouter: 'vendor/angular-ui-router/release/angular-ui-router.min',
-            angularCookies: 'vendor/angular-cookies/angular-cookies.min',
-            angularStorage: 'vendor/angular-local-storage/dist/angular-local-storage.min',
-            angularJwt: 'vendor/angular-jwt/dist/angular-jwt.min',
-            angularMocks: 'vendor/angular-mocks/angular-mocks',
-            ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.require.min',
             angularBootstrap: 'vendor/angular-bootstrap/ui-bootstrap-tpls',
-            angularXeditable: 'vendor/angular-xeditable/dist/js/xeditable.min',
+            angularCookies: 'vendor/angular-cookies/angular-cookies.min',
             angularCreditCards: 'vendor/angular-credit-cards/release/angular-credit-cards',
+            angularJwt: 'vendor/angular-jwt/dist/angular-jwt.min',
+            angularMessages: 'vendor/angular-messages/angular-messages.min',
+            angularMocks: 'vendor/angular-mocks/angular-mocks',
+            angularStorage: 'vendor/angular-local-storage/dist/angular-local-storage.min',
+            angularUiCalendar: 'vendor/angular-ui-calendar/src/calendar',
+            angularUiMask: 'vendor/angular-ui-mask/dist/mask.min',
+            angularUiRouter: 'vendor/angular-ui-router/release/angular-ui-router.min',
+            angularXeditable: 'vendor/angular-xeditable/dist/js/xeditable.min',
+            ocLazyLoad: 'vendor/ocLazyLoad/dist/ocLazyLoad.require.min',
 
+            // JQuery Plugins
             owl: 'vendor/owl-carousel/owl-carousel/owl.carousel.min',
             fitvid: 'vendor/fitvids/jquery.fitvids',
 
-            braintree: 'vendor/braintree-web/dist/braintree'
+            // Payment Libs
+            braintree: 'vendor/braintree-web/dist/braintree',
+
+            // Calendar Libs
+            fullcalendar: 'vendor/fullcalendar/dist/fullcalendar.min',
+            gcal: 'vendor/fullcalendar/dist/gcal'
         },
 
         shim: {
@@ -69,32 +81,41 @@
             angularAnimate: {
                 deps: ['angular']
             },
-            angularUiRouter: {
+            angularBootstrap: {
                 deps: ['angular']
             },
             angularCookies: {
                 deps: ['angular']
             },
-            angularStorage: {
+            angularCreditCards: {
                 deps: ['angular']
             },
             angularJwt: {
+                deps: ['angular']
+            },
+            angularMessages: {
                 deps: ['angular']
             },
             angularMocks: {
                 deps: ['angular'],
                 exports: 'angular.mock'
             },
-            ocLazyLoad: {
+            angularStorage: {
                 deps: ['angular']
             },
-            angularBootstrap: {
+            angularUiCalendar: {
+                deps: ['angular']
+            },
+            angularUiMask: {
+                deps: ['angular']
+            },
+            angularUiRouter: {
                 deps: ['angular']
             },
             angularXeditable: {
                 deps: ['angular']
             },
-            angularCreditCards: {
+            ocLazyLoad: {
                 deps: ['angular']
             },
             owl: {
@@ -105,6 +126,18 @@
             },
             braintree: {
                 exports: 'braintree'
+            },
+            fullcalendar: {
+                deps: [
+                    'jquery',
+                    'moment',
+                    'angularUiCalendar'
+                ]
+            },
+            gcal: {
+                deps: [
+                    'fullcalendar'
+                ]
             }
         }
     });

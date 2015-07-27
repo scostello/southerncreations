@@ -68,13 +68,29 @@ var OrderSchema = new Schema({
         type: Number,
         default: 0.0
     },
-    shipmentState: {
-        type: String,
-        default: null
+    shipmentAddress: {
+        fullName: String,
+        address1: String,
+        address2: String,
+        city: String,
+        phone: Number,
+        zipcode: Number,
+        state: {
+            abbreviation: String,
+            name: String
+        }
     },
-    paymentState: {
-        type: String,
-        default: null
+    billingAddress: {
+        fullName: String,
+        address1: String,
+        address2: String,
+        city: String,
+        phone: Number,
+        zipcode: Number,
+        state: {
+            abbreviation: String,
+            name: String
+        }
     },
     specialInstructions: {
         type: String,

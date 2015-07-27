@@ -1,26 +1,32 @@
 define([
     'angular',
     'lodash',
-    './services/core.services',
     './controllers/core.controllers',
     './directives/core.directives',
     './filters/core.filters',
+    './services/core.services',
     'angularAnimate',
-    'angularUiRouter',
-    'ocLazyLoad',
-    'angularJwt',
     'angularBootstrap',
-    'angularXeditable'
-], function (angular, _, coreServices, coreControllers, coreDirectives, coreFilters) {
+    'angularJwt',
+    'angularMessages',
+    'angularUiMask',
+    'angularUiRouter',
+    'angularXeditable',
+    'ocLazyLoad',
+    'gcal'
+], function (angular, _, coreControllers, coreDirectives, coreFilters, coreServices) {
     'use strict';
 
     var moduleName = 'southerncreations.core',
         deps = [
-            'ngAnimate',
-            'ui.router',
-            'oc.lazyLoad',
             'angular-jwt',
+            'ngAnimate',
+            'ngMessages',
+            'oc.lazyLoad',
             'ui.bootstrap',
+            'ui.calendar',
+            'ui.mask',
+            'ui.router',
             'xeditable',
             coreServices.name,
             coreControllers.name,
@@ -376,7 +382,7 @@ define([
                             'content@app': {
                                 templateUrl: '/static/app/components/checkout/views/checkout.html',
                                 controller: 'CheckoutController',
-                                controllerAs: 'checkoutCtrl'
+                                controllerAs: 'coCtrl'
                             }
                         },
                         resolve: {
@@ -395,7 +401,6 @@ define([
                         }
                     })
                     .state('app.checkout.address', {
-                        url: '',
                         views: {
                             'checkout-content@app.checkout': {
                                 templateUrl: '/static/app/components/checkout/views/checkout-address.html'
@@ -403,7 +408,6 @@ define([
                         }
                     })
                     .state('app.checkout.delivery', {
-                        url: '',
                         views: {
                             'checkout-content@app.checkout': {
                                 templateUrl: '/static/app/components/checkout/views/checkout-delivery.html'
@@ -411,7 +415,6 @@ define([
                         }
                     })
                     .state('app.checkout.payment', {
-                        url: '',
                         views: {
                             'checkout-content@app.checkout': {
                                 templateUrl: '/static/app/components/checkout/views/checkout-payment.html'
@@ -419,7 +422,6 @@ define([
                         }
                     })
                     .state('app.checkout.confirmation', {
-                        url: '',
                         views: {
                             'checkout-content@app.checkout': {
                                 templateUrl: '/static/app/components/checkout/views/checkout-confirmation.html'
@@ -442,8 +444,6 @@ define([
                 editableOptions.theme = 'bs3';
 
                 $rootScope.$on('$stateChangeStart', function (evt, to) {
-                    var currentOrder = OrderService.order().payload;
-
                     if (to.data && to.data.requiresLogin) {
                         if (!UserService.isLoggedIn()) {
                             evt.preventDefault();
@@ -455,13 +455,6 @@ define([
                         if (!UserService.isAdmin()) {
                             evt.preventDefault();
                             $state.go('app.profile');
-                        }
-                    }
-
-                    if (to.data && to.data.nextCheckoutState) {
-                        if (currentOrder.userId || currentOrder.email) {
-                            evt.preventDefault();
-                            $state.go(to.data.nextCheckoutState);
                         }
                     }
                 });

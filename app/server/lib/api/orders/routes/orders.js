@@ -18,26 +18,22 @@ module.exports = function (router) {
         .post(utils.userFromToken, orders.create);
 
     router.route('/orders/:orderNumber')
-        .get(orders.show)
-        .put(utils.userFromToken, orders.update)
-        .delete(utils.userFromToken, orders.destroy);
-
-    router.route('/orders/:orderNumber/tag')
-        .patch(utils.userFromToken, orders.tagOrder);
+        .get(orders.orderIsValid, orders.show)
+        .put(utils.userFromToken, orders.orderIsValid, orders.update)
+        .delete(utils.userFromToken, orders.orderIsValid, orders.destroy);
 
     router.route('/orders/:orderNumber/lineitems')
-        .post(orders.addLineItem);
+        .post(orders.orderIsValid, orders.addLineItem);
 
     router.route('/orders/:orderNumber/lineitems/:lineItemId')
-        .put(utils.userFromToken, orders.updateLineItem)
-        .delete(orders.removeLineItem);
+        .put(utils.userFromToken, orders.orderIsValid, orders.updateLineItem)
+        .delete(orders.orderIsValid, orders.removeLineItem);
 
     router.route('/orders/:orderNumber/paymenttoken')
-        .get(checkout.generateToken);
+        .get(orders.orderIsValid, checkout.generateToken);
 
-    router.route('/checkouts/:orderNumber/next')
-        .put(checkout.nextState, orders.show);
+    router.route('/checkouts/:orderNumber')
+        .put(orders.orderIsValid, checkout.nextState, orders.show);
 
-    router.param('orderId', orders.order);
     router.param('orderNumber', orders.orderByNumber);
 };

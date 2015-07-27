@@ -86,12 +86,7 @@ exports.orderHypermedia = function (order) {
         },
         {
             rel: 'checkouts',
-            href: path.join(checkoutBase, 'next'),
-            contentType: 'application/sc.orders+json'
-        },
-        {
-            rel: 'tag',
-            href: path.join(orderBase, 'tag'),
+            href: checkoutBase,
             contentType: 'application/sc.orders+json'
         },
         {

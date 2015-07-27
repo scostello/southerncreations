@@ -12,39 +12,59 @@ var mongoose = require('mongoose'),
     hat = require('hat'),
     _ = require('lodash');
 
-
 /**
- * Find order by id
+ *
+ * @param req
+ * @param res
+ * @param next
  */
-exports.order = function (req, res, next, id) {
-    Order.load(id, function (err, order) {
-        if (err) {
-            return next(err);
-        }
-
-        if (!order) {
-            return next(new Error('Failed to load order ' + id));
-        }
-
-        req.order = order;
-        next();
-    });
-};
-
 exports.orderByNumber = function (req, res, next) {
-    var orderNumber = req.params.orderNumber;
+    var orderNumber = req.params.orderNumber,
+        params = _.clone(req.params);
 
     Order.loadByNumber(orderNumber)
         .then(function (order) {
+            req.params = params;
             req.order = order;
             next();
+        }, function (err) {
+            err.status = 404;
+            next(err);
         });
 };
 
 /**
- * Create a order
+ * Validate the requested order with the passed order_token
+ * @param req
+ * @param res
+ * @param next
  */
-exports.create = function (req, res) {
+exports.orderIsValid = function (req, res, next) {
+    var order = req.order,
+        query = req.query,
+        body = req.body,
+        orderToken, err;
+
+    // Try to extract a passed order token
+    orderToken = query && query.order_token || body && body.order_token;
+
+    // Compare passed order_token with the associated order token
+    if (!orderToken || orderToken !== order.token) {
+        err = new Error('Unauthorized access to requested order.');
+        err.status = 403;
+        next(err);
+    }
+
+    next();
+};
+
+/**
+ * Create a new order
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.create = function (req, res, next) {
     var order = new Order(req.body);
 
     if (req.user) {
@@ -55,19 +75,23 @@ exports.create = function (req, res) {
     order.number = hat(64);
     order.token = hat(64);
 
-    order.save(function (err) {
-        if (err) {
-            return res.status(500).json(err);
-        }
-
-        res.status(201).json(hypermedia.orderHypermedia(order));
-    });
+    order.save()
+        .then(function (order) {
+            res.status(201).json(hypermedia.orderHypermedia(order));
+        }, function (err) {
+            err.message = 'Cannot create the order';
+            err.status = 500;
+            next(err);
+        });
 };
 
 /**
- * Update an order
+ * Update a current order
+ * @param req
+ * @param res
+ * @param next
  */
-exports.update = function (req, res) {
+exports.update = function (req, res, next) {
     var order = req.order,
         lineItems = _.map(req.body.lineitems, function (lineitem) {
             return {
@@ -80,29 +104,13 @@ exports.update = function (req, res) {
         lineItems: lineItems
     });
 
-    order.save(function (err) {
-        if (err) {
-            return res.status(500).json({
-                error: 'Cannot update the order'
-            });
-        }
-        res.status(200).json(order);
-    });
-};
-
-exports.tagOrder = function (req, res) {
-    var order = req.order,
-        orderToken = req.query && req.query.order_token,
-        email = req.body.email;
-
-    if (!orderToken || orderToken !== order.token) {
-        res.status(403).json({error: 'Unauthorized access to requested order.'})
-    }
-
-    order.email = email;
     order.save()
-        .then(function () {
-            req.status(200).json(hypermedia.orderHypermedia(order));
+        .then(function (order) {
+            res.status(200).json(hypermedia.orderHypermedia(order));
+        }, function (err) {
+            err.message = 'Cannot update the order';
+            err.status = 500;
+            next(err);
         });
 };
 
@@ -110,16 +118,17 @@ exports.tagOrder = function (req, res) {
  * Delete the current order
  * @param req
  * @param res
+ * @param next
  */
-exports.destroy = function (req, res) {
+exports.destroy = function (req, res, next) {
     var order = req.order;
 
-    order.remove(function (err) {
-        if (err) {
-            return res.status(500).json({error: 'Cannot delete the order'});
-        }
-
-        res.status(204).json(order);
+    order.remove(function (order) {
+        res.status(204).json(hypermedia.orderHypermedia(order));
+    }, function (err) {
+        err.message = 'Cannot delete the order';
+        err.status = 500;
+        next(err);
     });
 };
 
@@ -130,12 +139,7 @@ exports.destroy = function (req, res) {
  */
 exports.show = function (req, res) {
     var order = req.order,
-        orderObj = order.toObject(),
-        orderToken = req.query && req.query.order_token;
-
-    if (!orderToken || orderToken !== order.token) {
-        res.status(403).json({error: 'Unauthorized access to requested order.'})
-    }
+        orderObj = order.toObject();
 
     orderObj.lineItems = _.map(order.lineItems, function (lineItem) {
         return hypermedia.lineItemHypermedia(order.number, lineItem);
@@ -148,8 +152,9 @@ exports.show = function (req, res) {
  * Add line item to current order
  * @param req
  * @param res
+ * @param next
  */
-exports.addLineItem = function (req, res) {
+exports.addLineItem = function (req, res, next) {
     var order = req.order,
         lineitem = req.body.lineitem,
         newLineItem = new LineItem({variant: lineitem.variantId, quantity: lineitem.quantity});
@@ -158,9 +163,17 @@ exports.addLineItem = function (req, res) {
         .then(function (lineItem) {
             order.lineItems.push(lineItem);
             return order.save();
+        }, function (err) {
+            err.message = 'Unable to create new lineitem.';
+            err.status = 500;
+            next(err);
         })
         .then(function (order) {
             return order.populate({path: 'lineItems.variant', model: 'ProductVariant'}).execPopulate();
+        }, function (err) {
+            err.message = 'Unable to add lineitem in order.';
+            err.status = 500;
+            next(err);
         })
         .then(function (order) {
             var orderObj = order.toObject();
@@ -170,6 +183,10 @@ exports.addLineItem = function (req, res) {
             });
 
             res.status(200).json(hypermedia.orderHypermedia(orderObj));
+        }, function (err) {
+            err.message = 'Unable to add populate lineitem for order.';
+            err.status = 500;
+            next(err);
         });
 };
 
@@ -177,21 +194,20 @@ exports.addLineItem = function (req, res) {
  * Update a line item within the current order
  * @param req
  * @param res
+ * @param next
  */
-exports.updateLineItem = function (req, res) {
+exports.updateLineItem = function (req, res, next) {
     var order = req.order,
         lineItem = _.find(order.lineItems, function (lineItem) {
             return req.params.lineItemId.toString() === lineItem._id.toString();
         }),
         lineItemPayload = req.body.lineitem,
-        orderToken = req.body.order_token;
+        err;
 
     if (!lineItem) {
-        res.status(500).json({error: 'Could not find specified lineitem.'});
-    }
-
-    if (order.token !== orderToken) {
-        res.status(403).json({error: 'Unauthorized access to requested order.'});
+        err = new Error('Could not find specified lineitem.');
+        err.status = 500;
+        next(err);
     }
 
     lineItem.quantity = lineItemPayload.quantity;
@@ -204,6 +220,10 @@ exports.updateLineItem = function (req, res) {
             });
 
             res.status(200).json(hypermedia.orderHypermedia(orderObj));
+        }, function (err) {
+            err.message = 'Unable to update lineitem quantity.';
+            err.status = 500;
+            next(err);
         });
 };
 
@@ -211,26 +231,29 @@ exports.updateLineItem = function (req, res) {
  * Remove a line item from the current order
  * @param req
  * @param res
+ * @param next
  */
-exports.removeLineItem = function (req, res) {
+exports.removeLineItem = function (req, res, next) {
     var order = req.order,
         lineItem = _.find(order.lineItems, function (lineItem) {
             return req.params.lineItemId.toString() === lineItem._id.toString();
         }),
-        orderToken = req.body.order_token;
+        err;
 
     if (!lineItem) {
-        res.status(500).json({error: 'Could not find specified lineitem.'});
-    }
-
-    if (order.token !== orderToken) {
-        res.status(403).json({error: 'Unauthorized access to requested order.'});
+        err = new Error('Could not find specified lineitem.');
+        err.status = 500;
+        next(err);
     }
 
     order.lineItems.pull({_id: lineItem._id});
     order.save()
         .then(function () {
             res.status(204).json({});
+        }, function (err) {
+            err.message = 'Unable to delete lineitem.';
+            err.status = 500;
+            next(err);
         });
 };
 
@@ -238,8 +261,9 @@ exports.removeLineItem = function (req, res) {
  * List all orders
  * @param req
  * @param res
+ * @param next
  */
-exports.all = function(req, res) {
+exports.all = function(req, res, next) {
     Order.find({}).exec()
         .then(function (orders) {
             var hmList = _.map(orders, function (order) {
@@ -247,5 +271,9 @@ exports.all = function(req, res) {
             });
 
             res.status(200).json(hmList);
+        }, function (err) {
+            err.message = 'Unable to retrieve orders.';
+            err.status = 500;
+            next(err);
         });
 };

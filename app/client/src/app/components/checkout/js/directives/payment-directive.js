@@ -4,7 +4,7 @@ define([
     'use strict';
 
     return {
-        name: 'payment',
+        name: 'scPayment',
         fn: [PaymentDirective]
     };
 

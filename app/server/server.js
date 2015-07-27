@@ -20,7 +20,7 @@ var express = require('express'),
 var app = express(),
     redisClient = redis.createClient(),
     server = http.createServer(app),
-    router = express.Router(),
+    router = express.Router({mergeParams: true}),
     config = require('./config');
 
 require('./lib/db')();
@@ -79,6 +79,9 @@ require('./lib/api/settings/routes/settings')(app, router);
 require('./lib/api/users/routes/users')(router);
 require('./lib/api/orders/routes/orders')(router);
 require('./lib/web/routes/web')(app);
+app.use(function (err, req, res, next) {
+    res.status(err.status).json({error: err.message});
+});
 
 if (app.get('env') === 'development') {
     app.use(errorhandler());

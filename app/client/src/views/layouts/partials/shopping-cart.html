@@ -32,6 +32,9 @@
                 </ul>
             </div>
             <footer class="cart-footer">
+                <div class="cart-order-date">
+                    <a href="#" ng-click="cartCtrl.showCalendar()" class="text-accent"><i class="fa fa-calendar"></i> Check Delivery Dates</a>
+                </div>
                 <div class="cart-order-details">
                     <dl class="dl-horizontal">
                         <dt>Subtotal:</dt>
@@ -98,3 +101,16 @@
 
     </div>
 </div>
+
+<script type="text/ng-template" id="deliveryDates.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Pick a Delivery Date</h3>
+    </div>
+    <div class="modal-body">
+        <div ui-calendar="calCtrl.calendar" ng-model="calCtrl.events"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="calCtrl.ok()">OK</button>
+        <button class="btn btn-warning" ng-click="calCtrl.cancel()">Cancel</button>
+    </div>
+</script>

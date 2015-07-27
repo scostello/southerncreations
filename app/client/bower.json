@@ -35,8 +35,13 @@
     "lodash": "~3.9.3",
     "braintree-web": "~2.9.0",
     "angular-credit-cards": "~2.3.5",
-    "angular-bootstrap": "~0.13.0",
-    "angular-animate": "~1.4.3"
+    "angular-bootstrap": "0.13.1",
+    "angular-animate": "~1.4.3",
+    "angular-ui-utils": "~3.0.0",
+    "angular-messages": "~1.4.3",
+    "moment": "~2.10.3",
+    "angular-ui-calendar": "~1.0.1",
+    "payment-webfont": "~0.9.5"
   },
   "resolutions": {
     "angular": "1.4.3",

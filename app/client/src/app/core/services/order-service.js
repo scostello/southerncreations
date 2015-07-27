@@ -313,13 +313,18 @@ define([
                 order = this.order(),
                 orderToken = $cookies.get(self.currentOrderToken);
 
-            WebApi.checkouts.nextState(order.links, {data: payload, params: {order_token: orderToken}})
-                .then(function (order) {
-                    dfd.resolve(self.order(order));
-                })
-                .catch(function (err) {
-                    dfd.reject(err);
-                });
+            WebApi.orders.nextState(order.links, {
+                data: payload,
+                params: {
+                    order_token: orderToken
+                }
+            })
+            .then(function (order) {
+                dfd.resolve(self.order(order));
+            })
+            .catch(function (err) {
+                dfd.reject(err);
+            });
 
             return dfd.promise;
         };

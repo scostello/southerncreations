@@ -65,14 +65,12 @@ define([
                 zipcodeSearch: getMaker('zipcodes'),
                 getStates: getMaker('states')
             },
-            checkouts: {
-                nextState: putMaker('checkouts')
-            },
             lineitems: {
                 update: putMaker('self'),
                 delete: deleteMaker('self')
             },
             orders: {
+                nextState: putMaker('checkouts'),
                 getCurrent: getMaker('current_order'),
                 getOne: getMaker('self'),
                 update: putMaker('self'),

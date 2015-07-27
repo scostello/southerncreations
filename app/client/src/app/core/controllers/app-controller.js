@@ -31,6 +31,7 @@ function (_) {
 
             $scope.$on('$stateChangeSuccess', function (evt, toState) {
                 vm.currentState = toState;
+                console.log(toState);
                 AppStateService.closeShelves();
             });
 

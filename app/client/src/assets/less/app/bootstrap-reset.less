@@ -2,8 +2,6 @@
    Component: bootstrap-reset.less
  ========================================================================== */
 
-@import (less, reference) "../../../vendor/fontawesome/css/font-awesome.min.css";
-
 /*----------------*
  *    GENERAL     *
  *----------------*/
@@ -288,11 +286,24 @@ hr {
         font-size: 16px;
     }
 
-    span.form-error {
-        .text-danger;
+    span.form-error,
+    span.form-success {
         padding: 5px;
     }
 
+    span.form-error {
+        .text-danger;
+    }
+
+    span.form-success {
+        .text-success;
+    }
+
+}
+
+.text-help {
+    color: @gray;
+    font-size: 0.8em;
 }
 
 @media @upto-tablet {

@@ -1,7 +1,6 @@
 <div class="payment-info">
-
-
     <form name="paymentForm" ng-submit="submitPayment(paymentForm.$valid)" novalidate>
+
         <div class="form-group">
             <div class="cc-input-container cc-input-number-container">
                 <label for="ccNumber">Card number</label>
@@ -11,9 +10,10 @@
                 <label for="ccCode">CVV <i class="fa fa-question-circle"></i></label>
                 <input type="text" id="ccCode" class="form-control col-xs-4" name="ccCode" cc-cvc cc-type="paymentForm.ccNumber.$ccType" ng-model="card.code" placeholder="111"/>
             </div>
-            <!--<h2>{{paymentForm.ccNumber.$ccType || 'Unknown'}}</h2>-->
         </div>
+
         <div class="clearfix"></div>
+
         <div class="form-group">
             <div class="cc-input-container cc-input-name-container">
                 <label for="ccHolder">Name (as it appears on the card)</label>
@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" cc-exp-year name="ccExpYear" data-braintree-name="expiration_year" ng-model="card.expiration.year" placeholder="YY">
                 </div>
             </div>
-
         </div>
+
     </form>
 </div>

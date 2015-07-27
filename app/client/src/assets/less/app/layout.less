@@ -1,6 +1,7 @@
 
 @import (inline) "owl-carousel/owl-carousel/owl.carousel.css";
 @import (inline) "owl-carousel/owl-carousel/owl.theme.css";
+@import (inline) "fullcalendar/dist/fullcalendar.min.css";
 @import (inline) "angular-xeditable/dist/css/xeditable.css";
 
 /* ========================================================================
@@ -54,12 +55,18 @@ html, body {
 }
 
 a {
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+
     &:hover,
     &:active,
     &:visited,
     &:focus {
         text-decoration: none;
-        color: @link-color;
+        color: @link-hover-color;
     }
 }
 

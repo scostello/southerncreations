@@ -1,1 +1,5 @@
 <h3 class="text-center">Delivery Options</h3>
+<form id="delivery-form" name="coCtrl.deliveryForm" ng-submit="coCtrl.submitDeliveryInfo(coCtrl.deliveryForm.$valid)" novalidate>
+    <sc-delivery-method method="coCtrl.checkout.delivery.method" choices="coCtrl.checkout.delivery.choices"></sc-delivery-method>
+    <button type="submit" class="btn btn-full-width btn-success">Proceed to Payment</button>
+</form>

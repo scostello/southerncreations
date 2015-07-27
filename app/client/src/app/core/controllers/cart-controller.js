@@ -3,10 +3,10 @@ define(function () {
 
     return {
         name: 'CartController',
-        fn: ['$scope', '$state', 'AppStateService', 'OrderService', 'UserService', CartController]
+        fn: ['$scope', '$state', '$modal', 'AppStateService', 'OrderService', 'UserService', CartController]
     };
 
-    function CartController($scope, $state, AppStateService, OrderService, UserService) {
+    function CartController($scope, $state, $modal, AppStateService, OrderService, UserService) {
         var vm = this,
             cartViews = {
                 email: 'email',
@@ -19,6 +19,7 @@ define(function () {
         vm.checkUser = _checkUser;
         vm.proceedToCheckout = _proceedToCheckout;
         vm.removeLineItem = _removeLineItem;
+        vm.showCalendar = _showCalendar;
 
         $scope.$watch(AppStateService.getCurrentShelf, function (shelf) {
             if (!shelf) {
@@ -32,11 +33,12 @@ define(function () {
             if (!OrderService.isRegistered()) {
                 vm.cartView = cartViews.email;
             } else if (orderState !== 'cart') {
-                $state.go('app.checkout.' + orderState);
+                console.log('app.checkout.' + orderState);
+                $state.transitionTo('app.checkout.' + orderState);
             } else {
                 OrderService.nextOrderState()
                     .then(function (order) {
-                        $state.go('app.checkout.' + order.payload.state);
+                        $state.transitionTo('app.checkout.' + order.payload.state);
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -79,7 +81,7 @@ define(function () {
                     console.log(err);
                 })
                 .then(function (order) {
-                    $state.go('app.checkout.' + order.payload.state);
+                    $state.transitionTo('app.checkout.' + order.payload.state);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -94,6 +96,24 @@ define(function () {
                 .catch(function () {
 
                 });
+        }
+
+        function _showCalendar() {
+            var modalInstance = $modal.open({
+                templateUrl: 'deliveryDates.html',
+                controller: 'CalendarModalController',
+                controllerAs: 'calCtrl',
+                size: 'lg',
+                resolve: {
+                    items: function () {
+                        return ['item1', 'item2', 'item3'];
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            });
         }
     }
 });
