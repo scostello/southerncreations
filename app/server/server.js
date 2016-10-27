@@ -34,7 +34,7 @@ glob.sync('**/models/*.js').forEach(function (filePath) {
  * Setting app configuration
  */
 app.set('config', config[app.get('env')]);
-app.set('port', process.env.PORT || 3030);
+app.set('port', process.env.PORT || 8081);
 
 /**
  * Setting view configuration

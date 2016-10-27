@@ -3,10 +3,10 @@ define(function () {
 
     return {
         name: 'CartController',
-        fn: ['$scope', '$state', '$modal', 'AppStateService', 'OrderService', 'UserService', CartController]
+        fn: ['$scope', '$state', '$uibModal', 'AppStateService', 'OrderService', 'UserService', CartController]
     };
 
-    function CartController($scope, $state, $modal, AppStateService, OrderService, UserService) {
+    function CartController($scope, $state, $uibModal, AppStateService, OrderService, UserService) {
         var vm = this,
             cartViews = {
                 email: 'email',
@@ -99,7 +99,7 @@ define(function () {
         }
 
         function _showCalendar() {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'deliveryDates.html',
                 controller: 'CalendarModalController',
                 controllerAs: 'calCtrl',

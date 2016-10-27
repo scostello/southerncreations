@@ -33,11 +33,11 @@
 
         paths: {
             // Require.js Plugins
-            domReady: 'vendor/requirejs-domready/domReady',
+            domReady: 'vendor/domReady/domReady',
 
             // Utility Libs
             jquery: 'vendor/jquery/dist/jquery.min',
-            lodash: 'vendor/lodash/lodash.min',
+            lodash: 'vendor/lodash/dist/lodash.min',
             moment: 'vendor/moment/min/moment.min',
 
             // Angular Libs
